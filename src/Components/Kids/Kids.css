@@ -1,0 +1,331 @@
+.kids {
+    padding: 20px;
+  }
+  
+  .kids-banner {
+    position: relative;
+    width: 100%;
+    height: 400px; /* Set height as needed */
+    background-size: cover;
+    background-position: center;
+    display: fill;
+    align-items: center;
+    justify-content: center;
+    margin-top: 45px;
+
+  }
+  
+  
+  .kids-page {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .filters {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+
+    .search-bar {
+      width: 100%;
+      padding: 10px;
+      margin-right: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    
+    .search-icon,
+    .filter-icon {
+      cursor: pointer;
+      margin-left: 5px;
+      color: #aded9e;
+    }
+  }
+  
+  .filter-options {
+    border: 1px solid #ddd;
+    padding: 10px;
+    position: absolute; /* Positioning filter options */
+    background-color: white; /* Background for better visibility */
+    z-index: 1000; /* On top of other elements */
+  }
+
+  .explore-collection {
+    margin: 10px 0;
+    padding: 10px;
+    border-left: 5px solid;
+    border-image: linear-gradient(#aded9e, #8ee8c4) 1;
+    border-top: 5px solid;
+    border-right: 5px solid;
+    border-bottom: 5px solid;
+
+    .h3 {
+      font-size: 1.8em;
+      color: #aded9e;
+      margin-bottom: 10px;
+      text-align: left;
+    }
+    
+    .collection-container {
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+      position: relative;
+      outline: 4px solid transparent;
+      outline-offset: -4px;
+      background-clip: padding-box, border-box;
+      background: white;
+      box-shadow: 4px 4px 4px 4px #fff, 0 0 0 8px linear-gradient(135deg, #aded9e, #8ee8c4); /* Gradient outline effect */
+    }
+    
+    .collection-images {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr); /* Fill space with 3 images */
+      gap: 2px; /* No gaps between images */
+      width: 100%;
+      height: 100%;
+    }
+    
+    .collection-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Ensures full image display */
+    }
+  }
+  
+  .kids-gallery {
+    position: relative;
+    width: 100%;
+    height: 300px; /* Set height as needed */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white; /* Change text color for heading */
+    overflow: hidden; /* Hide overflow to prevent background visibility */
+    margin-top: 0.5px;
+    margin-bottom: 0.5px;
+    background-color: #f0f0f0; /* Optional: Set a solid background color */
+  }
+  
+  .kids-gallery::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0; /* Ensure the overlay is behind text */
+  }
+  
+  .gallery-heading {
+    position: absolute;
+    top: 70%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Adjust for exact centering */
+    font-size: 3em;
+    font-weight: bold; /* Make the text bold */
+    z-index: 1; /* Keep the heading on top */
+    text-align: center; /* Center the text */
+  }
+  
+  .shop-now-button {
+    position: absolute;
+    bottom: 20px; /* Position as needed */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Adjust for exact centering */
+    padding: 10px 20px;
+    background-color: #303034; /* Button color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold; 
+  }
+  
+  .arrow-icon {
+    position: absolute;
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+    border-radius: 50%;
+    cursor: pointer;
+    padding: 10px; /* Increase hit area */
+    z-index: 2; /* Above other elements */
+  }
+  
+  .prev-icon {
+    left: 10px; /* Position on the left */
+  }
+  
+  .next-icon {
+    right: 10px; /* Position on the right */
+  }
+  
+  .arrow-icon:hover {
+    background-color: rgba(255, 255, 255, 0.8); /* Change color on hover */
+  }
+  
+  .kids-two-column {
+    display: flex;
+    padding: 20px;
+    gap: 20px;
+  }
+/* Left column for heading */
+.left-column {
+  flex-basis: 20%;
+  padding-top: 10px;
+}
+
+.left-column h3 {
+  font-size: 24px;
+  color: white;
+  border-bottom: 2px solid #8ee8c4;
+  padding-bottom: 10px;
+  text-align: left;
+}
+
+/* Right column with items in a grid */
+.right-column {
+  flex-basis: 80%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  align-items: start;
+}
+
+/* Image container */
+.image-container {
+  position: relative;
+}
+
+.item-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Wishlist icon in top right of image */
+.wishlist-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 20px;
+  color: #8ee8c4;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.wishlist-active {
+  color: #ff6666;
+}
+
+/* Star rating inside image box */
+.star-rating {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  display: flex;
+  gap: 2px;
+}
+
+.star-icon {
+  font-size: 16px;
+  color: #ffb400;
+}
+
+/* Thumbnail image with gradient outline */
+.thumbnail-box {
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
+  border: 2px solid;
+  border-image: linear-gradient(45deg, #aded9e, #8ee8c4) 1;
+  border-radius: 4px;
+  margin-top: 4 px;
+
+}
+
+.thumbnail-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Details section aligned to left */
+.details {
+  text-align: left;
+  margin-top: 10px;
+}
+
+.details h4 {
+  font-size: 16px;
+  color: #aded9e;
+  margin-bottom: 5px;
+}
+
+.details p {
+  font-size: 14px;
+  color: #aded9e;
+}
+
+.price {
+  font-weight: bold;
+  color: #aded9e;
+  margin-top: 5px;
+}
+
+/* Add-to-cart button */
+.add-to-cart-button {
+  background-color: #8ee8c4;
+  color: white;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.cart-quantity {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cart-quantity button {
+  background-color: #8ee8c4;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.cart-quantity span {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* Popup for wishlist */
+.wishlist-popup {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 20px;
+  background-color: #8ee8c4;
+  color: white;
+  border-radius: 5px;
+  font-size: 14px;
+  animation: fadeInOut 2s ease;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; }
+  20%, 80% { opacity: 1; }
+  100% { opacity: 0; }
+}

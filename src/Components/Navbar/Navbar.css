@@ -1,0 +1,87 @@
+/* Navbar.css */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #fff; /* Adjust as needed */
+    position: relative;
+    margin: 5px 1px 20px 1px; /* This sets top, left, right, and bottom margins */
+    border: 2px solid red; /* Corrected border property */
+}
+
+  
+  .logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .logo img {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    height: 80px; /* Ensure logo visibility */
+  }
+  
+  
+.right-icons {
+  display: flex;
+  align-items: center;
+  left:-100px;
+}
+
+.signin-icon img {
+  height: 30px; /* Adjust sign-in icon size */
+  left: -20px; /* Space between sign-in icon and menu icon */
+}
+
+.menu-icon {
+  font-size: 25px;
+  cursor: pointer;
+  padding: 10px; /* Adjust padding as needed */
+  color:#8ee8c4;
+}
+  
+  .dropdown-container {
+    position: absolute;
+    top: 60px;
+    right: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    z-index: 1000;
+  }
+  
+  .dropdown-section {
+    padding: 10px;
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .dropdown-section:hover .sub-dropdown-menu {
+    display: block;
+  }
+  
+  .sub-dropdown-menu {
+    display: none;
+    position: absolute;
+    left: -180px; /* Adjust the value to position the submenu on the left */
+    top: 0;
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    z-index: 1001;
+    min-width: 180px;
+  }
+  
+  .sub-dropdown-menu a {
+    display: block;
+    padding: 5px 10px;
+    color: #393940;
+    text-decoration: none;
+  }
+  
+  .sub-dropdown-menu a:hover {
+    background-color: #8ee8c4;
+  }
+  
