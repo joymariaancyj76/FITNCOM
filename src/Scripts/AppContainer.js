@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
+import AppHelper from "./AppHelper";
 
 export const UserStatusContext = createContext();
 
@@ -10,7 +11,7 @@ const AppContainer = ({ children }) => {
     const checkLoginStatus = async () => {
       try {
         const response = await axios.post(
-          "http://localhost:8080/account/checkWhetherUserLoggedIn",
+          `${AppHelper.getServerUrl()}/account/checkWhetherUserLoggedIn`,
           {},
           {
             credentials: "include",

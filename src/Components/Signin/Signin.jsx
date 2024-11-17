@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import "./Signin.css";
 import axios from "axios";
 import { UserStatusContext } from "../../Scripts/AppContainer";
+import AppHelper from "../../Scripts/AppHelper";
 
 const Signin = () => {
   const [isSignIn, setIsSignIn] = useState(true);
@@ -27,9 +28,11 @@ const Signin = () => {
         password: loginDetails.password,
       };
       const response = await axios.post(
-        "http://localhost:8080/account/login",
+        `${AppHelper.getServerUrl()}/account/login`,
         body,
-        { credentials: "include" }
+        {
+          credentials: "include",
+        }
       );
       console.log("response.data:", response.data);
       if (response.data.message == "success") {
@@ -51,7 +54,7 @@ const Signin = () => {
         password: loginDetails.password,
       };
       const response = await axios.post(
-        "http://localhost:8080/account/signup",
+        `${AppHelper.getServerUrl()}/account/signup`,
         body
       );
       console.log("response.data:", response.data);

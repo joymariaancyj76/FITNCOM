@@ -1,18 +1,12 @@
-// const AppHelper = (function () {
-//   const _privateFunction = (param) => {
-//     console.log(`Private function called with param: ${param}`);
-//     return `Processed: ${param}`;
-//   };
+const AppHelper = (function () {
+  // Another private function
+  const _getServerUrl = () => {
+    return "https://fitnsportbackend.onrender.com";
+  };
 
-//   // Another private function
-//   const _anotherPrivateFunction = () => {
-//     return "Hello from AppHelper!";
-//   };
+  return {
+    getServerUrl: _getServerUrl,
+  };
+})();
 
-//   return {
-//     functionName: _privateFunction,
-//     anotherFunction: _anotherPrivateFunction,
-//   };
-// })();
-
-// export default AppHelper;
+export default AppHelper;
