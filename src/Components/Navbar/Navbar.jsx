@@ -1,15 +1,22 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 import { FiMenu } from "react-icons/fi";
 import logo from "../../Assets/LOGO-transparent.png";
 import signinicon from "../../Assets/signin-icon.png";
+import { UserStatusContext } from "../../Scripts/AppContainer";
 
 const Navbar = () => {
   const [showDropdown, setShowDropdown] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useContext(UserStatusContext);
 
   const handleMenuToggle = () => {
     setShowDropdown(!showDropdown);
+  };
+
+  const handleLogOut = () => {
+    setIsLoggedIn(false);
+    localStorage.removeItem("access-token");
   };
 
   return (
@@ -36,7 +43,9 @@ const Navbar = () => {
               <Link to="/orders">My Orders</Link>
               <Link to="/wishlist">My Wishlist</Link>
               <Link to="/order-history">Order History</Link>
-              <Link to="/logout">Logout</Link>
+              <Link onClick={handleLogOut} to="/">
+                Logout
+              </Link>
             </div>
           </div>
           <div className="dropdown-section">
