@@ -8,6 +8,7 @@ import Signin from "./Components/Signin/Signin";
 import ProductsPage from "./Components/ProductsPage/ProductsPage";
 import KidsPage from "./Components/Kids/Kids"; // Import KidsPage
 import { UserStatusContext } from "./Scripts/AppContainer";
+import Cricket from "./Components/ProductsPage/Cricket";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useContext(UserStatusContext);
@@ -29,6 +30,7 @@ function App() {
               }
             />
             <Route path="/products" element={<ProductsPage />} />
+            <Route path="/cricket" element={<Cricket />} />
             <Route path="/products/kids" element={<KidsPage />} />
             {/* Other protected routes */}
           </Routes>

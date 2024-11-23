@@ -1,0 +1,43 @@
+.cricket-container {
+    background-color: var(--green-1);
+    height: 100vh;
+    padding-top: 70px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-gap: 20px;
+    position: relative;
+    overflow: hidden;
+    width: 70%;
+    height: 100%;
+    margin: auto;
+}
+
+.grid-item {
+    /* border: 1px solid red; */
+    width: 200px;
+    height: 200px;
+    opacity: 0;
+    margin: 30px;
+
+    transform: translateX(-100%);
+    /* Start off-screen to the left */
+    animation: slideIn 0.8s ease forwards;
+    /* Apply animation */
+}
+
+.grid-item img {
+    max-width: 100%;
+    border-radius: 4px;
+}
+
+/* Sliding Animation */
+@keyframes slideIn {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+        /* Slide to original position */
+    }
+}
