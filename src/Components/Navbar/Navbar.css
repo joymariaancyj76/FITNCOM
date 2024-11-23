@@ -5,8 +5,14 @@
     align-items: center;
     padding: 10px 20px;
     background-color: #fff; /* Adjust as needed */
-    position: relative;
-    margin: 5px 1px 20px 1px; /* This sets top, left, right, and bottom margins */
+    position: fixed; /* This makes the navbar fixed */
+    top: 0; /* Positions it at the top of the viewport */
+    left: 0; /* Ensures it starts from the left edge */
+    right: 0; /* Ensures it stretches to the right edge */
+    z-index: 1000; /* Keeps it above other content */
+    margin: 0; /* Removes margin for proper alignment */
+    border-bottom: 2px solid red; /* Corrected border property */
+   /* margin: 5px 1px 20px 1px; /* This sets top, left, right, and bottom margins */
     border: 2px solid red; /* Corrected border property */
 }
 
@@ -20,19 +26,13 @@
   .logo img {
     margin-top: 10px;
     margin-bottom: 5px;
-    height: 80px; /* Ensure logo visibility */
+    height: 100px; /* Ensure logo visibility */
   }
   
-  
-.right-icons {
-  display: flex;
-  align-items: center;
-  left:-100px;
-}
-
-.signin-icon img {
-  height: 30px; /* Adjust sign-in icon size */
-  left: -20px; /* Space between sign-in icon and menu icon */
+  .signin-icon img {
+    display: inline;
+    height: 30px;
+    margin-left: 1130px;
 }
 
 .menu-icon {
@@ -40,6 +40,8 @@
   cursor: pointer;
   padding: 10px; /* Adjust padding as needed */
   color:#8ee8c4;
+  margin-right: 90px;
+  margin-left: -400px;
 }
   
   .dropdown-container {
@@ -56,10 +58,15 @@
     padding: 10px;
     cursor: pointer;
     position: relative;
+    font-family: "Myfont2";
   }
-  
+  .dropdown-section:hover {
+    background-color: #8ee8c4; 
+}
+
   .dropdown-section:hover .sub-dropdown-menu {
     display: block;
+    
   }
   
   .sub-dropdown-menu {
@@ -72,6 +79,7 @@
     border-radius: 5px;
     z-index: 1001;
     min-width: 180px;
+    
   }
   
   .sub-dropdown-menu a {
@@ -79,9 +87,9 @@
     padding: 5px 10px;
     color: #393940;
     text-decoration: none;
+    
   }
   
   .sub-dropdown-menu a:hover {
     background-color: #8ee8c4;
   }
-  

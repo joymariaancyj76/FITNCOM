@@ -1,4 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { useState, useContext } from "react";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 import "./Signin.css";
 import axios from "axios";
 import { UserStatusContext } from "../../Scripts/AppContainer";
@@ -9,23 +11,43 @@ const Signin = () => {
   const [isLoggedIn, setIsLoggedIn] = useContext(UserStatusContext);
 
   const [showPassword, setShowPassword] = useState(false);
-  const [isValidEmail, setIsValidEmail] = useState(false);
-  const [loginDetails, setLoginDetails] = useState({
+  const initialValues = {
     name: "",
     email: "",
     password: "",
-  });
+    confirmPassword: "",
+  };
 
   const toggleForm = () => setIsSignIn(!isSignIn);
   const handlePasswordToggle = () => setShowPassword(!showPassword);
 
-  const SignIn = async (event) => {
-    event.preventDefault();
+  const signInValidationSchema = Yup.object({
+    email: Yup.string().email("Invalid email format").required("Required"),
+    password: Yup.string()
+      .min(6, "Password must be at least 6 characters")
+      .required("Required"),
+  });
+
+  const signUpValidationSchema = Yup.object({
+    name: Yup.string().required("Required"),
+    email: Yup.string().email("Invalid email format").required("Required"),
+    password: Yup.string()
+      .min(6, "Password must be at least 6 characters")
+      .required("Required"),
+    confirmPassword: Yup.string()
+      .oneOf([Yup.ref("password"), null], "Passwords must match")
+      .required("Required"),
+  });
+
+  const onSubmit = (values) => {
+    isSignIn ? SignIn(values) : SignUp(values);
+  };
+  const SignIn = async (values) => {
     try {
       const body = {
-        name: loginDetails.name,
-        email: loginDetails.email,
-        password: loginDetails.password,
+        name: values.name,
+        email: values.email,
+        password: values.password,
       };
       const response = await axios.post(
         `${AppHelper.getServerUrl()}/account/login`,
@@ -45,13 +67,12 @@ const Signin = () => {
     }
   };
 
-  const SignUp = async (event) => {
-    event.preventDefault();
+  const SignUp = async (values) => {
     try {
       const body = {
-        name: loginDetails.name,
-        email: loginDetails.email,
-        password: loginDetails.password,
+        name: values.name,
+        email: values.email,
+        password: values.password,
       };
       const response = await axios.post(
         `${AppHelper.getServerUrl()}/account/signup`,
@@ -68,71 +89,82 @@ const Signin = () => {
     }
   };
 
-  const onInputChanged = (e) => {
-    const { name, value } = e.target;
-    if (name === "email") {
-      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-      setIsValidEmail(emailRegex.test(value));
-    }
-
-    setLoginDetails((prevState) => ({ ...prevState, [name]: value }));
-  };
-
   return (
     <div className="signin-container">
-      {" "}
-      {/* Centering container */}
       <div className="signin">
         <h2>{isSignIn ? "Sign In" : "Sign Up"}</h2>
-        <form>
-          {!isSignIn && (
-            <label>
-              Name:
-              <input
-                type="text"
-                name="name"
-                required
-                onChange={onInputChanged}
-              />
-            </label>
+        <Formik
+          initialValues={initialValues}
+          validationSchema={
+            isSignIn ? signInValidationSchema : signUpValidationSchema
+          }
+          onSubmit={onSubmit}
+        >
+          {() => (
+            <Form>
+              {!isSignIn && (
+                <div>
+                  <label htmlFor="name">Name</label>
+                  <Field
+                    type="text"
+                    id="name"
+                    name="name"
+                    // onChange={onInputChanged}
+                    // value={loginDetails.name}
+                  />
+                  <ErrorMessage name="name" component="div" className="error" />
+                </div>
+              )}
+              <div>
+                <label htmlFor="email">Email/Phone No</label>
+                <Field type="email" id="email" name="email" />
+                <ErrorMessage name="email" component="div" className="error" />
+              </div>
+              <div>
+                <label htmlFor="password">Password</label>
+                <Field
+                  type={showPassword ? "text" : "password"}
+                  id="password"
+                  name="password"
+                />
+                <ErrorMessage
+                  name="password"
+                  component="div"
+                  className="error"
+                />
+              </div>
+              {!isSignIn && (
+                <div>
+                  <label htmlFor="confirmPassword">Confirm Password</label>
+                  <Field
+                    type={showPassword ? "text" : "password"}
+                    id="confirmPassword"
+                    name="confirmPassword"
+                  />
+                  <ErrorMessage
+                    name="confirmPassword"
+                    component="div"
+                    className="error"
+                  />
+                </div>
+              )}
+              <div className="toggle-password">
+                <input
+                  type="checkbox"
+                  checked={showPassword}
+                  onChange={handlePasswordToggle}
+                />
+                <h4>Show Password</h4>
+              </div>
+              <button type="submit" className="signinbutton">
+                {isSignIn ? "Sign In" : "Sign Up"}
+              </button>
+            </Form>
           )}
-          <label>
-            Email:
-            <input
-              type="email"
-              name="email"
-              required
-              onChange={onInputChanged}
-            />
-          </label>
-          <label>
-            Password:
-            <input
-              type={showPassword ? "text" : "password"}
-              name="password"
-              onChange={onInputChanged}
-              required
-            />
-          </label>
-          <div className="toggle-password">
-            <input
-              type="checkbox"
-              checked={showPassword}
-              onChange={handlePasswordToggle}
-            />
-            <span>Show Password</span>
-          </div>
-          <button
-            type="submit"
-            onClick={isSignIn ? SignIn : SignUp}
-            disabled={!isValidEmail || loginDetails.password === ""}
-          >
-            {isSignIn ? "Sign In" : "Sign Up"}
-          </button>
-        </form>
+        </Formik>
         <p>
           {isSignIn ? "Don't have an account?" : "Already have an account?"}{" "}
-          <button onClick={toggleForm}>
+          <button type="button" onClick={toggleForm} className="toggle-button">
             {isSignIn ? "Sign Up" : "Sign In"}
           </button>
         </p>
