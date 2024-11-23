@@ -1,0 +1,81 @@
+/* Center the form container */
+.signin-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: ash-2;
+}
+
+/* Signin form styling */
+.signin {
+    padding: 30px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    max-width: 400px;
+    width: 100%;
+    background-color: ash-2;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    color:green-2;
+}
+
+.signin h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    text-align: center;
+    color: green-1;
+}
+
+.signin form {
+    display: flex;
+    flex-direction: column;
+}
+
+.signin label {
+    display: flex;
+    flex-direction: column;
+    font-weight: 600;
+    color: green-2;
+    margin-bottom: 15px;
+}
+
+.signin input {
+    padding: 12px;
+    margin-top: 5px; /* Adds space between label and input */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.signin button {
+    padding: 12px;
+    background-color: white;
+    color: green-2;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 15px;
+}
+
+.signin button:hover {
+    background-color: #45a049;
+}
+
+.signin p {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.toggle-password {
+    display: flex;
+    align-items: center;
+    margin-top: -5px;
+    font-size: 14px;
+    color: #4caf50;
+}
+
+.toggle-password input[type="checkbox"] {
+    margin-right: 8px; /* Space between checkbox and label */
+}

@@ -1,0 +1,226 @@
+/* Top Selling Products section styles */
+.top-selling-container {
+    margin-top: 100px;
+  .section-heading{
+    font-size: 24px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    text-align: left;
+  }  
+  }
+  
+  .product-carousel {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    position: relative;
+
+    .nav-icon {
+      cursor: pointer;
+      font-size: 30px;
+      color: #393940;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    
+    .left-icon {
+      left: -100px; 
+    }
+    
+    .right-icon {
+      right: -100px; 
+    }
+  }
+  
+  .product-grid {
+    display: flex;
+    flex-grow: 1;
+    gap: 20px;
+    overflow-x: auto;
+  }
+  
+  .product-item {
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
+    position: relative;
+    width: 250px;
+    flex: 1;
+  }
+
+  .rating {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+  }
+  
+  /* Even-indexed product items */
+  .odd-item {
+    background-color: #aded9e; /* Background color for even items */
+    
+    .star-icon {
+      color: #fff; /* Base color for unfilled stars */
+      align-items: center;
+    }
+    
+    .star-icon.filled {
+      color: #393940; /* Color for filled stars */
+    }
+    
+    .star-icon.outlined {
+      color: transparent; /* Makes unfilled stars visible with only the outline */
+      stroke: #393940; /* Outline color for unfilled stars */
+      stroke-width: 1px;
+    }
+    
+  }
+  
+  /* Odd-indexed product items */
+  .even-item {
+    border: 2px solid #393940; /* Border color for odd items */
+    background-color: #ffffff; /* Optional: a background to contrast the border */
+    
+    .star-icon {
+      color: #ddd; /* Base color for unfilled stars */
+      font-size: 18px;
+      margin-right: 2px;
+    }
+    
+    .star-icon.filled {
+      color: #aded9e; /* Color for filled stars */
+    }
+    
+    .star-icon.outlined {
+      color: transparent; /* Makes unfilled stars visible with only the outline */
+      stroke: #aded9e; /* Outline color for unfilled stars */
+      stroke-width: 1px;
+    }
+    
+  }
+  
+  .image-container img {
+    width: 100%;
+    height: auto;
+   object-fit: cover;
+  }
+  
+  
+  .product-details {
+    padding: 10px;
+
+    .product-name {
+      font-size: 16px;
+      margin: 5px 0;
+    }
+    
+    .product-price {
+      color: #333;
+      font-weight: bold;
+    }
+    
+    .rating-value {
+      font-size: 14px;
+      color: #555;
+    }
+  }
+  .centered-product-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh; /* Adjust based on your container height */
+    margin-bottom: -180px;
+    z-index: 1;
+  }
+  
+  .circle-content {
+    text-align: center;
+    position: absolute;
+    top: -150px; /* Position content above the circle */
+    width: 100%;
+    z-index: 2;
+  }
+  
+  .top-left-text {
+    position: absolute;
+    top: 200px;
+    left: -280px;  /* Adjust positioning for top left */
+    color: #393940;
+    z-index: 2;  /* Ensure it’s above the circle */
+    font-family: "MyFont1";
+    text-align: left;
+    font-size: large;
+  }
+  
+  .bottom-right-text {
+    position: absolute;
+    top: 330px;
+    bottom: -50px;
+    right: -295px;  /* Adjust positioning for bottom right */
+    color: #393940;
+    z-index: 2;  /* Ensure it’s above the circle */
+    font-family: "MyFont1";
+    text-align: left;
+    font-size: large;
+  }
+  
+  .highlight {
+    color: #8ee8c4;
+    font-family: "MyFont1";
+  }
+  
+  .rotating-circle {
+    position: relative;
+    width: 300px;  /* Adjust the size of the circle */
+    height: 300px;  /* Adjust the size of the circle */
+    border-radius: 50%;
+    background-color: #8ee8c4; /* Solid fill for the circle */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: visible; /* Ensures content is clipped inside the circle */
+  }
+  
+  .rotating-product-image {
+    position: absolute;  /* Ensures the image stays inside the circle */
+    width: 80%;  /* Adjust image size */
+    height: auto;
+    max-height: 80%; /* Ensures image does not exceed the circle's height */
+    animation: rotateImage 10s infinite linear; /* Rotation animation for the image */
+    top:400px ;
+    bottom: 180px;
+    align-items: center;
+    border-radius: 2px solid red;
+    z-index: 2;
+  }
+  
+  @keyframes rotateImage {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg); /* Rotate the image by 360 degrees */
+    }
+  }
+  
+  .cta-button {
+    margin-top: 20px;
+    padding: 15px 30px;
+    background-color: #8ee8c4;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Adds shadow */
+  }
+  
+  .cta-button:hover {
+    background-color: #69c7a1;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3); /* Slightly darker shadow on hover */
+  }
+  
