@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from "react";
+import { useSpring, animated } from "@react-spring/web";
 import "./Hero.css";
 import { FaArrowLeft, FaArrowRight, FaStar, FaStarHalfAlt } from 'react-icons/fa';
 import product1 from '../../Assets/bat png.png';
-import product2 from '../../Assets/bat png.png';
+import product2 from '../../Assets/bat 2.jpg';
 import product3 from '../../Assets/bat png.png';
-import product4 from '../../Assets/bat png.png';
+import product4 from '../../Assets/bat 2.jpg';
 import product5 from '../../Assets/bat png.png';
 import product6 from '../../Assets/bat png.png';
 import product7 from '../../Assets/bat png.png';
 import product8 from '../../Assets/bat png.png';
 import product9 from '../../Assets/bat png.png';
+import evenaddicon from '../../Assets/cart icon 1.png';
+import evensubicon from '../../Assets/cart icon 4.png';
+import oddaddicon from '../../Assets/cart icon 2.png';
+import oddsubicon from '../../Assets/cart icon 3.png';
 
 // Sample products data
 const products = [
@@ -27,15 +32,33 @@ const products = [
 function Hero() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const itemsPerPage = 3;
+  const [cart, setCart] = useState([]);
+  const [showMessage, setShowMessage] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
       handleNext();
-    }, 10000); // Auto change every 10 seconds
+    }, 10000);
     return () => clearInterval(interval);
   }, [currentIndex]);
 
   const currentProducts = products.slice(currentIndex, currentIndex + itemsPerPage);
+
+  const handleAddToCart = (productId) => {
+    if (cart.includes(productId)) {
+      // Remove product from cart if it already exists (toggle off)
+      setCart(cart.filter(id => id !== productId));
+    } else {
+      // Add product to cart if it doesn't exist (toggle on)
+      setCart([...cart, productId]);
+      showPopupMessage();
+    }
+  };
+
+  const showPopupMessage = () => {
+    setShowMessage(true);
+    setTimeout(() => setShowMessage(false), 2000); // Hide message after 2 seconds
+  };
 
   const handleNext = () => {
     if (currentIndex + itemsPerPage < products.length) {
@@ -51,8 +74,16 @@ function Hero() {
     }
   };
 
+  const zoomAnimation = useSpring({
+    from: { transform: 'scale(1)' },
+    to: { transform: 'scale(1.1)' },
+    config: { duration: 2000 },
+    reset: true
+  });
+
   return (
     <div className="hero container" id="home">
+          {showMessage && <div className="cart-message">Added to cart successfully!</div>}
       {/* Centered Product Section */}
       <div className="centered-product-container">
        <div className="rotating-circle">
@@ -60,10 +91,11 @@ function Hero() {
         <div className="top-left-text">
           <h1><span className="highlight">UNLOCK</span> YOUR <br/>FULL POTENTIAL</h1>
         </div>
-        <img
-          src={products[currentIndex % products.length].image}
-          alt={products[currentIndex % products.length].name}
-          className="rotating-product-image"
+        <animated.img
+              style={zoomAnimation}
+              src={products[currentIndex % products.length].image}
+              alt={products[currentIndex % products.length].name}
+              className="zoom-product-image"
         />
         <div className="bottom-right-text">
           <h1>WITH <span className="highlight">ELITE</span> <br/>SPORTS EQUIPMENT</h1>
@@ -83,9 +115,23 @@ function Hero() {
                 key={product.id}
                 className={`product-item ${index % 2 === 0 ? 'even-item' : 'odd-item'}`}
               >
-                <div className="image-container">
+               <div className="image-container">
                   <img src={product.image} alt={product.name} />
-                </div>
+                  <div
+                    className="cart-icon"
+                    onClick={() => handleAddToCart(product.id)}
+                  >
+                    <img
+                      src={
+                        cart.includes(product.id)
+                          ? (index % 2 === 0 ? evensubicon : oddsubicon)
+                          : (index % 2 === 0 ? evenaddicon : oddaddicon)
+                      }
+                      alt="Cart Icon"
+                      className="cart-icon-image"
+                    />
+                  </div>
+              </div>
                 <div className="product-details">
                   <p className="product-name">{product.name}</p>
                   <p className="product-price">{product.price}</p>

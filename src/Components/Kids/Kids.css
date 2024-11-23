@@ -155,11 +155,11 @@
     z-index: 2; /* Above other elements */
   }
   
-  .prev-icon {
+  .prev-icon .arrow-icon{
     left: 10px; /* Position on the left */
   }
   
-  .next-icon {
+  .next-icon .arrow-icon{
     right: 10px; /* Position on the right */
   }
   
