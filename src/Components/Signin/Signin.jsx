@@ -57,7 +57,7 @@ const Signin = () => {
         }
       );
       console.log("response.data:", response.data);
-      if (response.data.message == "success") {
+      if (response.data.message === "success") {
         setIsLoggedIn(true);
         localStorage.setItem("access-token", response.data.results.accessToken);
       }
@@ -79,7 +79,7 @@ const Signin = () => {
         body
       );
       console.log("response.data:", response.data);
-      if (response.data.message == "success") {
+      if (response.data.message === "success") {
         setIsLoggedIn(true);
         localStorage.setItem("access-token", response.data.results.accessToken);
       }
