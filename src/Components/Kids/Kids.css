@@ -173,12 +173,12 @@
     gap: 20px;
   }
 /* Left column for heading */
-.left-column {
+.kids-left-column {
   flex-basis: 20%;
   padding-top: 10px;
 }
 
-.left-column h3 {
+.kids-left-column h3 {
   font-size: 24px;
   color: white;
   border-bottom: 2px solid #8ee8c4;

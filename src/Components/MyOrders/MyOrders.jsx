@@ -1,9 +1,14 @@
 import React, { useContext, useState } from "react";
 import "./MyOrders.css";
 import { UserStatusContext } from "../../Scripts/AppContainer";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 const MyOrders = () => {
   const [isLoggedIn] = useContext(UserStatusContext); // Get authentication status
+  const [searchQuery, setSearchQuery] = useState(""); // State for search input
+  const [selectedTab, setSelectedTab] = useState("All Orders");
+
   const orders = [
     {
       id: 1,
@@ -51,37 +56,67 @@ const MyOrders = () => {
     },
   ];
 
-  const [selectedTab, setSelectedTab] = useState("All Orders");
-
-  const tabs = ["All Orders", "Pending Orders", "Shipped Orders", "Delivered Orders", "Cancelled Orders"];
+  const tabs = [
+    "All Orders",
+    "Pending Orders",
+    "Shipped Orders",
+    "Delivered Orders",
+    "Cancelled Orders",
+  ];
 
   const filteredOrders = orders.filter((order) => {
-    if (selectedTab === "All Orders") return true;
-    if (selectedTab === "Pending Orders") return order.status === "Pending";
-    if (selectedTab === "Shipped Orders") return order.status === "Shipped";
-    if (selectedTab === "Delivered Orders") return order.status === "Delivered";
-    if (selectedTab === "Cancelled Orders") return order.status === "Cancelled";
-    return false;
+    if (selectedTab !== "All Orders" && order.status !== selectedTab.split(" ")[0]) {
+      return false;
+    }
+    if (searchQuery && !order.productName.toLowerCase().includes(searchQuery.toLowerCase())) {
+      return false;
+    }
+    return true;
   });
 
   return isLoggedIn ? (
     <div className="my-orders-container">
-      <div className="my-orders-content">
-        {/* Left column: Filters */}
-        <div className="filters">
-          <h3>Filter Orders</h3>
-          {tabs.map((tab) => (
-            <button
-              key={tab}
-              className={`filter-button ${selectedTab === tab ? "active" : ""}`}
-              onClick={() => setSelectedTab(tab)}
-            >
-              {tab}
-            </button>
-          ))}
+      {/* Left Column: Search and Filters */}
+      <div className="left-column">
+        {/* Search Bar */}
+        <div className="search-bar">
+          <input
+            type="text"
+            placeholder="Search orders by product name..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          <FontAwesomeIcon icon={faSearch} className="search-icon" />
         </div>
 
-        {/* Right column: Orders Table */}
+        {/* Filter Heading and Tabs */}
+        <div className="filters">
+          <h3>Filter</h3>
+          {/* All Orders Tab */}
+          <div
+            key="All Orders"
+            className={`filter-box ${selectedTab === "All Orders" ? "active" : ""}`}
+            onClick={() => setSelectedTab("All Orders")}
+          >
+            All Orders
+          </div>
+          {/* Other Tabs in two rows, two columns */}
+          <div className="filter-row">
+            {tabs.slice(1).map((tab) => (
+              <div
+                key={tab}
+                className={`filter-box ${selectedTab === tab ? "active" : ""}`}
+                onClick={() => setSelectedTab(tab)}
+              >
+                {tab}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Right Column: Orders Table */}
+      <div className="right-column">
         <div className="orders-table">
           <table>
             <thead>
@@ -92,8 +127,8 @@ const MyOrders = () => {
                 <th>Payment Status</th>
                 <th>Total Price</th>
                 <th>Delivery Date Estimate</th>
-                <th>Track Order</th>
                 <th>Additional Notes</th>
+                <th>Track Order</th>
               </tr>
             </thead>
             <tbody>
@@ -106,21 +141,21 @@ const MyOrders = () => {
                     <td>{order.paymentStatus}</td>
                     <td>{order.totalPrice}</td>
                     <td>{order.deliveryDateEstimate}</td>
+                    <td>{order.notes}</td>
                     <td>
                       {order.trackingLink ? (
                         <a href={order.trackingLink} target="_blank" rel="noopener noreferrer">
-                          Track
+                          <button className="track-order-btn">Track Order</button>
                         </a>
                       ) : (
                         "--"
                       )}
                     </td>
-                    <td>{order.notes}</td>
                   </tr>
                 ))
               ) : (
                 <tr>
-                  <td colSpan="8">No orders found for the selected filter.</td>
+                  <td colSpan="8">No orders found for the selected filter or search query.</td>
                 </tr>
               )}
             </tbody>

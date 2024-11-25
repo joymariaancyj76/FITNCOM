@@ -220,7 +220,7 @@ const Kids = () => {
         </div>
 
         <div className="kids-two-column">
-          <div className="left-column">
+          <div className="kids-left-column">
             <h3>Kids T-Shirts</h3>
           </div>
 
