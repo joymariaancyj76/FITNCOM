@@ -1,52 +1,65 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import './ProductsPage.css';
-import kidsImg from '../../Assets/kids.png';
-import teenImg from '../../Assets/teen.png';
-import adultImg from '../../Assets/adult.png';
-import indoorImg from '../../Assets/indoor.png';
-import outdoorImg from '../../Assets/outdoor.png';
+import React from "react";
+import "./ProductsPage.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 const ProductsPage = () => {
+  const products = [
+    { id: 1, name: "Product 1", image: "product1.jpg", rating: 4.5 },
+    { id: 2, name: "Product 2", image: "product2.jpg", rating: 4.0 },
+    // Add more products here
+  ];
+
   return (
     <div className="products-page">
-      <h1>Our Product Categories</h1>
-      
-      <div className="products-container">
-        <div className="product-category">
-          {/*<h1>Shop By Age</h1>*/}
-          <h2>Kids</h2>
-          <Link to="kids"> 
-            <img src={kidsImg} alt="Kids" />
-          </Link>
+      <div className="filters-column">
+        <div className="search-bar">
+          <FontAwesomeIcon icon={faSearch} className="search-icon" />
+          <input type="text" placeholder="Search products" />
         </div>
-        <div className="product-category">
-          <h2>Teen</h2>
-          <Link to="teen"> 
-            <img src={teenImg} alt="Teen" />
-          </Link>
+
+        <div className="filter-section">
+          <h3>Filter by Price</h3>
+          <p>Rs. 100 - Rs. 100000</p>
         </div>
-        <div className="product-category">
-          <h2>Adult</h2>
-          <Link to="adult"> 
-            <img src={adultImg} alt="Adult" />
-          </Link>
+
+        <div className="filter-section">
+          <h3>Filter by Games</h3>
+          <ul>
+            <li>Cricket</li>
+            <li>Basketball</li>
+            <li>Football</li>
+            <li>Badminton</li>
+            <li>Volleyball</li>
+            <li>Tennis</li>
+            <li>Table Tennis</li>
+          </ul>
+        </div>
+
+        <div className="filter-section">
+          <h3>Filter by Rating</h3>
+          <input type="range" min="1" max="5" />
+          <p>Rating: 1 - 5</p>
         </div>
       </div>
 
-      <div className="products-container lower-row">
-        <div className="product-category">
-          {/*<h1>Shop By</h1>*/}
-          <h2>Indoor Games</h2>
-          <Link to="indoor"> 
-            <img src={indoorImg} alt="Indoor Games" />
-          </Link>
+      <div className="products-column">
+        <div className="products-grid">
+          {products.map((product) => (
+            <div key={product.id} className="product-card">
+              <img src={product.image} alt={product.name} />
+              <h4>{product.name}</h4>
+              <p>Rating: {product.rating}</p>
+            </div>
+          ))}
         </div>
-        <div className="product-category">
-          <h2>Outdoor Games</h2>
-          <Link to="outdoor"> 
-            <img src={outdoorImg} alt="Outdoor Games" />
-          </Link>
+
+        <div className="pagination">
+          <button>Previous</button>
+          <button>1</button>
+          <button>2</button>
+          <button>3</button>
+          <button>Next</button>
         </div>
       </div>
     </div>
