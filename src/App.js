@@ -1,16 +1,19 @@
-import React, { useContext } from "react";
+import React, { useContext, Suspense, lazy } from "react";
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import Navbar from "./Components/Navbar/Navbar";
-import Hero from "./Components/Hero/Hero";
 import Footer from "./Components/Footer/Footer";
-import AboutUs from "./Components/AboutUs/AboutUs";
-import Signin from "./Components/Signin/Signin";
-import ProductsPage from "./Components/ProductsPage/ProductsPage";
-import KidsPage from "./Components/Kids/Kids";
 import { UserStatusContext } from "./Scripts/AppContainer";
-import Cricket from "./Components/ProductsPage/Cricket";
-import MyOrders from "./Components/MyOrders/MyOrders";
-import HowToChooseSport from "./Components/HowToChoose/HowToChoose"; 
+
+// Lazy loaded components for better performance
+const Hero = lazy(() => import("./Components/Hero/Hero"));
+const AboutUs = lazy(() => import("./Components/AboutUs/AboutUs"));
+const Signin = lazy(() => import("./Components/Signin/Signin"));
+const ProductsPage = lazy(() => import("./Components/ProductsPage/ProductPage"));
+const Cricket = lazy(() => import("./Components/ProductsPage/Cricket"));
+const KidsPage = lazy(() => import("./Components/Kids/Kids"));
+const MyOrders = lazy(() => import("./Components/MyOrders/MyOrders"));
+const HowToChooseSport = lazy(() => import("./Components/HowToChoose/HowToChoose"));
+const NotFound = lazy(() => import("./Components/NotFound/NotFound"));
 
 function App() {
   const [isLoggedIn] = useContext(UserStatusContext);
@@ -19,37 +22,42 @@ function App() {
     <Router>
       <div className="App">
         <Navbar />
-        <Routes>
-          {/* Common Routes */}
-          <Route
-            path="/"
-            element={
-              <>
-                <Hero />
-                <AboutUs />
-                <Footer />
-              </>
-            }
-          />
-          <Route path="/cricket" element={<Cricket />} />
-          <Route path="/products/kids" element={<KidsPage />} />
-          <Route path="/how-to-choose-sport" element={<HowToChooseSport />} />
+        <Suspense fallback={<div>Loading...</div>}>
+          <Routes>
+            {/* Home Route */}
+            <Route
+              path="/"
+              element={
+                <>
+                  <Hero />
+                  <AboutUs />
+                </>
+              }
+            />
 
-          {/* Protected Routes */}
-          <Route
-            path="/myorders"
-            element={isLoggedIn ? <MyOrders /> : <Navigate to="/signin" />}
-          />
+            {/* Products and Related Routes */}
+            <Route path="/cricket" element={<Cricket />} />
+            <Route path="/products/kids" element={<KidsPage />} />
+            <Route path="/how-to-choose-sport" element={<HowToChooseSport />} />
+            <Route path="/products/:productId" element={<ProductsPage />} />
 
-          {/* Signin Route */}
-          <Route
-            path="/signin"
-            element={isLoggedIn ? <Navigate to="/products" /> : <Signin />}
-          />
+            {/* Protected Routes */}
+            <Route
+              path="/myorders"
+              element={isLoggedIn ? <MyOrders /> : <Navigate to="/signin" />}
+            />
 
-          {/* Catch-all Route */}
-          <Route path="*" element={<Navigate to="/" />} />
-        </Routes>
+            {/* Sign-in Route */}
+            <Route
+              path="/signin"
+              element={isLoggedIn ? <Navigate to="/" /> : <Signin />}
+            />
+
+            {/* 404 Not Found Route */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
+        <Footer />
       </div>
     </Router>
   );
