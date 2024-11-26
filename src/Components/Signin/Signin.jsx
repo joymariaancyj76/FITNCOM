@@ -1,16 +1,20 @@
 import React, { useState, useContext } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import "./Signin.css";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { UserStatusContext } from "../../Scripts/AppContainer";
 import AppHelper from "../../Scripts/AppHelper";
+import "./Signin.css";
 
 const Signin = () => {
   const [isSignIn, setIsSignIn] = useState(true);
   const [isLoggedIn, setIsLoggedIn] = useContext(UserStatusContext);
-
   const [showPassword, setShowPassword] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const navigate = useNavigate();
+
   const initialValues = {
     name: "",
     email: "",
@@ -18,7 +22,11 @@ const Signin = () => {
     confirmPassword: "",
   };
 
-  const toggleForm = () => setIsSignIn(!isSignIn);
+  const toggleForm = () => {
+    setIsSignIn(!isSignIn);
+    setErrorMessage(""); // Clear error message when switching forms
+  };
+
   const handlePasswordToggle = () => setShowPassword(!showPassword);
 
   const signInValidationSchema = Yup.object({
@@ -40,34 +48,35 @@ const Signin = () => {
   });
 
   const onSubmit = (values) => {
-    isSignIn ? SignIn(values) : SignUp(values);
+    isSignIn ? handleSignIn(values) : handleSignUp(values);
   };
-  const SignIn = async (values) => {
+
+  const handleSignIn = async (values) => {
     try {
       const body = {
-        name: values.name,
         email: values.email,
         password: values.password,
       };
       const response = await axios.post(
         `${AppHelper.getServerUrl()}/account/login`,
         body,
-        {
-          credentials: "include",
-        }
+        { credentials: "include" }
       );
-      console.log("response.data:", response.data);
+
       if (response.data.message === "success") {
         setIsLoggedIn(true);
         localStorage.setItem("access-token", response.data.results.accessToken);
+        navigate("/"); // Redirect to the home page after successful login
+      } else {
+        setErrorMessage("Invalid credentials. Please try again.");
       }
     } catch (error) {
-      console.error("Error checking login status:", error);
-      setIsLoggedIn(false);
+      console.error("Error during sign-in:", error);
+      setErrorMessage("Something went wrong. Please try again later.");
     }
   };
 
-  const SignUp = async (values) => {
+  const handleSignUp = async (values) => {
     try {
       const body = {
         name: values.name,
@@ -78,14 +87,17 @@ const Signin = () => {
         `${AppHelper.getServerUrl()}/account/signup`,
         body
       );
-      console.log("response.data:", response.data);
+
       if (response.data.message === "success") {
         setIsLoggedIn(true);
         localStorage.setItem("access-token", response.data.results.accessToken);
+        navigate("/"); // Redirect to the home page after successful sign-up
+      } else {
+        setErrorMessage("Sign-up failed. Please try again.");
       }
     } catch (error) {
-      console.error("Error checking login status:", error);
-      setIsLoggedIn(false);
+      console.error("Error during sign-up:", error);
+      setErrorMessage("Something went wrong. Please try again later.");
     }
   };
 
@@ -93,6 +105,8 @@ const Signin = () => {
     <div className="signin-container">
       <div className="signin">
         <h2>{isSignIn ? "Sign In" : "Sign Up"}</h2>
+        {errorMessage && <div className="error-message">{errorMessage}</div>}
+
         <Formik
           initialValues={initialValues}
           validationSchema={
@@ -109,15 +123,19 @@ const Signin = () => {
                     type="text"
                     id="name"
                     name="name"
-                    // onChange={onInputChanged}
-                    // value={loginDetails.name}
+                    placeholder="Enter your name"
                   />
                   <ErrorMessage name="name" component="div" className="error" />
                 </div>
               )}
               <div>
-                <label htmlFor="email">Email/Phone No</label>
-                <Field type="email" id="email" name="email" />
+                <label htmlFor="email">Email</label>
+                <Field
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="Enter your email"
+                />
                 <ErrorMessage name="email" component="div" className="error" />
               </div>
               <div>
@@ -126,6 +144,7 @@ const Signin = () => {
                   type={showPassword ? "text" : "password"}
                   id="password"
                   name="password"
+                  placeholder="Enter your password"
                 />
                 <ErrorMessage
                   name="password"
@@ -140,6 +159,7 @@ const Signin = () => {
                     type={showPassword ? "text" : "password"}
                     id="confirmPassword"
                     name="confirmPassword"
+                    placeholder="Re-enter your password"
                   />
                   <ErrorMessage
                     name="confirmPassword"

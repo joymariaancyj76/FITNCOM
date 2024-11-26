@@ -82,13 +82,16 @@ form input {
     background-color: #8ee8c4;
 }
 
-/* Error message styling */
-.error {
-    color: #d9534f;
-    font-size: 0.875rem;
-    margin-top: -0.5rem;
-    margin-bottom: 1rem;
-}
+.error-message {
+    color: #ff4d4d;
+    background-color: #ffe6e6;
+    padding: 0.5rem;
+    margin: 0.5rem 0;
+    border: 1px solid #ffcccc;
+    border-radius: 4px;
+    text-align: center;
+  }
+  
 
 /* Show password toggle */
 .toggle-password {

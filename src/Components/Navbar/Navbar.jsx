@@ -40,7 +40,7 @@ const Navbar = () => {
             ACCOUNT
             <div className="sub-dropdown-menu">
               <Link to="/profile">My Profile</Link>
-              <Link to="/orders">My Orders</Link>
+              <Link to="/MyOrders">My Orders</Link>
               <Link to="/wishlist">My Wishlist</Link>
               <Link to="/order-history">Order History</Link>
               <Link onClick={handleLogOut} to="/">
