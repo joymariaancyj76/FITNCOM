@@ -26,8 +26,8 @@ const Cricket = () => {
     }, 100); // Slight delay before animation starts
   }, []);
 
-  const handleProductClick = (id) => {
-    navigate(`/product/${id}`); // Navigate to the product details page with the product ID
+  const handleProductClick = (productId) => {
+    navigate(`/products/${productId}`); // Correct URL structure
   };
 
   return (
