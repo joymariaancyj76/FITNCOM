@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './AboutUs.css'; // Import the CSS file
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'; // Import icons
+import { useNavigate } from 'react-router-dom'; // For navigation
 
 const clientReviews = [
     {
@@ -26,6 +27,25 @@ const clientReviews = [
 ];
 
 const AboutUs = () => {
+        const navigate = useNavigate();
+        const [currentReview, setCurrentReview] = useState(0); // Track the current review index
+    
+        // Navigate to "How to Choose a Sport for Children" page
+        const handleChooseSportClick = () => {
+            navigate('/how-to-choose-sport'); // Adjust the path as per your route
+        };
+    
+        // Navigate reviews
+        const handleNextReview = () => {
+            setCurrentReview((prevIndex) => (prevIndex + 1) % clientReviews.length);
+        };
+    
+        const handlePrevReview = () => {
+            setCurrentReview((prevIndex) =>
+                prevIndex === 0 ? clientReviews.length - 1 : prevIndex - 1
+            );
+        };
+
     return (
         <section className="about-us">
             <div className="what-we-do">
@@ -36,7 +56,7 @@ const AboutUs = () => {
                 FitnSportz makes it easy for kids and parents to find the perfect sport to match their unique build and Interests.
                 </p>
                 <div className="choose-sport">
-                    <button>HOW TO CHOOSE A SPORT FOR CHILDREN</button>
+                    <button onClick={handleChooseSportClick}>HOW TO CHOOSE A SPORT FOR CHILDREN</button>
                 </div>
             </div>
 
