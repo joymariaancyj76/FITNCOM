@@ -8,12 +8,11 @@ import AppHelper from "../../Scripts/AppHelper";
 import "./Signin.css";
 
 const Signin = () => {
-  const [isSignIn, setIsSignIn] = useState(true);
-  const [isLoggedIn, setIsLoggedIn] = useContext(UserStatusContext);
-  const [showPassword, setShowPassword] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("");
-
   const navigate = useNavigate();
+  const [isSignIn, setIsSignIn] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useContext(UserStatusContext);
 
   const initialValues = {
     name: "",

@@ -1,89 +1,47 @@
-import React, { useContext, Suspense, lazy, useEffect } from "react";
-import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
+import React, { useContext } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navbar from "./Components/Navbar/Navbar";
+import Hero from "./Components/Hero/Hero";
 import Footer from "./Components/Footer/Footer";
+import AboutUs from "./Components/AboutUs/AboutUs";
+import Signin from "./Components/Signin/Signin";
+import ProductsPage from "./Components/Cricket/ProductPage";
+import KidsPage from "./Components/Kids/Kids"; // Import KidsPage
 import { UserStatusContext } from "./Scripts/AppContainer";
-
-// Lazy loaded components for better performance
-const Hero = lazy(() => import("./Components/Hero/Hero"));
-const AboutUs = lazy(() => import("./Components/AboutUs/AboutUs"));
-const Signin = lazy(() => import("./Components/Signin/Signin"));
-const ProductsPage = lazy(() => import("./Components/Cricket/ProductPage"));
-const Cricket = lazy(() => import("./Components/Cricket/Cricket"));
-const KidsPage = lazy(() => import("./Components/Kids/Kids"));
-const MyOrders = lazy(() => import("./Components/MyOrders/MyOrders"));
-const HowToChooseSport = lazy(() => import("./Components/HowToChoose/HowToChoose"));
-const NotFound = lazy(() => import("./Components/NotFound/NotFound"));
+import Cricket from "./Components/Cricket/Cricket";
+import LoadingMask from "./Components/Common/LoadingMask";
 
 function App() {
-  const [isLoggedIn] = useContext(UserStatusContext);
-
-  // Preload critical routes like Signin for smoother transitions
-  useEffect(() => {
-    import("./Components/Signin/Signin");
-  }, []);
+  // eslint-disable-next-line
+  const [isLoggedIn, setIsLoggedIn] = useContext(UserStatusContext);
 
   return (
     <Router>
-      <div className="App">
+      <div className={`App`}>
         <Navbar />
-
-        <Suspense fallback={<div className="loading-spinner">Loading...</div>}>
+        <LoadingMask />
+        {isLoggedIn ? (
           <Routes>
-            {/* Home Route */}
             <Route
               path="/"
               element={
                 <>
                   <Hero />
                   <AboutUs />
+                  <Footer />
                 </>
               }
             />
-
-            {/* Products and Related Routes */}
+            <Route path="/products" element={<ProductsPage />} />
             <Route path="/cricket" element={<Cricket />} />
             <Route path="/products/kids" element={<KidsPage />} />
-            <Route path="/how-to-choose-sport" element={<HowToChooseSport />} />
-            <Route path="/products/:productId" element={<ProductsPage />} />
-
-            {/* Sign-in Route with dedicated Suspense */}
-            <Route
-              path="/signin"
-              element={
-                <Suspense fallback={<div className="loading-spinner">Loading Sign In...</div>}>
-                  <Signin />
-                </Suspense>
-              }
-            />
-
-            {/* Protected Routes */}
-            <Route
-              path="/myorders"
-              element={
-                isLoggedIn ? (
-                  <Suspense fallback={<div className="loading-spinner">Loading Orders...</div>}>
-                    <MyOrders />
-                  </Suspense>
-                ) : (
-                  <Navigate to="/signin" />
-                )
-              }
-            />
-
-            {/* 404 Not Found Route */}
-            <Route
-              path="*"
-              element={
-                <Suspense fallback={<div className="loading-spinner">Page Not Found...</div>}>
-                  <NotFound />
-                </Suspense>
-              }
-            />
+            {/* Other protected routes */}
           </Routes>
-        </Suspense>
-
-        <Footer />
+        ) : (
+          <Routes>
+            <Route path="/*" element={<Signin />} />
+          </Routes>
+        )}
       </div>
     </Router>
   );
