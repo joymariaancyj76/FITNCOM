@@ -2,10 +2,9 @@ import React, { useState, useContext } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { UserStatusContext } from "../../Scripts/AppContainer";
-import AppHelper from "../../Scripts/AppHelper";
 import "./Signin.css";
+import apiCaller from "../../Scripts/ApiCaller";
 
 const Signin = () => {
   const navigate = useNavigate();
@@ -56,16 +55,12 @@ const Signin = () => {
         email: values.email,
         password: values.password,
       };
-      const response = await axios.post(
-        `${AppHelper.getServerUrl()}/account/login`,
-        body,
-        { credentials: "include" }
-      );
 
-      if (response.data.message === "success") {
+      const response = await apiCaller("post", "/account/login", body);
+      if (response.message === "success") {
         setIsLoggedIn(true);
-        localStorage.setItem("access-token", response.data.results.accessToken);
-        navigate("/"); // Redirect to the home page after successful login
+        localStorage.setItem("access-token", response.results.accessToken);
+        navigate("/");
       } else {
         setErrorMessage("Invalid credentials. Please try again.");
       }
@@ -82,17 +77,14 @@ const Signin = () => {
         email: values.email,
         password: values.password,
       };
-      const response = await axios.post(
-        `${AppHelper.getServerUrl()}/account/signup`,
-        body
-      );
 
-      if (response.data.message === "success") {
+      const response = await apiCaller("post", "/account/signup", body);
+      if (response.message === "success") {
         setIsLoggedIn(true);
-        localStorage.setItem("access-token", response.data.results.accessToken);
-        navigate("/"); // Redirect to the home page after successful sign-up
+        localStorage.setItem("access-token", response.results.accessToken);
+        navigate("/");
       } else {
-        setErrorMessage("Sign-up failed. Please try again.");
+        setErrorMessage(response.message);
       }
     } catch (error) {
       console.error("Error during sign-up:", error);

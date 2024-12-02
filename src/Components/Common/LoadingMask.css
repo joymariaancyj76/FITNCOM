@@ -27,3 +27,13 @@
 .hide {
     display: none;
 }
+
+@keyframes runner {
+    from {
+        left: 0px;
+    }
+
+    to {
+        left: 40px;
+    }
+}
