@@ -7,6 +7,7 @@
   font-style: normal;
   /* Define the font style */
 }
+
 h1,
 h2,
 h3 {
@@ -43,8 +44,7 @@ body {
 }
 
 h5,
-h4
- {
+h4 {
   font-family: 'MyFont2';
   /* Apply to headings as well */
 }
