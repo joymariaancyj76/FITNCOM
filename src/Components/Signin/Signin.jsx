@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { UserStatusContext } from "../../Scripts/AppContainer";
 import "./Signin.css";
 import apiCaller from "../../Scripts/ApiCaller";
+import User from "../../Scripts/User";
 
 const Signin = () => {
   const navigate = useNavigate();
@@ -60,6 +61,7 @@ const Signin = () => {
       if (response.message === "success") {
         setIsLoggedIn(true);
         localStorage.setItem("access-token", response.results.accessToken);
+        User.setUserName(response.results.customerName);
         navigate("/");
       } else {
         setErrorMessage("Invalid credentials. Please try again.");
@@ -82,6 +84,7 @@ const Signin = () => {
       if (response.message === "success") {
         setIsLoggedIn(true);
         localStorage.setItem("access-token", response.results.accessToken);
+        User.setUserName(response.results.customerName);
         navigate("/");
       } else {
         setErrorMessage(response.message);

@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 import apiCaller from "./ApiCaller";
+import User from "./User";
 
 export const UserStatusContext = createContext();
 
@@ -16,11 +17,12 @@ const AppContainer = ({ children }) => {
         if (response.message === "success") {
           setIsLoggedIn(true);
           localStorage.setItem("access-token", response.results.accessToken);
+          User.setUserName(response.results.customerName);
+        } else {
+          setIsLoggedIn(false);
         }
       } catch (error) {
-        console.error("Error checking login status:", error);
         setIsLoggedIn(false);
-      } finally {
       }
     };
 

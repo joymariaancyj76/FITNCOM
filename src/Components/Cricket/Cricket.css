@@ -70,7 +70,7 @@ div {
 
             .product-details {
                 width: 60%;
-                gap: 10px;
+                gap: 15px;
 
                 .product-name {
                     color: wheat;
@@ -80,6 +80,19 @@ div {
                 .product-desc {
                     font-size: 20px;
                     color: aquamarine;
+                }
+
+                .buttons-container {
+                    display: flex;
+                    gap: 20px;
+                    justify-content: space-between;
+                    /* border: 1px solid red; */
+
+                    button {
+                        width: 200px;
+                        height: 40px;
+                        border-radius: 20px;
+                    }
                 }
             }
         }

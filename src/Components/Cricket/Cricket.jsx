@@ -94,7 +94,7 @@ const Cricket = () => {
             <img
               src={product.image}
               alt={product.name}
-              onClick={() => handleProductClick(product.id)} // Navigate when clicked
+              // onClick={() => handleProductClick(product.id)} // Navigate when clicked
               className="clickable-image"
             />
             <div className="product-details">
