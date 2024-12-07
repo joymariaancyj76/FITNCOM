@@ -41,11 +41,11 @@ const apiCaller = async (method, url, data = {}, params = {}, headers = {}) => {
       params,
       headers,
     });
-    AppHelper.firEvent("loadmask:hide");
     return response.data;
   } catch (error) {
     console.error(`Error in ${method.toUpperCase()} ${url}:`, error);
-    throw error;
+  } finally {
+    AppHelper.firEvent("loadmask:hide");
   }
 };
 

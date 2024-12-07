@@ -2,9 +2,12 @@ import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 import { FiMenu } from "react-icons/fi";
+import { MdOutlineShoppingCart } from "react-icons/md";
 import logo from "../../Assets/LOGO-transparent.png";
 import signinicon from "../../Assets/signin-icon.png";
+import { FaUserCircle } from "react-icons/fa";
 import { UserStatusContext } from "../../Scripts/AppContainer";
+import User from "../../Scripts/User";
 
 const Navbar = () => {
   const [showDropdown, setShowDropdown] = useState(false);
@@ -27,15 +30,22 @@ const Navbar = () => {
         </Link>
       </div>
       <div className="signin-icon">
-        <Link to="/signin">
+        <Link to="/">
           <img src={signinicon} alt="Sign In" />
         </Link>
       </div>
-      <div className="menu-icon" onClick={handleMenuToggle}>
-        <FiMenu />
+
+      <div className="menu-icon">
+        {isLoggedIn && (
+          <div className="profile-name">
+            <FaUserCircle /> {User.getUserName()}
+          </div>
+        )}
+        <MdOutlineShoppingCart />
+        <FiMenu onClick={handleMenuToggle} />
       </div>
       {showDropdown && (
-        <div className="dropdown-container">
+        <div className="dropdown-container" onMouseLeave={handleMenuToggle}>
           <div className="dropdown-section">
             ACCOUNT
             <div className="sub-dropdown-menu">

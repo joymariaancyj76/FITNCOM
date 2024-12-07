@@ -2,7 +2,7 @@
   margin-top: 100px;
   padding: 20px;
   font-family: "MyFont2";
-  border: 2px solid red;
+  /* border: 2px solid red; */
 }
 
 .content {
@@ -12,8 +12,8 @@
 
 .section {
   padding: 20px;
-  left:0;
-  right:0;
+  left: 0;
+  right: 0;
   margin-bottom: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -39,7 +39,7 @@
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   }
-  
+
   .sports-list {
     text-align: center;
     font-weight: bold;
@@ -51,7 +51,8 @@
 /* Even sections: Gradient background */
 .section.even {
   background: linear-gradient(135deg, #aded9e, #8ee8c4);
-  color: #000000; /* Dark text for readability on gradient */
+  color: #000000;
+  /* Dark text for readability on gradient */
 
   .grid-list {
     display: grid;
@@ -60,7 +61,7 @@
     padding: 0;
     list-style: none;
   }
-  
+
   .grid-list li {
     background: #ffffff;
     padding: 10px;
