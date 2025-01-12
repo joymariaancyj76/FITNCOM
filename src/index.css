@@ -108,3 +108,7 @@ a {
   width: 20px;
   margin-left: 10px;
 }
+.img {
+  max-width: none;
+  max-height: none;
+}
