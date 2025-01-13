@@ -91,29 +91,28 @@
         background-color: #fff;
         color: #333;
         /* Default text color for related products */
-      }
 
-      .related-product img {
-        width: 100%;
-        height: auto;
+        img {
+          width: 100%;
+          height: auto;
+        }
+
+        h3 {
+          margin: 10px 0;
+        }
+
+        p {
+          color: #333;
+        }
       }
 
       /* Odd and Even Related Products */
-      .related-product.odd {
+      .odd {
         background-color: #f9f9f9;
       }
 
-      .related-product.even {
+      .even {
         background-color: #e9e9e9;
-      }
-
-      /* Product Name and Price */
-      .related-product h3 {
-        margin: 10px 0;
-      }
-
-      .related-product p {
-        color: #333;
       }
     }
   }

@@ -6,7 +6,8 @@
     margin-top: 40px;
     height: 100vh;
     background-color: #f0f4f8;
-    padding: 0 1rem; /* Added padding for responsiveness */
+    padding: 0 1rem;
+    /* Added padding for responsiveness */
 }
 
 /* Form box styling */
@@ -44,8 +45,8 @@ form input {
     font-size: 1rem;
 }
 
-  /* Button styling */
-  .signinbutton {
+/* Button styling */
+.signinbutton {
     display: block;
     width: 100%;
     background-color: #aded9e;
@@ -90,18 +91,24 @@ form input {
     border: 1px solid #ffcccc;
     border-radius: 4px;
     text-align: center;
-  }
-  
+}
+
+.error {
+    color: red;
+}
+
 
 /* Show password toggle */
 .toggle-password {
-    display: inline-flex; /* Align checkbox and label on the same line */
+    display: inline-flex;
+    /* Align checkbox and label on the same line */
     justify-content: flex-start;
     color: #4caf50;
 }
 
 .toggle-password input[type="checkbox"] {
-    margin-right: 5px; /* Space between checkbox and label */
+    margin-right: 5px;
+    /* Space between checkbox and label */
 }
 
 .toggle-password h4 {

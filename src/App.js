@@ -1,53 +1,39 @@
 import React, { useContext, Suspense, lazy, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navbar from "./Components/Navbar/Navbar";
+import Hero from "./Components/Hero/Hero";
 import Footer from "./Components/Footer/Footer";
+import AboutUs from "./Components/AboutUs/AboutUs";
+import Signin from "./Components/Signin/Signin";
 import { UserStatusContext } from "./Scripts/AppContainer";
-
-// Lazy loaded components for better performance
-const Hero = lazy(() => import("./Components/Hero/Hero"));
-const AboutUs = lazy(() => import("./Components/AboutUs/AboutUs"));
-const Signin = lazy(() => import("./Components/Signin/Signin"));
-const ProductsPage = lazy(() => import("./Components/Cricket/ProductPage"));
-const Cricket = lazy(() => import("./Components/Cricket/Cricket"));
-const OrderPage = lazy(() => import("./Components/OrderPage/OrderPage"));
-const HowToChooseSport = lazy(() =>
-  import("./Components/HowToChoose/HowToChoose")
-);
-const NotFound = lazy(() => import("./Components/NotFound/NotFound"));
-const CricketProduct = lazy(() =>
-  import("./Components/CricketProduct/CricketProduct")
-);
-const CricketDetail = lazy(() =>
-  import("./Components/CricketDetail/CricketDetail")
-);
+import LoadingMask from "./Components/Common/LoadingMask";
+import CricketProduct from "./Components/CricketProduct/CricketProduct";
+import HowToChooseSport from "./Components/CricketProduct/CricketProduct";
+import OrderPage from "./Components/OrderPage/OrderPage";
+import NotFound from "./Components/NotFound/NotFound";
+import CricketDetail from "./Components/CricketDetail/CricketDetail";
 
 function App() {
-  const [isLoggedIn] = useContext(UserStatusContext);
-
-  // Preload critical routes like Signin for smoother transitions
-  useEffect(() => {
-    import("./Components/Signin/Signin");
-  }, []);
+  // eslint-disable-next-line
+  const [isLoggedIn, setIsLoggedIn] = useContext(UserStatusContext);
 
   return (
     <Router>
-      <div className="App">
+      <div className={`App`}>
         <Navbar />
-
-        <Suspense fallback={<div className="loading-spinner">Loading...</div>}>
+        <LoadingMask />
+        {isLoggedIn ? (
           <Routes>
-            {/* Home Route */}
             <Route
               path="/"
               element={
                 <>
                   <Hero />
                   <AboutUs />
+                  <Footer />
                 </>
               }
             />
-
             {/* Products and Related Routes */}
             <Route path="/cricket" element={<CricketProduct />} />
             <Route path="/how-to-choose-sport" element={<HowToChooseSport />} />
@@ -84,9 +70,11 @@ function App() {
               }
             />
           </Routes>
-        </Suspense>
-
-        <Footer />
+        ) : (
+          <Routes>
+            <Route path="/*" element={<Signin />} />
+          </Routes>
+        )}
       </div>
     </Router>
   );

@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
-import axios from "axios";
-import AppHelper from "./AppHelper";
+import apiCaller from "./ApiCaller";
+import User from "./User";
 
 export const UserStatusContext = createContext();
 
@@ -10,26 +10,18 @@ const AppContainer = ({ children }) => {
   useEffect(() => {
     const checkLoginStatus = async () => {
       try {
-        const response = await axios.post(
-          `${AppHelper.getServerUrl()}/account/checkWhetherUserLoggedIn`,
-          {},
-          {
-            credentials: "include",
-            headers: {
-              "Access-Token": localStorage.getItem("access-token"),
-            },
-          }
+        const response = await apiCaller(
+          "post",
+          "/account/checkWhetherUserLoggedIn"
         );
-        console.log("response.data:", response.data);
-        if (response.data.message === "success") {
+        if (response.message === "success") {
           setIsLoggedIn(true);
-          localStorage.setItem(
-            "access-token",
-            response.data.results.accessToken
-          );
+          localStorage.setItem("access-token", response.results.accessToken);
+          User.setUserName(response.results.customerName);
+        } else {
+          setIsLoggedIn(false);
         }
       } catch (error) {
-        console.error("Error checking login status:", error);
         setIsLoggedIn(false);
       }
     };
