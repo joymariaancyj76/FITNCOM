@@ -1,120 +1,126 @@
 /* Product Detail Page */
 .product-detail-page {
-    background-color: black; /* Black background for the detail page */
-    color: white; /* White text color for contrast */
-    margin-top: 100px; /* Ensure content isn't hidden behind navbar */
-    padding: 20px;
-    z-index: 10;
-    position: relative; /* Ensure the content is in the correct stacking context */
-  }
-  
+  background-color: black;
+  /* Black background for the detail page */
+  color: white;
+  /* White text color for contrast */
+  padding-top: 100px;
+  /* Ensure content isn't hidden behind navbar */
+  /* padding: 20px; */
+  z-index: 10;
+  position: relative;
+  /* Ensure the content is in the correct stacking context */
+
   /* Product Header */
   .product-header {
     display: flex;
     padding: 20px;
     border-bottom: 1px solid #ddd;
+
+    /* Product Image */
+    .product-image {
+      width: 300px;
+      height: auto;
+      margin-right: 20px;
+    }
+
+    /* Product Information */
+    .product-info {
+      flex: 1;
+
+
+      .product-attributes p {
+        margin: 5px 0;
+      }
+
+      /* Styling for the Add-to-Cart and Wishlist Buttons */
+      .product-controls {
+        margin-top: 20px;
+
+        .quantity-selector button {
+          background-color: #ade9de;
+          border: none;
+          padding: 5px;
+          cursor: pointer;
+          font-weight: bold;
+          border-radius: 5px;
+        }
+
+        .quantity-selector span {
+          margin: 0 10px;
+        }
+
+        .add-to-cart,
+        .wishlist {
+          background-color: #ade9de;
+          border: none;
+          color: black;
+          padding: 10px;
+          cursor: pointer;
+          margin-right: 10px;
+          font-weight: bold;
+          border-radius: 5px;
+        }
+
+        .add-to-cart:hover,
+        .wishlist:hover {
+          background-color: #8ee8c4;
+        }
+      }
+    }
   }
-  
-  /* Product Image */
-  .product-image {
-    width: 300px;
-    height: auto;
-    margin-right: 20px;
-  }
-  
-  /* Product Information */
-  .product-info {
-    flex: 1;
-  }
-  
-  .product-attributes p {
-    margin: 5px 0;
-  }
-  
+
   /* Related Products Section */
   .related-products {
     padding: 20px;
     margin-top: 20px;
+
+    /* Related Products List */
+    .related-products-list {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+
+      /* Individual Related Product */
+      .related-product {
+        width: 22%;
+        text-align: center;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        background-color: #fff;
+        color: #333;
+        /* Default text color for related products */
+      }
+
+      .related-product img {
+        width: 100%;
+        height: auto;
+      }
+
+      /* Odd and Even Related Products */
+      .related-product.odd {
+        background-color: #f9f9f9;
+      }
+
+      .related-product.even {
+        background-color: #e9e9e9;
+      }
+
+      /* Product Name and Price */
+      .related-product h3 {
+        margin: 10px 0;
+      }
+
+      .related-product p {
+        color: #333;
+      }
+    }
   }
-  
+
   .related-products h2 {
     text-align: center;
     margin-bottom: 10px;
   }
-  
-  /* Related Products List */
-  .related-products-list {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-  }
-  
-  /* Individual Related Product */
-  .related-product {
-    width: 22%;
-    text-align: center;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    background-color: #fff;
-    color: #333; /* Default text color for related products */
-  }
-  
-  .related-product img {
-    width: 100%;
-    height: auto;
-  }
-  
-  /* Odd and Even Related Products */
-  .related-product.odd {
-    background-color: #f9f9f9;
-  }
-  
-  .related-product.even {
-    background-color: #e9e9e9;
-  }
-  
-  /* Product Name and Price */
-  .related-product h3 {
-    margin: 10px 0;
-  }
-  
-  .related-product p {
-    color: #333;
-  }
-  
-  /* Styling for the Add-to-Cart and Wishlist Buttons */
-  .product-controls {
-    margin-top: 20px;
-  }
-  
-  .add-to-cart,
-  .wishlist {
-    background-color: #ade9de;
-    border: none;
-    color: black;
-    padding: 10px;
-    cursor: pointer;
-    margin-right: 10px;
-    font-weight: bold;
-    border-radius: 5px;
-  }
-  
-  .add-to-cart:hover,
-  .wishlist:hover {
-    background-color: #8ee8c4;
-  }
-  
-  .quantity-selector button {
-    background-color: #ade9de;
-    border: none;
-    padding: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    border-radius: 5px;
-  }
-  
-  .quantity-selector span {
-    margin: 0 10px;
-  }
-  
+
+}

@@ -11,10 +11,16 @@ const Signin = lazy(() => import("./Components/Signin/Signin"));
 const ProductsPage = lazy(() => import("./Components/Cricket/ProductPage"));
 const Cricket = lazy(() => import("./Components/Cricket/Cricket"));
 const OrderPage = lazy(() => import("./Components/OrderPage/OrderPage"));
-const HowToChooseSport = lazy(() => import("./Components/HowToChoose/HowToChoose"));
+const HowToChooseSport = lazy(() =>
+  import("./Components/HowToChoose/HowToChoose")
+);
 const NotFound = lazy(() => import("./Components/NotFound/NotFound"));
-const CricketProduct =lazy(()=> import("./Components/CricketProduct/CricketProduct"));
-const CricketDetail =lazy(()=> import("./Components/CricketDetail/CricketDetail"));
+const CricketProduct = lazy(() =>
+  import("./Components/CricketProduct/CricketProduct")
+);
+const CricketDetail = lazy(() =>
+  import("./Components/CricketDetail/CricketDetail")
+);
 
 function App() {
   const [isLoggedIn] = useContext(UserStatusContext);
@@ -45,8 +51,8 @@ function App() {
             {/* Products and Related Routes */}
             <Route path="/cricket" element={<CricketProduct />} />
             <Route path="/how-to-choose-sport" element={<HowToChooseSport />} />
-            <Route path="/products/:productid" element={<CricketDetail />} />
-            
+            <Route path="/products/:productId" element={<CricketDetail />} />
+
             {/* Correct path for My Orders */}
             <Route path="/myorders" element={<OrderPage />} />
 
@@ -54,7 +60,11 @@ function App() {
             <Route
               path="/signin"
               element={
-                <Suspense fallback={<div className="loading-spinner">Loading Sign In...</div>}>
+                <Suspense
+                  fallback={
+                    <div className="loading-spinner">Loading Sign In...</div>
+                  }
+                >
                   <Signin />
                 </Suspense>
               }
@@ -64,7 +74,11 @@ function App() {
             <Route
               path="*"
               element={
-                <Suspense fallback={<div className="loading-spinner">Page Not Found...</div>}>
+                <Suspense
+                  fallback={
+                    <div className="loading-spinner">Page Not Found...</div>
+                  }
+                >
                   <NotFound />
                 </Suspense>
               }

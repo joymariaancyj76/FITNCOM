@@ -59,6 +59,12 @@
     margin-bottom: 20px;
     box-shadow: 0 4px 8px rgba(14, 0, 0, 0.3);
 
+    .order-status {
+      margin-bottom: 10px;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
     .order-header {
       display: flex;
       justify-content: space-between;
@@ -110,63 +116,43 @@
             overflow: hidden;
           }
         }
+
       }
 
+      .order-right {
+        display: flex;
+        align-items: center;
+        /* justify-content: center; */
+        flex: 1;
+
+        .item-description {
+          text-align: left;
+        }
+
+      }
 
     }
+
+    .order-buttons {
+      margin-top: 15px;
+      text-align: center;
+
+      button {
+        background-color: var(--green-1);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        margin: 0 10px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+    }
+
   }
 
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-.order-right {
-  display: flex;
-  align-items: center;
-  flex: 1;
-}
-
-.order-status {
-  margin-bottom: 10px;
-  font-weight: bold;
-  font-size: 14px;
-}
-
-.item-description {
-  text-align: left;
-}
-
-
-.order-buttons {
-  margin-top: 15px;
-  text-align: center;
-}
-
-.order-buttons button {
-  background-color: var(--green-1);
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  margin: 0 10px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.order-buttons button:hover {
-  background-color: #45a049;
 }

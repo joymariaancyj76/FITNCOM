@@ -38,13 +38,12 @@ const OrderItem = ({ order }) => {
         <div>Total: {order.totalAmount}</div>
         <div>Ship To: {order.shipTo}</div>
       </div>
-
+      <div className="order-status">
+        <div>{order.deliveryStatus}</div>
+        <div>{order.orderDate}</div>
+      </div>
       <div className="order-details">
         <div className="order-left">
-          <div className="order-status">
-            <div>{order.deliveryStatus}</div>
-            <div>{order.orderDate}</div>
-          </div>
           <div className="order-image-container">
             <img className="itemimg" src={order.itemImage} alt="Order Item" />
           </div>
