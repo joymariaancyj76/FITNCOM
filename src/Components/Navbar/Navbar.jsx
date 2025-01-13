@@ -38,10 +38,10 @@ const Navbar = () => {
       <div className="menu-icon">
         {isLoggedIn && (
           <div className="profile-name">
-            <FaUserCircle /> {User.getUserName()}
+            {User.getUserName()}
           </div>
         )}
-        <MdOutlineShoppingCart />
+       {/* <MdOutlineShoppingCart /> */}
         <FiMenu onClick={handleMenuToggle} />
       </div>
       {showDropdown && (
