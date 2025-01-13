@@ -45,7 +45,7 @@ const OrderItem = ({ order }) => {
       <div>{order.deliveryStatus}</div>
       <div>{order.orderDate}</div>
     </div>
-    <div className="image-container">
+    <div className="order-image-container">
       <img className="itemimg" src={order.itemImage} alt="Order Item" />
     </div>
   </div>

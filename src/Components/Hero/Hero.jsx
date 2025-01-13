@@ -115,7 +115,7 @@ function Hero() {
                 key={product.id}
                 className={`product-item ${index % 2 === 0 ? 'even-item' : 'odd-item'}`}
               >
-               <div className="image-container">
+               <div className="product-image-container">
                   <img src={product.image} alt={product.name} />
                   <div
                     className="cart-icon"

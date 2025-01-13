@@ -13,6 +13,8 @@ const Cricket = lazy(() => import("./Components/Cricket/Cricket"));
 const OrderPage = lazy(() => import("./Components/OrderPage/OrderPage"));
 const HowToChooseSport = lazy(() => import("./Components/HowToChoose/HowToChoose"));
 const NotFound = lazy(() => import("./Components/NotFound/NotFound"));
+const CricketProduct =lazy(()=> import("./Components/CricketProduct/CricketProduct"));
+const CricketDetail =lazy(()=> import("./Components/CricketDetail/CricketDetail"));
 
 function App() {
   const [isLoggedIn] = useContext(UserStatusContext);
@@ -41,9 +43,9 @@ function App() {
             />
 
             {/* Products and Related Routes */}
-            <Route path="/cricket" element={<Cricket />} />
+            <Route path="/cricket" element={<CricketProduct />} />
             <Route path="/how-to-choose-sport" element={<HowToChooseSport />} />
-            <Route path="/products/:productId" element={<ProductsPage />} />
+            <Route path="/products/:productid" element={<CricketDetail />} />
             
             {/* Correct path for My Orders */}
             <Route path="/myorders" element={<OrderPage />} />
