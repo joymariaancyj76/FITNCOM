@@ -22,59 +22,54 @@ function App() {
       <div className={`App`}>
         <Navbar />
         <LoadingMask />
-        {isLoggedIn ? (
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <>
-                  <Hero />
-                  <AboutUs />
-                  <Footer />
-                </>
-              }
-            />
-            {/* Products and Related Routes */}
-            <Route path="/cricket" element={<CricketProduct />} />
-            <Route path="/how-to-choose-sport" element={<HowToChooseSport />} />
-            <Route path="/products/:productId" element={<CricketDetail />} />
-
-            {/* Correct path for My Orders */}
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <Hero />
+                <AboutUs />
+                <Footer />
+              </>
+            }
+          />
+          {/* Products and Related Routes */}
+          <Route path="/cricket" element={<CricketProduct />} />
+          <Route path="/how-to-choose-sport" element={<HowToChooseSport />} />
+          <Route path="/products/:productId" element={<CricketDetail />} />
+          {isLoggedIn ? (
             <Route path="/myorders" element={<OrderPage />} />
-
-            {/* Sign-in Route with dedicated Suspense */}
-            <Route
-              path="/signin"
-              element={
-                <Suspense
-                  fallback={
-                    <div className="loading-spinner">Loading Sign In...</div>
-                  }
-                >
-                  <Signin />
-                </Suspense>
-              }
-            />
-
-            {/* 404 Not Found Route */}
-            <Route
-              path="*"
-              element={
-                <Suspense
-                  fallback={
-                    <div className="loading-spinner">Page Not Found...</div>
-                  }
-                >
-                  <NotFound />
-                </Suspense>
-              }
-            />
-          </Routes>
-        ) : (
-          <Routes>
+          ) : (
             <Route path="/*" element={<Signin />} />
-          </Routes>
-        )}
+          )}
+          {/* Sign-in Route with dedicated Suspense */}
+          <Route
+            path="/signin"
+            element={
+              <Suspense
+                fallback={
+                  <div className="loading-spinner">Loading Sign In...</div>
+                }
+              >
+                <Signin />
+              </Suspense>
+            }
+          />
+
+          {/* 404 Not Found Route */}
+          <Route
+            path="*"
+            element={
+              <Suspense
+                fallback={
+                  <div className="loading-spinner">Page Not Found...</div>
+                }
+              >
+                <NotFound />
+              </Suspense>
+            }
+          />
+        </Routes>
       </div>
     </Router>
   );

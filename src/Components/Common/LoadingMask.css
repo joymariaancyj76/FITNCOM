@@ -7,7 +7,6 @@
     position: absolute;
     display: flex;
     align-items: center;
-    justify-content: center;
     background: rgba(255, 255, 255);
 
     .loading-gif {
@@ -34,6 +33,6 @@
     }
 
     to {
-        left: 40px;
+        left: calc(100% - 80px);
     }
 }
