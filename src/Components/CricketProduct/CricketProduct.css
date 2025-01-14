@@ -1,14 +1,14 @@
 .product-grid {
-    text-align: center;
-    padding: 20px;
-    top: 300px;
-  }
-  
-  .product-grid h1 {
+  text-align: center;
+  padding: 20px;
+  top: 300px;
+  padding-top: 100px;
+
+  h1 {
     top: 100px;
     margin-bottom: 20px;
   }
-  
+
   .grid-container {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -17,64 +17,74 @@
     width: 70%;
     margin: auto;
     overflow: hidden;
-  }
-  
-  .grid-item {
-    /* Applying initial opacity and positioning off-screen */
-    opacity: 0;
-    transform: translateX(-100%);
-    animation: slideIn 0.8s ease forwards; /* Apply animation */
-  }
-  
-  .grid-item img {
-    max-width: 100%;
-    border-radius: 4px;
-  }
-  
-  /* Sliding Animation */
-  @keyframes slideIn {
-    to {
-      opacity: 1;
-      transform: translateX(0); /* Slide to original position */
+
+    .grid-item {
+      /* Applying initial opacity and positioning off-screen */
+      opacity: 0;
+      transform: translateX(-100%);
+      animation: slideIn 0.8s ease forwards;
+      /* Apply animation */
+
+      .product-card {
+        padding: 20px;
+        border-radius: 8px;
+        text-align: center;
+      }
+
+      .product-card:nth-child(odd) {
+        background-color: var(--green-1);
+        /* Color for odd items */
+      }
+
+      .product-card:nth-child(even) {
+        background-color: var(--green-2);
+        /* Color for even items */
+      }
+
+      .product-card img {
+        width: 100%;
+        height: auto;
+        max-height: 200px;
+        object-fit: contain;
+      }
+
+    }
+
+    .grid-item img {
+      max-width: 100%;
+      border-radius: 4px;
     }
   }
-  
-  .product-card {
-    padding: 20px;
-    border-radius: 8px;
-    text-align: center;
-  }
-  
-  .product-card:nth-child(odd) {
-    background-color: var(--green-1); /* Color for odd items */
-  }
-  
-  .product-card:nth-child(even) {
-    background-color: var(--green-2); /* Color for even items */
-  }
-  
-  .product-card img {
-    width: 100%;
-    height: auto;
-    max-height: 200px;
-    object-fit: contain;
-  }
-  
+
   .pagination {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 20px;
+
+    .nav-icon {
+      font-size: 24px;
+      margin: 0 10px;
+      cursor: pointer;
+    }
+
+    .nav-icon[disabled] {
+      color: #ccc;
+      pointer-events: none;
+    }
   }
-  
-  .nav-icon {
-    font-size: 24px;
-    margin: 0 10px;
-    cursor: pointer;
+}
+
+
+
+
+
+
+/* Sliding Animation */
+@keyframes slideIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+    /* Slide to original position */
   }
-  
-  .nav-icon[disabled] {
-    color: #ccc;
-    pointer-events: none;
-  }
-  
+}
