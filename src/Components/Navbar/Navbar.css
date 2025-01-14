@@ -18,11 +18,12 @@
   /* Keeps it above other content */
   margin: 0;
   /* Removes margin for proper alignment */
-  border-bottom: 2px solid red;
+  /* border-bottom: 2px solid red; */
   /* Corrected border property */
   /* margin: 5px 1px 20px 1px; /* This sets top, left, right, and bottom margins */
   /* border: 2px solid red; */
   /* Corrected border property */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 
@@ -59,6 +60,7 @@
   align-items: center;
   gap: 15px;
 }
+
 .profile-name {
   display: flex;
   gap: 10px;
@@ -70,6 +72,7 @@
   border-top: 60px;
 
 }
+
 .dropdown-container {
   position: absolute;
   top: 40px;
