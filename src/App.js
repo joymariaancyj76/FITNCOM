@@ -13,6 +13,7 @@ import OrderPage from "./Components/OrderPage/OrderPage";
 import NotFound from "./Components/NotFound/NotFound";
 import CricketDetail from "./Components/CricketDetail/CricketDetail";
 import YourProfile from "./Components/YourProfile/YourProfile";
+import Wishlist from "./Components/Wishlist/Wishlist";
 
 function App() {
   // eslint-disable-next-line
@@ -43,6 +44,7 @@ function App() {
             <>
               <Route path="/myprofile" element={<YourProfile />} />
               <Route path="/myorders" element={<OrderPage />} />
+              <Route path="/mywishlist" element={<Wishlist />} />
             </>
           ) : (
             <Route path="/*" element={<Signin />} />

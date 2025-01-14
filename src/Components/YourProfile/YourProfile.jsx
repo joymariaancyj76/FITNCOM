@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Formik, Form, Field, FieldArray } from 'formik';
 import * as Yup from 'yup';
-import { FaEdit, FaTrashAlt, FaPlus,FaSave } from 'react-icons/fa';
+import { FaEdit, FaTrashAlt, FaPlus, FaSave } from 'react-icons/fa';
 import './YourProfile.css';
 import usericon from "../../Assets/signin-icon.png";
 
@@ -37,11 +37,31 @@ const validationSchema = Yup.object().shape({
 const YourProfile = () => {
   const [savedAddresses, setSavedAddresses] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
+  const [showEmailSection, setShowEmailSection] = useState(false);
+  const [showPhoneSection, setShowPhoneSection] = useState(false);
+  const [showPasswordSection, setShowPasswordSection] = useState(false);
+  const [passwordChangeSuccess, setPasswordChangeSuccess] = useState(false);
 
   const handleEditClick = () => {
     setIsEditing(true);
   };
 
+  const toggleEmailSection = () => {
+    setShowEmailSection(!showEmailSection);
+  };
+
+  const togglePhoneSection = () => {
+    setShowPhoneSection(!showPhoneSection);
+  };
+
+  const togglePasswordSection = () => {
+    setShowPasswordSection(!showPasswordSection);
+  };
+
+  const handlePasswordChange = () => {
+    setPasswordChangeSuccess(true);
+    setShowPasswordSection(false);
+  };
 
   return (
     <div className='YourProfile'>
@@ -80,21 +100,61 @@ const YourProfile = () => {
       >
         {({ values, setFieldValue }) => (
           <Form className="profile-form">
-             {/* User Profile Section */}
-             <div className="user-profile-section">
-              <img src={usericon} alt="User" className="signin-image" />
+            {/* User Profile Section */}
+            <div className="user-profile-section">
+              <img src={usericon} alt="User" className="profile-signin-image" />
               <div>
                 <Field name="username" placeholder="Username" className="profile-input" />
-                <FaEdit className="edit-icon" onClick={handleEditClick} />
+                <FaEdit className="profile-edit-icon" onClick={handleEditClick} />
               </div>
             </div>
 
             {/* Email, Password, PhoneNumber */}
             <div className="profile-info">
-              <Field name="email" placeholder="Gmail ID" className="profile-input" />
-              <Field type="password" name="password" placeholder="Change Password" className="profile-input" />
-              <Field name="phoneNumber" placeholder="Phone Number" className="profile-input" />
+              {/* Email Section */}
+              <div className="email-section">
+                <div className="email-bar" onClick={toggleEmailSection}>
+                  Gmail
+                </div>
+                {showEmailSection && (
+                  <div className="email-form">
+                    <Field name="email" placeholder="Gmail ID" className="profile-input" />
+                  </div>
+                )}
+              </div>
+
+              {/* Phone Section */}
+              <div className="phoneNumber-section">
+                <div className="phoneNumber-bar" onClick={togglePhoneSection}>
+                  Phone Number
+                </div>
+                {showPhoneSection && (
+                  <div className="phoneNumber-form">
+                    <Field name="phoneNumber" placeholder="Phone Number" className="profile-input" />
+                  </div>
+                )}
+              </div>
+
+              {/* Password Section */}
+              <div className="password-section">
+                <div className="password-bar" onClick={togglePasswordSection}>
+                  Change Password
+                </div>
+                {showPasswordSection && (
+                  <div className="password-form">
+                    <div className='password-changebox'>
+                    <Field type="password" name="oldPassword" placeholder="Old Password" className="profile-input" />
+                    <Field type="password" name="newPassword" placeholder="New Password" className="profile-input" />
+                    <Field type="password" name="confirmPassword" placeholder="Confirm Password" className="profile-input" />
+                    <button type="button" onClick={handlePasswordChange} className="profile-button">Update</button>
+                    <button type="button" onClick={togglePasswordSection} className="profile-button">Cancel</button>
+                  </div>
+                  </div>
+                )}
+                {passwordChangeSuccess && <div className="success-message">Password changed successfully</div>}
+              </div>
             </div>
+
             {/* Billing Address Section */}
             <div className="address-box">
               <h2>Billing Address</h2>
@@ -144,7 +204,7 @@ const YourProfile = () => {
                           Default
                         </label>
                         <div className="profile-icons">
-                          <FaTrashAlt className="delete-icon" onClick={() => remove(index)} />
+                          <FaTrashAlt className="profile-delete-icon" onClick={() => remove(index)} />
                         </div>
                       </div>
                     </div>
@@ -185,7 +245,7 @@ const YourProfile = () => {
           {savedAddresses.map((address, index) => (
             <div key={index} className="address-box">
               <p>
-                {address.billingAddress.name}, {address.billingAddress.flatNo}, {address.billingAddress.street}, {address.billingAddress.area}, {address.billingAddress.district}, {address.billingAddress.state}, {address.billingAddress.pincode}, {address.billingAddress.phoneNo}, {address.billingAddress.landmark}
+                {address.billingAddress.name}, {address.billingAddress.flatNo}, {address.billingAddress.street}, {address.billingAddress.area}, {address.billingAddress.district}, {address.billingAddress.state}, {address.billingAddress.pincode}, {address.billingAddress.phoneNo}
               </p>
             </div>
           ))}

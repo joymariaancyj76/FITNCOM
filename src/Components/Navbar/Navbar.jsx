@@ -51,8 +51,7 @@ const Navbar = () => {
             <div className="sub-dropdown-menu">
               <Link to="/myprofile">My Profile</Link>
               <Link to="/myorders">My Orders</Link>
-              <Link to="/wishlist">My Wishlist</Link>
-              <Link to="/order-history">Order History</Link>
+              <Link to="/mywishlist">My Wishlist</Link>
               <Link onClick={handleLogOut} to="/">
                 Logout
               </Link>
