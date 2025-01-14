@@ -49,7 +49,7 @@ const Navbar = () => {
           <div className="dropdown-section">
             ACCOUNT
             <div className="sub-dropdown-menu">
-              <Link to="/profile">My Profile</Link>
+              <Link to="/myprofile">My Profile</Link>
               <Link to="/myorders">My Orders</Link>
               <Link to="/wishlist">My Wishlist</Link>
               <Link to="/order-history">Order History</Link>

@@ -7,7 +7,7 @@
     position: absolute;
     display: flex;
     align-items: center;
-    background: rgba(255, 255, 255);
+    background: var(--ash-2);
 
     .loading-gif {
         width: 80px;

@@ -1,4 +1,4 @@
-import React, { useContext, Suspense, lazy, useEffect } from "react";
+import React, { useContext, Suspense, lazy } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navbar from "./Components/Navbar/Navbar";
 import Hero from "./Components/Hero/Hero";
@@ -8,14 +8,15 @@ import Signin from "./Components/Signin/Signin";
 import { UserStatusContext } from "./Scripts/AppContainer";
 import LoadingMask from "./Components/Common/LoadingMask";
 import CricketProduct from "./Components/CricketProduct/CricketProduct";
-import HowToChooseSport from "./Components/CricketProduct/CricketProduct";
+import HowToChooseSport from "./Components/HowToChoose/HowToChoose";
 import OrderPage from "./Components/OrderPage/OrderPage";
 import NotFound from "./Components/NotFound/NotFound";
 import CricketDetail from "./Components/CricketDetail/CricketDetail";
+import YourProfile from "./Components/YourProfile/YourProfile";
 
 function App() {
   // eslint-disable-next-line
-  const [isLoggedIn, setIsLoggedIn] = useContext(UserStatusContext);
+  const [isLoggedIn] = useContext(UserStatusContext);
 
   return (
     <Router>
@@ -37,11 +38,16 @@ function App() {
           <Route path="/cricket" element={<CricketProduct />} />
           <Route path="/how-to-choose-sport" element={<HowToChooseSport />} />
           <Route path="/products/:productId" element={<CricketDetail />} />
+          
           {isLoggedIn ? (
-            <Route path="/myorders" element={<OrderPage />} />
+            <>
+              <Route path="/myprofile" element={<YourProfile />} />
+              <Route path="/myorders" element={<OrderPage />} />
+            </>
           ) : (
             <Route path="/*" element={<Signin />} />
           )}
+
           {/* Sign-in Route with dedicated Suspense */}
           <Route
             path="/signin"
