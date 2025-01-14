@@ -28,7 +28,7 @@
 
 .logo {
   position: absolute;
-  left: 50%;
+  left: 10%;
   transform: translateX(-50%);
 }
 
@@ -43,6 +43,7 @@
   display: inline;
   height: 30px;
   margin-left: 1130px;
+  gap: 15px;
 }
 
 .menu-icon {
@@ -57,15 +58,18 @@
   flex-direction: row;
   align-items: center;
   gap: 15px;
-
-  .profile-name {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: black;
-  }
 }
+.profile-name {
+  display: flex;
+  gap: 10px;
+  color: black;
+  font-family: "MyFont2";
+  font-size: x-small;
+  align-items: baseline;
+  z-index: 1001;
+  border-top: 60px;
 
+}
 .dropdown-container {
   position: absolute;
   top: 40px;
