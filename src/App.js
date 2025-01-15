@@ -14,6 +14,7 @@ import NotFound from "./Components/NotFound/NotFound";
 import CricketDetail from "./Components/CricketDetail/CricketDetail";
 import YourProfile from "./Components/YourProfile/YourProfile";
 import Wishlist from "./Components/Wishlist/Wishlist";
+import TermsConditions from "./Components/TermsConditions/TermsConditions";
 
 function App() {
   // eslint-disable-next-line
@@ -31,7 +32,6 @@ function App() {
               <>
                 <Hero />
                 <AboutUs />
-                <Footer />
               </>
             }
           />
@@ -39,6 +39,8 @@ function App() {
           <Route path="/cricket" element={<CricketProduct />} />
           <Route path="/how-to-choose-sport" element={<HowToChooseSport />} />
           <Route path="/products/:productId" element={<CricketDetail />} />
+
+          <Route path="/termsconditions" element={<TermsConditions />} />
           
           {isLoggedIn ? (
             <>
@@ -78,6 +80,7 @@ function App() {
             }
           />
         </Routes>
+        <Footer/>
       </div>
     </Router>
   );
