@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import "./OrderPage.css"; // Import your styles here
+import { useNavigate } from "react-router-dom";
+import "./OrderPage.css";
 import product1 from "../../Assets/bat png.png"; // Replace with actual image path
 
 // OrderTabs Component
@@ -7,12 +8,18 @@ const OrderTabs = ({ activeTab, setActiveTab }) => {
   return (
     <div className="order-tabs">
       <button
+        className={`tab ${activeTab === "all" ? "active" : ""}`}
+        onClick={() => setActiveTab("all")}
+      >
+        ALL
+      </button>
+      <button
         className={`tab ${activeTab === "orders" ? "active" : ""}`}
         onClick={() => setActiveTab("orders")}
       >
         ORDERS
       </button>
-      <div className="tab.centre">
+      <div className="tab-centre">
         <button
           className={`tab ${activeTab === "notShipped" ? "active" : ""}`}
           onClick={() => setActiveTab("notShipped")}
@@ -30,7 +37,14 @@ const OrderTabs = ({ activeTab, setActiveTab }) => {
   );
 };
 
+// OrderItem Component
 const OrderItem = ({ order }) => {
+  const navigate = useNavigate();
+
+  const handleViewItemClick = () => {
+    navigate("/ordersummary");
+  };
+
   return (
     <div className="order-item">
       <div className="order-header">
@@ -57,7 +71,9 @@ const OrderItem = ({ order }) => {
 
       <div className="order-buttons">
         <button className="buy-again">Buy It Again</button>
-        <button className="view-item">View Your Item</button>
+        <button className="view-item" onClick={handleViewItemClick}>
+          View Your Item
+        </button>
       </div>
     </div>
   );
@@ -65,7 +81,7 @@ const OrderItem = ({ order }) => {
 
 // OrderPage Component
 const OrderPage = () => {
-  const [activeTab, setActiveTab] = useState("orders"); // Manage active tab state
+  const [activeTab, setActiveTab] = useState("all"); // Manage active tab state
 
   const orders = [
     {
@@ -86,7 +102,7 @@ const OrderPage = () => {
       orderDate: "Jan 2, 2025",
       itemDescription:
         "Willow is the only type of wood that can provide the strength and compression needed for a cricket bat.",
-      itemImage: product1, // replace with actual image path
+      itemImage: product1,
     },
     {
       orderPlaced: "Jan 3, 2025",
@@ -96,9 +112,28 @@ const OrderPage = () => {
       orderDate: "Jan 3, 2025",
       itemDescription:
         "Willow is the only type of wood that can provide the strength and compression needed for a cricket bat.",
-      itemImage: product1, // replace with actual image path
+      itemImage: product1,
+    },
+    {
+      orderPlaced: "Jan 4, 2025",
+      totalAmount: "Rs. 800",
+      shipTo: "Charlie",
+      deliveryStatus: "Cancelled",
+      orderDate: "Jan 4, 2025",
+      itemDescription:
+        "Willow is the only type of wood that can provide the strength and compression needed for a cricket bat.",
+      itemImage: product1,
     },
   ];
+
+  // Filter orders based on active tab
+  const filteredOrders = orders.filter((order) => {
+    if (activeTab === "all") return true;
+    if (activeTab === "orders") return order.deliveryStatus === "In Transit" || order.deliveryStatus === "Delivered";
+    if (activeTab === "notShipped") return order.deliveryStatus === "Shipped";
+    if (activeTab === "cancelled") return order.deliveryStatus === "Cancelled";
+    return false;
+  });
 
   return (
     <div className="order-page">
@@ -109,7 +144,7 @@ const OrderPage = () => {
 
       {/* Order Items */}
       <div className="order-list">
-        {orders.map((order) => (
+        {filteredOrders.map((order) => (
           <OrderItem key={order.orderPlaced} order={order} />
         ))}
       </div>
