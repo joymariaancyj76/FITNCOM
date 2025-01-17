@@ -16,6 +16,7 @@ import YourProfile from "./Components/YourProfile/YourProfile";
 import Wishlist from "./Components/Wishlist/Wishlist";
 import TermsConditions from "./Components/TermsConditions/TermsConditions";
 import OrderSummary from "./Components/OrderSummary/OrderSummary";
+import CartPage from "./Components/CartPage/CartPage";
 
 function App() {
   // eslint-disable-next-line
@@ -40,6 +41,7 @@ function App() {
           <Route path="/cricket" element={<CricketProduct />} />
           <Route path="/how-to-choose-sport" element={<HowToChooseSport />} />
           <Route path="/products/:productId" element={<CricketDetail />} />
+          <Route path="/cart" element={<CartPage/>} />
 
           <Route path="/termsconditions" element={<TermsConditions />} />
           

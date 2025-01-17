@@ -2,19 +2,19 @@ import React, { useState, useEffect } from "react";
 import { useSpring, animated } from "@react-spring/web";
 import "./Hero.css";
 import { FaArrowLeft, FaArrowRight, FaStar, FaStarHalfAlt } from 'react-icons/fa';
-import product1 from '../../Assets/bat png.png';
-import product2 from '../../Assets/bat 2.jpg';
-import product3 from '../../Assets/bat png.png';
-import product4 from '../../Assets/bat 2.jpg';
-import product5 from '../../Assets/bat png.png';
-import product6 from '../../Assets/bat png.png';
-import product7 from '../../Assets/bat png.png';
-import product8 from '../../Assets/bat png.png';
-import product9 from '../../Assets/bat png.png';
-import evenaddicon from '../../Assets/cart icon 1.png';
-import evensubicon from '../../Assets/cart icon 4.png';
-import oddaddicon from '../../Assets/cart icon 2.png';
-import oddsubicon from '../../Assets/cart icon 3.png';
+import product1 from '../../Assets/Images/bat png.png';
+import product2 from '../../Assets/Images/bat png.png';
+import product3 from '../../Assets/Images/bat png.png';
+import product4 from '../../Assets/Images/bat png.png';
+import product5 from '../../Assets/Images/bat png.png';
+import product6 from '../../Assets/Images/bat png.png';
+import product7 from '../../Assets/Images/bat png.png';
+import product8 from '../../Assets/Images/bat png.png';
+import product9 from '../../Assets/Images/bat png.png';
+import evenaddicon from '../../Assets/Images/cart icon 1.png';
+import evensubicon from '../../Assets/Images/cart icon 4.png';
+import oddaddicon from '../../Assets/Images/cart icon 2.png';
+import oddsubicon from '../../Assets/Images/cart icon 3.png';
 
 // Sample products data
 const products = [

@@ -1,17 +1,17 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // Import useNavigate hook
 import "./Navbar.css";
 import { FiMenu } from "react-icons/fi";
-import { MdOutlineShoppingCart } from "react-icons/md";
-import logo from "../../Assets/LOGO-transparent.png";
-import signinicon from "../../Assets/signin-icon.png";
-import { FaUserCircle } from "react-icons/fa";
+import addtocarticon from "../../Assets/Images/addtocart.png";
+import logo from "../../Assets/Images/LOGO-transparent.png";
+import signinicon from "../../Assets/Images/signin-icon.png";
 import { UserStatusContext } from "../../Scripts/AppContainer";
 import User from "../../Scripts/User";
 
 const Navbar = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useContext(UserStatusContext);
+  const navigate = useNavigate(); // Initialize navigate function
 
   const handleMenuToggle = () => {
     setShowDropdown(!showDropdown);
@@ -20,6 +20,10 @@ const Navbar = () => {
   const handleLogOut = () => {
     setIsLoggedIn(false);
     localStorage.removeItem("access-token");
+  };
+
+  const handleAddToCartClick = () => {
+    navigate("/cart"); // Navigate to CartPage when "Add to Cart" icon is clicked
   };
 
   return (
@@ -33,6 +37,9 @@ const Navbar = () => {
         <Link to="/">
           <img src={signinicon} alt="Sign In" />
         </Link>
+        <div className="addtocart-icon" onClick={handleAddToCartClick}>
+          <img src={addtocarticon} alt="Add to Cart" />
+        </div>
       </div>
 
       <div className="menu-icon">
@@ -41,7 +48,6 @@ const Navbar = () => {
             {User.getUserName()}
           </div>
         )}
-       {/* <MdOutlineShoppingCart /> */}
         <FiMenu onClick={handleMenuToggle} />
       </div>
       {showDropdown && (

@@ -46,6 +46,13 @@
   margin-left: 1130px;
   gap: 15px;
 }
+.addtocarticon img {
+  display: inline;
+  height: 30px;
+  margin-left: 300px;
+  margin-right: 100px;
+  gap: 15px;
+}
 
 .menu-icon {
   font-size: 25px;
@@ -53,7 +60,7 @@
   padding: 10px;
   /* Adjust padding as needed */
   color: #8ee8c4;
-  margin-right: 90px;
+  margin-right: 70px;
   margin-left: -400px;
   display: flex;
   flex-direction: row;

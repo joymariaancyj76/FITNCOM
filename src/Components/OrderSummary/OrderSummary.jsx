@@ -1,61 +1,36 @@
 import React, { useState } from 'react';
 import './OrderSummary.css';
-import ordersummaryproduct from "../../Assets/bat png.png";
+import ordersummaryproduct from "../../Assets/Images/bat png.png";
 
 const OrderSummary = () => {
-  const [showTrackingDetails, setShowTrackingDetails] = useState(false);
-  const [showCancelForm, setShowCancelForm] = useState(false);
-  const [cancelReason, setCancelReason] = useState('');
-  const [description, setDescription] = useState('');
-
-  const handleTrackingDetailsClick = () => {
-    setShowTrackingDetails(!showTrackingDetails);
-  };
-
-  const handleCancelClick = () => {
-    setShowCancelForm(!showCancelForm);
-  };
-
-  const handleReasonChange = (event) => {
-    setCancelReason(event.target.value);
-  };
-
-  const handleDescriptionChange = (event) => {
-    setDescription(event.target.value);
-  };
-
-  const handleFormSubmit = (event) => {
-    event.preventDefault();
-    console.log("Reason for cancellation:", cancelReason);
-    console.log("Description:", description);
-    setShowCancelForm(false);
-  };
-  const OrderSummaryTabs = ({ activeTab, setActiveTab }) => {
-    return (
-      <div className="ordersummary-tabs">
-        <button
-          className={`tab ${activeTab === "cart" ? "active" : ""}`}
-          onClick={() => setActiveTab("cart")}
-        >
-          CART
-        </button>
-        <button
-          className={`tab ${activeTab === "payment" ? "active" : ""}`}
-          onClick={() => setActiveTab("payment")}
-        >
-          PAYMENT
-        </button>
-        <div className="tab-centre">
-          <button
-            className={`tab ${activeTab === "address" ? "active" : ""}`}
-            onClick={() => setActiveTab("address")}
-          >
-            ADDRESS
-          </button>
-        </div>
-        </div>
-    );
-  };
+    const [showTrackingDetails, setShowTrackingDetails] = useState(false);
+    const [showCancelForm, setShowCancelForm] = useState(false);
+    const [cancelReason, setCancelReason] = useState('');
+    const [description, setDescription] = useState('');
+  
+    const handleTrackingDetailsClick = () => {
+      setShowTrackingDetails(!showTrackingDetails);
+    };
+  
+    const handleCancelClick = () => {
+      setShowCancelForm(!showCancelForm);
+    };
+  
+    const handleReasonChange = (event) => {
+      setCancelReason(event.target.value);
+    };
+  
+    const handleDescriptionChange = (event) => {
+      setDescription(event.target.value);
+    };
+  
+    const handleFormSubmit = (event) => {
+      event.preventDefault();
+      console.log("Reason for cancellation:", cancelReason);
+      console.log("Description:", description);
+      setShowCancelForm(false);
+    };
+  
   const stages = [
     { id: 1, status: "Order Placed", date: "2025-01-10" },
     { id: 2, status: "Shipped", date: "2025-01-11" },
@@ -65,40 +40,37 @@ const OrderSummary = () => {
   return (
     <div className="order-summary-container">
       <h1>ORDER SUMMARY</h1>
-      <div className="ordersummary-tabs">
-        <p>CART</p>
-        <p>ADDRESS</p>
-        <p>PAYMENT</p>
-      </div>
-      <div className="ordersummary-product-details">
-        <img src={ordersummaryproduct} alt="Product" />
-        <div>
-        <p>ORDER DATE: DD/MM/YYYY</p>
-        <p>ORDER ID: 0000000000</p>
-        <p>ORDER TOTAL: Rs 000/-</p>
-          <p>Willow Bat</p>
-          <p>"Willow is the only type of wood that can provide the strength and compression needed for a cricket bat. There are big differences in the performance of the two types of willow."</p>
-          <label>
-            SIZE: 
-            <select>
-              {['1', '2', '3', '4', '5', '6', 'H', 'SH', 'LH'].map(size => (
-                <option key={size} value={size}>{size}</option>
-              ))}
-            </select>
-          </label>
-          <label>
-            QTY: 
-            <select>
-              {Array.from({ length: 10 }, (_, i) => i + 1).map(qty => (
-                <option key={qty} value={qty}>{qty}</option>
-              ))}
-            </select>
-          </label>
-          <p>Rs. 000/-</p>
-          <button onClick={handleCancelClick}>CANCEL</button>
-          <button onClick={handleTrackingDetailsClick}>TRACKING DETAILS</button>
+        <div className="cart-content">
+          <div className="ordersummary-product-details">
+            <img src={ordersummaryproduct} alt="Product" />
+            <div>
+              <p>ORDER DATE: DD/MM/YYYY</p>
+              <p>ORDER ID: 0000000000</p>
+              <p>ORDER TOTAL: Rs 000/-</p>
+              <p>Willow Bat</p>
+              <p>"Willow is the only type of wood that can provide the strength and compression needed for a cricket bat."</p>
+              <label>
+                SIZE:
+                <select>
+                  {['1', '2', '3', '4', '5', '6', 'H', 'SH', 'LH'].map(size => (
+                    <option key={size} value={size}>{size}</option>
+                  ))}
+                </select>
+              </label>
+              <label>
+                QTY:
+                <select>
+                  {Array.from({ length: 10 }, (_, i) => i + 1).map(qty => (
+                    <option key={qty} value={qty}>{qty}</option>
+                  ))}
+                </select>
+              </label>
+              <p>Rs. 000/-</p>
+              <button onClick={handleCancelClick}>CANCEL</button>
+              <button onClick={handleTrackingDetailsClick}>TRACKING DETAILS</button>
+            </div>
+          </div>
         </div>
-      </div>
 
       {showTrackingDetails && (
         <div className="timeline-container">
@@ -151,23 +123,23 @@ const OrderSummary = () => {
         <h2>Order Summary</h2>
         <div className="price-details-table">
           <div>
-            <p>Total MRP:</p>
+            <p>Total MRP        :</p>
             <p>Rs. 0000/-</p>
           </div>
           <div>
-            <p>Discount on MRP:</p>
+            <p>Discount on MRP  :</p>
             <p>Rs. 000/-</p>
           </div>
           <div>
-            <p>Coupon Discount:</p>
+            <p>Coupon Discount  :</p>
             <p><button className='applycoupon'>APPLY COUPON</button></p>
           </div>
           <div>
-            <p>Shipping Fee:</p>
+            <p>Shipping Fee     :</p>
             <p>Rs. 000/-</p>
           </div>
           <div>
-            <p>Order Total:</p>
+            <p>Order Total      :</p>
             <p>Rs. 000/-</p>
           </div>
         </div>

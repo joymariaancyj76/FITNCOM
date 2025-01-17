@@ -3,7 +3,7 @@ import { Formik, Form, Field, FieldArray } from 'formik';
 import * as Yup from 'yup';
 import { FaEdit, FaTrashAlt, FaPlus, FaSave } from 'react-icons/fa';
 import './YourProfile.css';
-import usericon from "../../Assets/signin-icon.png";
+import usericon from "../../Assets/Images/signin-icon.png";
 
 // Validation Schema
 const validationSchema = Yup.object().shape({

@@ -12,11 +12,12 @@
     margin-bottom: 20px;
   }
   
-  .ordersummary-tabs, .ordersummary-product-details {
+ .ordersummary-product-details {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
   }
+  
   
   .ordersummary-product-details {
     background-color: #ffffff;
@@ -174,7 +175,7 @@
     border-radius: 10px;
   }
   
-  .price-details-table {
+  .ordersummary-price-details .price-details-table {
     display: flex;
     flex-direction: column;
   }
@@ -182,6 +183,7 @@
   .price-details-table div {
     display: flex;
     justify-content: space-between;
+    column-gap: 10px;
     margin: 10px 0;
   }
   

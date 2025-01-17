@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FaArrowLeft, FaArrowRight, FaStar, FaStarHalfAlt } from 'react-icons/fa'; // Importing necessary icons
 import { Link } from 'react-router-dom'; // Importing Link for routing
 import './CricketProduct.css';
-import productimage from "../../Assets/bat png.png";
+import productimage from "../../Assets/Images/bat png.png";
 
 const products = new Array(16).fill({
   name: "ProFlex Cricket Bat",

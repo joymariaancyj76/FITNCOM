@@ -1,6 +1,6 @@
 import React from "react";
 import "./Footer.css";
-import blogImage from "../../Assets/blog1.jpg"; // Update this path as needed
+import blogImage from "../../Assets/Images/blog1.jpg"; // Update this path as needed
 import { FaFacebookF, FaTwitter, FaInstagram } from "react-icons/fa"; // Social icons
 
 const Footer = () => {

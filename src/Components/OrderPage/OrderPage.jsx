@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./OrderPage.css";
-import product1 from "../../Assets/bat png.png"; // Replace with actual image path
+import product1 from "../../Assets/Images/bat png.png"; // Replace with actual image path
 
 // OrderTabs Component
 const OrderTabs = ({ activeTab, setActiveTab }) => {

@@ -4,15 +4,15 @@ import { useParams } from "react-router-dom"; // Import useParams from react-rou
 import "./CricketDetail.css";
 
 // Import product images
-import product1 from "../../Assets/bat png.png";
-import product2 from "../../Assets/bat 2.jpg";
-import product3 from "../../Assets/bat png.png";
-import product4 from "../../Assets/bat 2.jpg";
-import product5 from "../../Assets/bat png.png";
-import product6 from "../../Assets/bat png.png";
-import productH from "../../Assets/bat png.png";
-import productSH from "../../Assets/bat png.png";
-import productLH from "../../Assets/bat png.png";
+import product1 from "../../Assets/Images/bat png.png";
+import product2 from "../../Assets/Images/bat png.png"
+import product3 from "../../Assets/Images/bat png.png";
+import product4 from "../../Assets/Images/bat png.png"
+import product5 from "../../Assets/Images/bat png.png";
+import product6 from "../../Assets/Images/bat png.png";
+import productH from "../../Assets/Images/bat png.png";
+import productSH from "../../Assets/Images/bat png.png";
+import productLH from "../../Assets/Images/bat png.png";
 
 const productDescriptions = {
   1: {

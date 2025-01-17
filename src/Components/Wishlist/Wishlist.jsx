@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Wishlist.css';
-import  wishlistproductImage from "../../Assets/bat png.png"; // Replace with your actual image source
+import  wishlistproductImage from "../../Assets/Images/bat png.png"; // Replace with your actual image source
 
 // Star Rating Component
 const StarRating = ({ rating }) => {

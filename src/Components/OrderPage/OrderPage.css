@@ -25,7 +25,7 @@
       border-radius: 5px;
       box-shadow: 0 4px 8px rgba(14, 0, 0, 0.3);
 
-      .tab {
+     .tab {
         background-color: transparent;
         border-radius: 8px;
         /* No border */
@@ -38,13 +38,13 @@
         transition: background-color 0.3s ease;
       }
 
-      .tab.center {
+      .order-tabs .tab.center {
         flex-grow: 1;
         text-align: center;
         /* Align text in the center */
       }
 
-      .tab.active {
+      .order-tabs .tab.active {
         background-color: white;
         color: var(--green-1);
       }
