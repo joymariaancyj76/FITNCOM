@@ -2,9 +2,12 @@ import React from "react";
 import "./Footer.css";
 import blogImage from "../../Assets/Images/blog1.jpg"; // Update this path as needed
 import { FaFacebookF, FaTwitter, FaInstagram } from "react-icons/fa"; // Social icons
+import { useLocation } from "react-router-dom";
 
 const Footer = () => {
-  return (
+  const location = useLocation();
+  const pagesNotToRenderFooter = ["/signin"];
+  return pagesNotToRenderFooter.includes(location.pathname) ? (
     <footer className="footer-container">
       {/* Blogs Section */}
       <div className="footer-blogs">
@@ -25,11 +28,7 @@ const Footer = () => {
 
       {/* Subscription Section */}
       <div className="footer-subscription">
-        <input
-          type="email"
-          placeholder="EMAIL ID"
-          className="email-input"
-        />
+        <input type="email" placeholder="EMAIL ID" className="email-input" />
       </div>
 
       {/* Footer Logo */}
@@ -37,7 +36,11 @@ const Footer = () => {
 
       {/* Social Icons */}
       <div className="footer-icons">
-        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+        <a
+          href="https://facebook.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <FaFacebookF />
         </a>
         <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
@@ -52,6 +55,8 @@ const Footer = () => {
         </a>
       </div>
     </footer>
+  ) : (
+    <></>
   );
 };
 
