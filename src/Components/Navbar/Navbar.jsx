@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom"; // Import useNavigate hook
 import "./Navbar.css";
 import { FiMenu } from "react-icons/fi";
 import addtocarticon from "../../Assets/Images/addtocart.png";
-import logo from "../../Assets/Images/LOGO-transparent.png";
+import logo from "../../Assets/Images/LOGO-transparent1.png";
 import signinicon from "../../Assets/Images/signin-icon.png";
 import { UserStatusContext } from "../../Scripts/AppContainer";
 import User from "../../Scripts/User";
