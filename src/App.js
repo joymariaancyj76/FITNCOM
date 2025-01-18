@@ -1,4 +1,10 @@
-import React, { useContext, Suspense, lazy } from "react";
+import React, {
+  useContext,
+  Suspense,
+  useState,
+  useCallback,
+  useEffect,
+} from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navbar from "./Components/Navbar/Navbar";
 import Hero from "./Components/Hero/Hero";
@@ -22,68 +28,95 @@ function App() {
   // eslint-disable-next-line
   const [isLoggedIn] = useContext(UserStatusContext);
 
+  const [toShow, setToShow] = useState(false);
+
+  const showMask = useCallback((config = {}) => {
+    setToShow(true);
+  }, []);
+
+  const hideMask = useCallback(() => {
+    if (toShow) {
+      setToShow(false);
+    }
+  }, [toShow]);
+
+  useEffect(() => {
+    window.addEventListener("loadmask:show", showMask);
+    window.addEventListener("loadmask:hide", hideMask);
+
+    return () => {
+      window.removeEventListener("loadmask:show", showMask);
+      window.removeEventListener("loadmask:hide", hideMask);
+    };
+  }, [showMask, hideMask]);
+
   return (
     <div className={`App`}>
       <Navbar />
-      <LoadingMask />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <>
-              <Hero />
-              <AboutUs />
-            </>
-          }
-        />
-        {/* Products and Related Routes */}
-        <Route path="/cricket" element={<CricketProduct />} />
-        <Route path="/how-to-choose-sport" element={<HowToChooseSport />} />
-        <Route path="/products/:productId" element={<CricketDetail />} />
-        <Route path="/cart" element={<CartPage />} />
-
-        <Route path="/termsconditions" element={<TermsConditions />} />
-
-        {isLoggedIn ? (
-          <>
-            <Route path="/myprofile" element={<YourProfile />} />
-            <Route path="/myorders" element={<OrderPage />} />
-            <Route path="/ordersummary" element={<OrderSummary />} />
-            <Route path="/mywishlist" element={<Wishlist />} />
-          </>
-        ) : (
-          <Route path="/*" element={<Signin />} />
-        )}
-
-        {/* Sign-in Route with dedicated Suspense */}
-        <Route
-          path="/signin"
-          element={
-            <Suspense
-              fallback={
-                <div className="loading-spinner">Loading Sign In...</div>
+      {toShow ? (
+        <LoadingMask />
+      ) : (
+        <>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <>
+                  <Hero />
+                  <AboutUs />
+                </>
               }
-            >
-              <Signin />
-            </Suspense>
-          }
-        />
+            />
+            {/* Products and Related Routes */}
+            <Route path="/cricket" element={<CricketProduct />} />
+            <Route path="/how-to-choose-sport" element={<HowToChooseSport />} />
+            <Route path="/products/:productId" element={<CricketDetail />} />
+            <Route path="/cart" element={<CartPage />} />
 
-        {/* 404 Not Found Route */}
-        <Route
-          path="*"
-          element={
-            <Suspense
-              fallback={
-                <div className="loading-spinner">Page Not Found...</div>
+            <Route path="/termsconditions" element={<TermsConditions />} />
+
+            {isLoggedIn ? (
+              <>
+                <Route path="/myprofile" element={<YourProfile />} />
+                <Route path="/myorders" element={<OrderPage />} />
+                <Route path="/ordersummary" element={<OrderSummary />} />
+                <Route path="/mywishlist" element={<Wishlist />} />
+              </>
+            ) : (
+              <Route path="/*" element={<Signin />} />
+            )}
+
+            {/* Sign-in Route with dedicated Suspense */}
+            <Route
+              path="/signin"
+              element={
+                <Suspense
+                  fallback={
+                    <div className="loading-spinner">Loading Sign In...</div>
+                  }
+                >
+                  <Signin />
+                </Suspense>
               }
-            >
-              <NotFound />
-            </Suspense>
-          }
-        />
-      </Routes>
-      <Footer />
+            />
+
+            {/* 404 Not Found Route */}
+            <Route
+              path="*"
+              element={
+                <Suspense
+                  fallback={
+                    <div className="loading-spinner">Page Not Found...</div>
+                  }
+                >
+                  <NotFound />
+                </Suspense>
+              }
+            />
+          </Routes>
+          <Footer />
+        </>
+      )}
     </div>
   );
 }

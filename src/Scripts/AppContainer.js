@@ -36,7 +36,7 @@ const AppContainer = ({ children }) => {
     if (pagesToCheckLogin.includes(location.pathname)) {
       checkLoginStatus();
     }
-  }, [location.pathname]);
+  }, []);
 
   return (
     <UserStatusContext.Provider value={[isLoggedIn, setIsLoggedIn]}>

@@ -28,28 +28,31 @@ const Navbar = () => {
 
   return (
     <nav className="navbar">
-      <div className="logo">
-        <Link to="/">
-          <img src={logo} alt="Logo" />
-        </Link>
+      <div className="left-bar">
+        <div className="logo">
+          <Link to="/">
+            <img src={logo} alt="Logo" />
+          </Link>
+        </div>
       </div>
-      <div className="signin-icon">
-        <Link to="/">
-          <img src={signinicon} alt="Sign In" />
-        </Link>
+      <div className="right-bar">
+        <div className="signin-icon">
+          <Link to="/">
+            <img src={signinicon} alt="Sign In" />
+          </Link>
+          {isLoggedIn && (
+            <div className="profile-name">{User.getUserName()}</div>
+          )}
+        </div>
         <div className="addtocart-icon" onClick={handleAddToCartClick}>
           <img src={addtocarticon} alt="Add to Cart" />
         </div>
+        <div className="menu-icon">
+          {/* <MdOutlineShoppingCart /> */}
+          <FiMenu onClick={handleMenuToggle} />
+        </div>
       </div>
 
-      <div className="menu-icon">
-        {isLoggedIn && (
-          <div className="profile-name">
-            {User.getUserName()}
-          </div>
-        )}
-        <FiMenu onClick={handleMenuToggle} />
-      </div>
       {showDropdown && (
         <div className="dropdown-container" onMouseLeave={handleMenuToggle}>
           <div className="dropdown-section">
