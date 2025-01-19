@@ -1,36 +1,36 @@
-import React, { useState } from 'react';
-import './OrderSummary.css';
+import React, { useState } from "react";
+import "./OrderSummary.css";
 import ordersummaryproduct from "../../Assets/Images/bat png.png";
 
 const OrderSummary = () => {
-    const [showTrackingDetails, setShowTrackingDetails] = useState(false);
-    const [showCancelForm, setShowCancelForm] = useState(false);
-    const [cancelReason, setCancelReason] = useState('');
-    const [description, setDescription] = useState('');
-  
-    const handleTrackingDetailsClick = () => {
-      setShowTrackingDetails(!showTrackingDetails);
-    };
-  
-    const handleCancelClick = () => {
-      setShowCancelForm(!showCancelForm);
-    };
-  
-    const handleReasonChange = (event) => {
-      setCancelReason(event.target.value);
-    };
-  
-    const handleDescriptionChange = (event) => {
-      setDescription(event.target.value);
-    };
-  
-    const handleFormSubmit = (event) => {
-      event.preventDefault();
-      console.log("Reason for cancellation:", cancelReason);
-      console.log("Description:", description);
-      setShowCancelForm(false);
-    };
-  
+  const [showTrackingDetails, setShowTrackingDetails] = useState(false);
+  const [showCancelForm, setShowCancelForm] = useState(false);
+  const [cancelReason, setCancelReason] = useState("");
+  const [description, setDescription] = useState("");
+
+  const handleTrackingDetailsClick = () => {
+    setShowTrackingDetails(!showTrackingDetails);
+  };
+
+  const handleCancelClick = () => {
+    setShowCancelForm(!showCancelForm);
+  };
+
+  const handleReasonChange = (event) => {
+    setCancelReason(event.target.value);
+  };
+
+  const handleDescriptionChange = (event) => {
+    setDescription(event.target.value);
+  };
+
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+    console.log("Reason for cancellation:", cancelReason);
+    console.log("Description:", description);
+    setShowCancelForm(false);
+  };
+
   const stages = [
     { id: 1, status: "Order Placed", date: "2025-01-10" },
     { id: 2, status: "Shipped", date: "2025-01-11" },
@@ -40,53 +40,72 @@ const OrderSummary = () => {
   return (
     <div className="order-summary-container">
       <h1>ORDER SUMMARY</h1>
-        <div className="cart-content">
-          <div className="ordersummary-product-details">
-            <img src={ordersummaryproduct} alt="Product" />
-            <div>
-              <p>ORDER DATE: DD/MM/YYYY</p>
-              <p>ORDER ID: 0000000000</p>
-              <p>ORDER TOTAL: Rs 000/-</p>
-              <p>Willow Bat</p>
-              <p>"Willow is the only type of wood that can provide the strength and compression needed for a cricket bat."</p>
-              <label>
-                SIZE:
-                <select>
-                  {['1', '2', '3', '4', '5', '6', 'H', 'SH', 'LH'].map(size => (
-                    <option key={size} value={size}>{size}</option>
-                  ))}
-                </select>
-              </label>
-              <label>
-                QTY:
-                <select>
-                  {Array.from({ length: 10 }, (_, i) => i + 1).map(qty => (
-                    <option key={qty} value={qty}>{qty}</option>
-                  ))}
-                </select>
-              </label>
-              <p>Rs. 000/-</p>
-              <button onClick={handleCancelClick}>CANCEL</button>
-              <button onClick={handleTrackingDetailsClick}>TRACKING DETAILS</button>
-            </div>
+      <div className="cart-content">
+        <div className="ordersummary-product-details">
+          <img src={ordersummaryproduct} alt="Product" />
+          <div>
+            <p>ORDER DATE: DD/MM/YYYY</p>
+            <p>ORDER ID: 0000000000</p>
+            <p>ORDER TOTAL: Rs 000/-</p>
+            <p>Willow Bat</p>
+            <p>
+              "Willow is the only type of wood that can provide the strength and
+              compression needed for a cricket bat."
+            </p>
+            <label>
+              SIZE:
+              <select>
+                {["1", "2", "3", "4", "5", "6", "H", "SH", "LH"].map((size) => (
+                  <option key={size} value={size}>
+                    {size}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label>
+              QTY:
+              <select>
+                {Array.from({ length: 10 }, (_, i) => i + 1).map((qty) => (
+                  <option key={qty} value={qty}>
+                    {qty}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <p>Rs. 000/-</p>
+            <button onClick={handleCancelClick}>CANCEL</button>
+            <button onClick={handleTrackingDetailsClick}>
+              TRACKING DETAILS
+            </button>
           </div>
         </div>
+      </div>
 
       {showTrackingDetails && (
         <div className="timeline-container">
-            <h3>Tracking Your Order</h3>
-        {stages.map((stage, index) => (
-          <div className="timeline-item" key={stage.id}>
-            <div className={`timeline-bubble ${index === stages.length - 1 ? "active" : ""}`}>
-              <span className="date">{stage.date}</span>
+          <h3>Tracking Your Order</h3>
+          {stages.map((stage, index) => (
+            <div className="timeline-item" key={stage.id}>
+              <div className="date">{stage.date}</div>
+              <div
+                className={`timeline-bubble ${
+                  index === stages.length - 1 ? "active" : ""
+                }`}
+              >
+                {index === stages.length - 1 ? (
+                  <></>
+                ) : (
+                  <div className="center-line"></div>
+                )}
+              </div>
+
+              <div className="timeline-content">
+                <h4>{stage.status}</h4>
+                <p>{`Date: ${stage.date}`}</p>
+              </div>
             </div>
-            <div className="timeline-content">
-              <h4>{stage.status}</h4>
-              <p>{`Date: ${stage.date}`}</p>
-            </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
       )}
 
       {showCancelForm && (
@@ -94,11 +113,17 @@ const OrderSummary = () => {
           <h2>WHAT MADE YOU TO CANCEL?</h2>
           <form onSubmit={handleFormSubmit}>
             <div className="radio-options">
-              {['Ordered Wrong Item', 'Product Is Not As Expected', 'Product Came Damaged', 'Delivery Took Too Long', 'Other'].map(reason => (
+              {[
+                "Ordered Wrong Item",
+                "Product Is Not As Expected",
+                "Product Came Damaged",
+                "Delivery Took Too Long",
+                "Other",
+              ].map((reason) => (
                 <label key={reason}>
-                  <input 
-                    type="radio" 
-                    value={reason} 
+                  <input
+                    type="radio"
+                    value={reason}
                     checked={cancelReason === reason}
                     onChange={handleReasonChange}
                   />
@@ -108,13 +133,15 @@ const OrderSummary = () => {
             </div>
             <div className="description-box">
               <h3>REASON FOR CANCELLATION?</h3>
-              <textarea 
-                value={description} 
-                onChange={handleDescriptionChange} 
+              <textarea
+                value={description}
+                onChange={handleDescriptionChange}
                 placeholder="Provide more details..."
               />
             </div>
-            <button className='ordersummarysubmit' type="submit">SUBMIT & CANCEL THE ORDER</button>
+            <button className="ordersummarysubmit" type="submit">
+              SUBMIT & CANCEL THE ORDER
+            </button>
           </form>
         </div>
       )}
@@ -123,23 +150,25 @@ const OrderSummary = () => {
         <h2>Order Summary</h2>
         <div className="price-details-table">
           <div>
-            <p>Total MRP        :</p>
+            <p>Total MRP :</p>
             <p>Rs. 0000/-</p>
           </div>
           <div>
-            <p>Discount on MRP  :</p>
+            <p>Discount on MRP :</p>
             <p>Rs. 000/-</p>
           </div>
           <div>
-            <p>Coupon Discount  :</p>
-            <p><button className='applycoupon'>APPLY COUPON</button></p>
+            <p>Coupon Discount :</p>
+            <p>
+              <button className="applycoupon">APPLY COUPON</button>
+            </p>
           </div>
           <div>
-            <p>Shipping Fee     :</p>
+            <p>Shipping Fee :</p>
             <p>Rs. 000/-</p>
           </div>
           <div>
-            <p>Order Total      :</p>
+            <p>Order Total :</p>
             <p>Rs. 000/-</p>
           </div>
         </div>

@@ -37,7 +37,7 @@ const Navbar = () => {
       </div>
       <div className="right-bar">
         <div className="signin-icon">
-          <Link to="/signin">
+          <Link to={isLoggedIn ? "/" : "/signin"}>
             <img src={signinicon} alt="Sign In" />
           </Link>
           {isLoggedIn && (

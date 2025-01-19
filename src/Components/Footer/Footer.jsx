@@ -8,6 +8,8 @@ const Footer = () => {
   const location = useLocation();
   const pagesNotToRenderFooter = ["/signin"];
   return pagesNotToRenderFooter.includes(location.pathname) ? (
+    <></>
+  ) : (
     <footer className="footer-container">
       {/* Blogs Section */}
       <div className="footer-blogs">
@@ -55,8 +57,6 @@ const Footer = () => {
         </a>
       </div>
     </footer>
-  ) : (
-    <></>
   );
 };
 
