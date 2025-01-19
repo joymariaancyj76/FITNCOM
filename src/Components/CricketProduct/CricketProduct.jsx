@@ -1,14 +1,19 @@
-import React, { useState } from 'react';
-import { FaArrowLeft, FaArrowRight, FaStar, FaStarHalfAlt } from 'react-icons/fa'; // Importing necessary icons
-import { Link } from 'react-router-dom'; // Importing Link for routing
-import './CricketProduct.css';
+import React, { useState } from "react";
+import {
+  FaArrowLeft,
+  FaArrowRight,
+  FaStar,
+  FaStarHalfAlt,
+} from "react-icons/fa"; // Importing necessary icons
+import { Link } from "react-router-dom"; // Importing Link for routing
+import "./CricketProduct.css";
 import productimage from "../../Assets/Images/bat png.png";
 
 const products = new Array(16).fill({
   name: "ProFlex Cricket Bat",
   price: "Rs. 1000/-",
   image: productimage,
-  rating: 4.5 // Example rating, you can adjust for each product
+  rating: 4.5, // Example rating, you can adjust for each product
 });
 
 function CricketProduct() {
@@ -17,7 +22,10 @@ function CricketProduct() {
 
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
+  const currentProducts = products.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
 
   const totalPages = Math.ceil(products.length / productsPerPage);
 
@@ -36,15 +44,19 @@ function CricketProduct() {
 
     return (
       <>
-        {Array(fullStars).fill().map((_, index) => (
-          <FaStar key={`full-${index}`} className="star-icon filled" />
-        ))}
+        {Array(fullStars)
+          .fill()
+          .map((_, index) => (
+            <FaStar key={`full-${index}`} className="star-icon filled" />
+          ))}
         {halfStar ? (
           <FaStarHalfAlt key="half" className="star-icon half-filled" />
         ) : null}
-        {Array(emptyStars).fill().map((_, index) => (
-          <FaStar key={`empty-${index}`} className="star-icon empty" />
-        ))}
+        {Array(emptyStars)
+          .fill()
+          .map((_, index) => (
+            <FaStar key={`empty-${index}`} className="star-icon empty" />
+          ))}
       </>
     );
   };
@@ -61,25 +73,27 @@ function CricketProduct() {
               </Link>
               <h3>{product.name}</h3>
               <p>{product.price}</p>
-              <div className="rating">
-                {renderRating(product.rating)}
-              </div>
+              <div className="rating">{renderRating(product.rating)}</div>
             </div>
           </div>
         ))}
       </div>
       <div className="pagination">
-        <FaArrowLeft 
-          className="nav-icon" 
-          onClick={handlePrev} 
-          disabled={currentPage === 1} 
-        />
-        <span>Page {currentPage} of {totalPages}</span>
-        <FaArrowRight 
-          className="nav-icon" 
-          onClick={handleNext} 
-          disabled={currentPage === totalPages} 
-        />
+        <div className="arrows">
+          <FaArrowLeft
+            className="arrow"
+            onClick={handlePrev}
+            disabled={currentPage === 1}
+          />
+          <FaArrowRight
+            className="arrow"
+            onClick={handleNext}
+            disabled={currentPage === totalPages}
+          />
+        </div>
+        <span>
+          Page {currentPage} of {totalPages}
+        </span>
       </div>
     </div>
   );

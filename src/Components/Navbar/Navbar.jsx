@@ -37,7 +37,7 @@ const Navbar = () => {
       </div>
       <div className="right-bar">
         <div className="signin-icon">
-          <Link to="/">
+          <Link to="/signin">
             <img src={signinicon} alt="Sign In" />
           </Link>
           {isLoggedIn && (
@@ -48,7 +48,6 @@ const Navbar = () => {
           <img src={addtocarticon} alt="Add to Cart" />
         </div>
         <div className="menu-icon">
-          {/* <MdOutlineShoppingCart /> */}
           <FiMenu onClick={handleMenuToggle} />
         </div>
       </div>
@@ -61,9 +60,13 @@ const Navbar = () => {
               <Link to="/myprofile">My Profile</Link>
               <Link to="/myorders">My Orders</Link>
               <Link to="/mywishlist">My Wishlist</Link>
-              <Link onClick={handleLogOut} to="/">
-                Logout
-              </Link>
+              {isLoggedIn ? (
+                <Link onClick={handleLogOut} to="/">
+                  Logout
+                </Link>
+              ) : (
+                <></>
+              )}
             </div>
           </div>
           <div className="dropdown-section">

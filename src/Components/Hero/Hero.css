@@ -129,32 +129,29 @@
 
   .section-heading {
     font-size: 24px;
-    margin-top: 10px;
-    margin-bottom: 5px;
+    margin: 10px 0px;
     text-align: left;
   }
 
   .product-carousel-wrapper {
     display: flex;
+    flex-direction: row;
     align-items: center;
-    justify-content: space-between;
     width: 100%;
-    position: relative;
+    /* position: relative; */
 
-    .nav-icon {
+    .nav-arrow {
       cursor: pointer;
       font-size: 30px;
       color: #393940;
-      position: absolute;
-      transform: translateY(-50%);
     }
 
-    .left-icon {
-      left: 40px;
-      top: 850px
+    .left-arrow-icon {
+      /* left: 40px; */
+      /* top: 850px */
     }
 
-    .product-grid {
+    .top-product-grid {
       display: flex;
       flex-grow: 1;
       gap: 20px;
@@ -272,9 +269,9 @@
 
     }
 
-    .right-icon {
-      right: 40px;
-      top: 850px;
+    .right-arrow-icon {
+      /* right: 40px; */
+      /* top: 850px; */
     }
 
   }
