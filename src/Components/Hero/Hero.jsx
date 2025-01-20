@@ -1,12 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSpring, animated } from "@react-spring/web";
 import "./Hero.css";
-import {
-  FaArrowLeft,
-  FaArrowRight,
-  FaStar,
-  FaStarHalfAlt,
-} from "react-icons/fa";
 import product1 from "../../Assets/Images/bat png.png";
 import product2 from "../../Assets/Images/bat png.png";
 import product3 from "../../Assets/Images/bat png.png";
@@ -16,10 +10,8 @@ import product6 from "../../Assets/Images/bat png.png";
 import product7 from "../../Assets/Images/bat png.png";
 import product8 from "../../Assets/Images/bat png.png";
 import product9 from "../../Assets/Images/bat png.png";
-import evenaddicon from "../../Assets/Images/cart icon 1.png";
-import evensubicon from "../../Assets/Images/cart icon 4.png";
-import oddaddicon from "../../Assets/Images/cart icon 2.png";
-import oddsubicon from "../../Assets/Images/cart icon 3.png";
+
+import TopSellingProduct from "../TopSellingProducts/TopSellingProduct";
 
 // Sample products data
 const products = [
@@ -39,48 +31,6 @@ function Hero() {
   const itemsPerPage = 3;
   const [cart, setCart] = useState([]);
   const [showMessage, setShowMessage] = useState(false);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      handleNext();
-    }, 10000);
-    return () => clearInterval(interval);
-  }, [currentIndex]);
-
-  const currentProducts = products.slice(
-    currentIndex,
-    currentIndex + itemsPerPage
-  );
-
-  const handleAddToCart = (productId) => {
-    if (cart.includes(productId)) {
-      // Remove product from cart if it already exists (toggle off)
-      setCart(cart.filter((id) => id !== productId));
-    } else {
-      // Add product to cart if it doesn't exist (toggle on)
-      setCart([...cart, productId]);
-      showPopupMessage();
-    }
-  };
-
-  const showPopupMessage = () => {
-    setShowMessage(true);
-    setTimeout(() => setShowMessage(false), 2000); // Hide message after 2 seconds
-  };
-
-  const handleNext = () => {
-    if (currentIndex + itemsPerPage < products.length) {
-      setCurrentIndex(currentIndex + itemsPerPage);
-    } else {
-      setCurrentIndex(0); // Loop back to the beginning
-    }
-  };
-
-  const handlePrevious = () => {
-    if (currentIndex - itemsPerPage >= 0) {
-      setCurrentIndex(currentIndex - itemsPerPage);
-    }
-  };
 
   const zoomAnimation = useSpring({
     from: { transform: "scale(1)" },
@@ -121,73 +71,7 @@ function Hero() {
         <button className="cta-button">Get Your Gear Today</button>
       </div>
 
-      <div className="top-selling-container">
-        <h2 className="section-heading">Top Selling Products</h2>
-        <div className="product-carousel-wrapper">
-          <FaArrowLeft
-            className="nav-arrow left-arrow-icon"
-            onClick={handlePrevious}
-          />
-          <div className="top-product-grid">
-            {currentProducts.map((product, index) => (
-              <div
-                key={product.id}
-                className={`product-item ${
-                  index % 2 === 0 ? "even-item" : "odd-item"
-                }`}
-              >
-                <div className="product-image-container">
-                  <img src={product.image} alt={product.name} />
-                  <div
-                    className="cart-icon"
-                    onClick={() => handleAddToCart(product.id)}
-                  >
-                    <img
-                      src={
-                        cart.includes(product.id)
-                          ? index % 2 === 0
-                            ? evensubicon
-                            : oddsubicon
-                          : index % 2 === 0
-                          ? evenaddicon
-                          : oddaddicon
-                      }
-                      alt="Cart Icon"
-                      className="cart-icon-image"
-                    />
-                  </div>
-                </div>
-                <div className="product-details">
-                  <p className="product-name">{product.name}</p>
-                  <p className="product-price">{product.price}</p>
-                  <div className="rating">
-                    {Array.from({ length: 5 }, (_, i) => {
-                      if (i < Math.floor(product.rating)) {
-                        return <FaStar key={i} className="star-icon filled" />;
-                      } else if (
-                        i < product.rating &&
-                        i === Math.floor(product.rating)
-                      ) {
-                        return (
-                          <FaStarHalfAlt key={i} className="star-icon filled" />
-                        );
-                      } else {
-                        return (
-                          <FaStar key={i} className="star-icon outlined" />
-                        );
-                      }
-                    })}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-          <FaArrowRight
-            className="nav-arrow right-arrow-icon"
-            onClick={handleNext}
-          />
-        </div>
-      </div>
+      <TopSellingProduct products={products} />
     </div>
   );
 }
