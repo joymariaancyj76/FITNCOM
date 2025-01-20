@@ -24,6 +24,8 @@ import TermsConditions from "./Components/TermsConditions/TermsConditions";
 import OrderSummary from "./Components/OrderSummary/OrderSummary";
 import CartPage from "./Components/CartPage/CartPage";
 import WarrantyPolicy from "./Components/WarrantyPolicy/WarrantyPolicy";
+import PrivacyPolicy from "./Components/PrivacyPolicy/PrivacyPolicy";
+import FAQ from "./Components/FAQ/FAQ";
 
 function App() {
   // eslint-disable-next-line
@@ -76,6 +78,8 @@ function App() {
 
             <Route path="/termsconditions" element={<TermsConditions />} />
             <Route path="/warranty" element={<WarrantyPolicy />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy/>} />
+            <Route path="/faq" element={<FAQ/>} />
 
             {isLoggedIn ? (
               <>
