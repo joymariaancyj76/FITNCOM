@@ -1,15 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 import "./CartPage.css"; // Ensure this file contains necessary styles
-import {
-  FaArrowLeft,
-  FaArrowRight,
-  FaStar,
-  FaStarHalfAlt,
-} from "react-icons/fa";
-import evenaddicon from "../../Assets/Images/cart icon 1.png";
-import evensubicon from "../../Assets/Images/cart icon 4.png";
-import oddaddicon from "../../Assets/Images/cart icon 2.png";
-import oddsubicon from "../../Assets/Images/cart icon 3.png";
 import productimg from "../../Assets/Images/bat png.png";
 import TopSellingProduct from "../TopSellingProducts/TopSellingProduct";
 import product1 from "../../Assets/Images/bat png.png";
@@ -27,7 +18,62 @@ const CartPage = () => {
   const [currentProducts, setCurrentProducts] = useState([]); // Current products to display
   const [cart, setCart] = useState([]); // Cart items
   const [currentIndex, setCurrentIndex] = useState(0); // Index for the current product in the carousel
+  const [selectedOption, setSelectedOption] = useState('');
+  const [selectedUPIOption, setSelectedUPIOption] = useState('');
+  const [orderPlaced, setOrderPlaced] = useState(false); // To track order placement status
+  const navigate = useNavigate();
 
+  const handlePlaceOrder = () => {
+    // Simulate order placement
+    setOrderPlaced(true); // Set order as placed
+  };
+
+  const handleContinueShopping = () => {
+    setOrderPlaced(false); // Hide the order placed message
+    navigate("/products"); // Redirect to the products page
+  };
+
+  const [addresses, setAddresses] = useState([
+    {
+      id: 1,
+      name: 'Customer Name',
+      details: 'House no, House Name, Street Name, District, State.',
+      pincode: '000 000',
+      phone: '+00 0000000000'
+    },
+    {
+      id: 2,
+      name: 'Customer Name',
+      details: 'House no, House Name, Street Name, District, State.',
+      pincode: '000 000',
+      phone: '+00 0000000000'
+    }
+  ]);
+
+  const handleRemove = (id) => {
+    setAddresses(addresses.filter(address => address.id !== id));
+  };
+
+  const handleAddAddress = () => {
+    navigate('/profile');
+  };
+
+  const handleEdit = (address) => {
+    navigate('/profile', { state: { address } });
+  };
+
+
+  const handleOptionChange = (event) => {
+    setSelectedOption(event.target.value);
+  };
+
+  const handleUPIOptionChange = (event) => {
+    setSelectedUPIOption(event.target.value);
+  };
+  const handlePayNow = () => {
+    alert('Payment processing...');
+    // Add your payment processing logic here
+  };
   // Sample products data
   const products = [
     { id: 1, name: "Product 1", price: "Rs.50", rating: 4.5, image: product1 },
@@ -40,49 +86,6 @@ const CartPage = () => {
     { id: 8, name: "Product 8", price: "Rs.75", rating: 4.6, image: product8 },
     { id: 9, name: "Product 9", price: "Rs.60", rating: 4.3, image: product9 },
   ];
-
-  // Simulate fetching products data
-  // useEffect(() => {
-  //   const products = [
-  //     {
-  //       id: 1,
-  //       name: "Product 1",
-  //       price: "Rs. 1000/-",
-  //       image: "product1.jpg",
-  //       rating: 4.5,
-  //     },
-  //     {
-  //       id: 2,
-  //       name: "Product 2",
-  //       price: "Rs. 1500/-",
-  //       image: "product2.jpg",
-  //       rating: 3.5,
-  //     },
-  //     {
-  //       id: 3,
-  //       name: "Product 3",
-  //       price: "Rs. 2000/-",
-  //       image: "product3.jpg",
-  //       rating: 5,
-  //     },
-  //     {
-  //       id: 4,
-  //       name: "Product 4",
-  //       price: "Rs. 1200/-",
-  //       image: "product4.jpg",
-  //       rating: 4,
-  //     },
-  //     {
-  //       id: 5,
-  //       name: "Product 5",
-  //       price: "Rs. 1800/-",
-  //       image: "product5.jpg",
-  //       rating: 3.8,
-  //     },
-  //     // Add more products as needed
-  //   ];
-  //   setCurrentProducts(products);
-  // }, []);
 
   const handlePrevious = () => {
     setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 0)); // Prevent going below index 0
@@ -101,7 +104,7 @@ const CartPage = () => {
     {
       id: 1,
       name: "Cricket Bat",
-      image: { productimg }, // Replace with actual image path
+      image: productimg, 
       price: "Rs. 5000/-",
       rating: 4.5,
       description:
@@ -110,7 +113,7 @@ const CartPage = () => {
     {
       id: 2,
       name: "Cricket Willow Bat",
-      image: { productimg }, // Replace with actual image path
+      image: productimg, 
       price: "Rs. 3000/-",
       rating: 4,
       description: "A high-quality football for professional play.",
@@ -121,7 +124,6 @@ const CartPage = () => {
     if (activeTab === "cart") {
       return (
         <div className="cart-content">
-          <h2>Shopping Cart</h2>
           {cartItems.map((product) => (
             <div key={product.id} className="product-box">
               <div className="product-image">
@@ -161,148 +163,172 @@ const CartPage = () => {
         </div>
       );
     } else if (activeTab === "address") {
-      return (
-        <div className="address-content">
-          <h2>Select Delivery Address</h2>
-          <div className="address-box1">
-            <p>Customer Name</p>
-            <p>House no, House Name, Street Name, District, State.</p>
-            <p>Pincode - 000 000</p>
-            <p>Phone no: +00 0000000000</p>
-            <div className="address-box2">
-              <p>Customer Name</p>
-              <p>House no, House Name, Street Name, District, State.</p>
-              <p>Pincode - 000 000</p>
-              <p>Phone no: +00 0000000000</p>
-              <div className="address-actions">
-                <button className="remove-button">Remove</button>
-                <button className="edit-button">Edit</button>
-              </div>
+        return (
+            <div className="address-content">
+              <h2>Select Delivery Address</h2>
+              {addresses.map(address => (
+                <div key={address.id} className="address-box">
+                  <label>
+                    <input
+                      type="checkbox"
+                      name="selectedAddress"
+                      value={address.id}
+                      checked={selectedOption === address.id} // Ensure this reflects the selected address
+                      onChange={() => setSelectedOption(address.id)} // Set the selected address
+                    />
+                    <div className="address-details">
+                      <p>{address.name}</p>
+                      <p>{address.details}</p>
+                      <p>Pincode - {address.pincode}</p>
+                      <p>Phone no: {address.phone}</p>
+                    </div>
+                  </label>
+                  <div className="address-actions">
+                    <button className="remove-button" onClick={() => handleRemove(address.id)}>Remove</button>
+                    <button className="edit-button" onClick={() => handleEdit(address)}>Edit</button>
+                  </div>
+                </div>
+              ))}
+              <button className="add-address-button" onClick={handleAddAddress}>Add New Address</button>
             </div>
-            <div className="address-actions">
-              <button className="remove-button">Remove</button>
-              <button className="edit-button">Edit</button>
-            </div>
-          </div>
-          <button className="add-address-button">Add New Address</button>
-        </div>
-      );
+          );
     } else if (activeTab === "payment") {
       return (
         <div className="payment-content">
-          <h2>Payment Options</h2>
-          <div className="payment-option">
-            <label>
-              <input type="radio" name="payment" value="cod" />
-              Pay On Delivery
-            </label>
+      <h2>Payment Options</h2>
+      <div className={`payment-option ${selectedOption === 'cod' ? 'selected' : ''}`}>
+        <label>
+          <input
+            type="radio"
+            name="payment"
+            value="cod"
+            onChange={handleOptionChange}
+          />
+          <span>Pay On Delivery</span>
+        </label>
+      </div>
+      <div className={`payment-option ${selectedOption === 'upi' ? 'selected' : ''}`}>
+        <label>
+          <input
+            type="radio"
+            name="payment"
+            value="upi"
+            onChange={handleOptionChange}
+          />
+      <span>Pay Via UPI</span>
+        </label>
+        {selectedOption === 'upi' && (
+          <div className="upi-options">
+            <div className="upi-option">
+              <label>
+                <input
+                  type="radio"
+                  name="upi"
+                  value="gpay"
+                  onChange={handleUPIOptionChange}
+                />
+                <span>GPay</span>
+              </label>
+              {selectedUPIOption === 'gpay' && (
+                <input type="text" placeholder="Enter GPay UPI ID" className="upi-input" />
+              )}
+            </div>
+            <div className="upi-option">
+              <label>
+                <input
+                  type="radio"
+                  name="upi"
+                  value="phonepe"
+                  onChange={handleUPIOptionChange}
+                />
+                <span>PhonePe</span>
+              </label>
+              {selectedUPIOption === 'phonepe' && (
+                <input type="text" placeholder="Enter PhonePe UPI ID" className="upi-input" />
+              )}
+            </div>
           </div>
-          <div className="payment-option">
-            <label>
-              <input type="radio" name="payment" value="upi" />
-              Pay Via UPI (GPay, PhonePe)
-            </label>
+        )}
+      </div>
+      <div className={`payment-option ${selectedOption === 'card' ? 'selected' : ''}`}>
+        <label>
+          <input
+            type="radio"
+            name="payment"
+            value="card"
+            onChange={handleOptionChange}
+          />
+          <span>Credit/Debit Card</span>
+        </label>
+        {selectedOption === 'card' && (
+          <div className="card-inputs">
+            <input type="text" placeholder="Card Number" />
+            <input type="text" placeholder="Card Holder Name" />
+            <input type="text" placeholder="Expiry Date" />
+            <input type="text" placeholder="CVV" />
           </div>
-          <div className="payment-option">
-            <label>
-              <input type="radio" name="payment" value="card" />
-              Credit/Debit Card
-              <div>
-                <input type="text" placeholder="Card Number" />
-                <input type="text" placeholder="Card Holder Name" />
-                <input type="text" placeholder="Expiry Date" />
-                <input type="text" placeholder="CVV" />
-              </div>
-            </label>
-          </div>
-        </div>
-      );
+        )}
+      </div>
+      <button className="pay-now-button" onClick={handlePayNow}>PAY NOW</button>
+    </div>
+  );
     }
   };
 
-  return (
+return (
     <div className="cart-page">
-      <header className="cart-header">
-        <nav>
-          <span
-            className={activeTab === "cart" ? "active" : ""}
-            onClick={() => setActiveTab("cart")}
-          >
-            Cart
-          </span>
-          <span
-            className={activeTab === "address" ? "active" : ""}
-            onClick={() => setActiveTab("address")}
-          >
-            Address
-          </span>
-          <span
-            className={activeTab === "payment" ? "active" : ""}
-            onClick={() => setActiveTab("payment")}
-          >
-            Payment
-          </span>
-        </nav>
-      </header>
+      <h2>Shopping Cart</h2>
 
-      {renderTabContent()}
-
-      <div className="order-summary">
-        <h3>Order Summary</h3>
-        <p>Price Details: (1 Item)</p>
-        <p>Total MRP: Rs. 1000/-</p>
-        <p>Discount: Rs. 100/-</p>
-        <h4>Order Total: Rs. 900/-</h4>
-      </div>
-      <TopSellingProduct products={products} />
-      {/* <div className="top-selling-container">
-        <h2 className="section-heading">Top Selling Products</h2>
-        <div className="product-carousel-wrapper">
-          <FaArrowLeft className="nav-icon left-icon" onClick={handlePrevious} />
-          <div className="product-grid">
-            {currentProducts.map((product, index) => (
-              <div
-                key={product.id}
-                className={`product-item ${index % 2 === 0 ? 'even-item' : 'odd-item'}`}
-              >
-                <div className="product-image-container">
-                  <img src={product.image} alt={product.name} />
-                  <div
-                    className="cart-icon"
-                    onClick={() => handleAddToCart(product.id)}
-                  >
-                    <img
-                      src={
-                        cart.includes(product.id)
-                          ? (index % 2 === 0 ? evensubicon : oddsubicon)
-                          : (index % 2 === 0 ? evenaddicon : oddaddicon)
-                      }
-                      alt="Cart Icon"
-                      className="cart-icon-image"
-                    />
-                  </div>
-                </div>
-                <div className="product-details">
-                  <p className="product-name">{product.name}</p>
-                  <p className="product-price">{product.price}</p>
-                  <div className="rating">
-                    {Array.from({ length: 5 }, (_, i) => {
-                      if (i < Math.floor(product.rating)) {
-                        return <FaStar key={i} className="star-icon filled" />;
-                      } else if (i < product.rating && i === Math.floor(product.rating)) {
-                        return <FaStarHalfAlt key={i} className="star-icon filled" />;
-                      } else {
-                        return <FaStar key={i} className="star-icon outlined" />;
-                      }
-                    })}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-          <FaArrowRight className="nav-icon right-icon" onClick={handleNext} />
+      {orderPlaced && (
+        <div className="order-confirmation">
+          <h2>Order Placed Successfully!</h2>
+          <button onClick={handleContinueShopping}>Continue Shopping</button>
         </div>
-      </div> */}
+      )}
+
+      {!orderPlaced && (
+        <header className="cart-header">
+          <nav>
+            <span
+              className={activeTab === "cart" ? "active" : ""}
+              onClick={() => setActiveTab("cart")}
+            >
+              Cart
+            </span>
+            <span
+              className={activeTab === "address" ? "active" : ""}
+              onClick={() => setActiveTab("address")}
+            >
+              Address
+            </span>
+            <span
+              className={activeTab === "payment" ? "active" : ""}
+              onClick={() => setActiveTab("payment")}
+            >
+              Payment
+            </span>
+          </nav>
+        </header>
+      )}
+
+      <div className="tab-content">{renderTabContent()}</div>
+      <div className="order-summary">
+            <h3>Order Summary</h3>
+            <p>Price Details: (1 Item)</p>
+            <p>Total MRP: Rs. 1000/-</p>
+            <p>Coupon Code : <button className="apply-coupon-button">APPLY COUPON</button></p>
+            <p>Discount: Rs. 100/-</p>
+            <h4>Order Total: Rs. 900/-</h4>
+          </div>
+         {/* Place Order button only on the Payment tab */}
+      {activeTab === "payment" && (
+        <div>
+          <button className="place-order-button" onClick={handlePlaceOrder}>
+            Place Order
+          </button>
+        </div>
+      )}
+      <TopSellingProduct products={products} />
     </div>
   );
 };

@@ -37,12 +37,19 @@ const validationSchema = Yup.object().shape({
 const YourProfile = () => {
   const [savedAddresses, setSavedAddresses] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
+  const [editingIndex, setEditingIndex] = useState(null); // Track index of the address being edited
   const [showEmailSection, setShowEmailSection] = useState(false);
   const [showPhoneSection, setShowPhoneSection] = useState(false);
   const [showPasswordSection, setShowPasswordSection] = useState(false);
   const [passwordChangeSuccess, setPasswordChangeSuccess] = useState(false);
 
-  const handleEditClick = () => {
+  const handleEditClick = (index) => {
+    setEditingIndex(index);
+    setIsEditing(true);
+  };
+
+  const handleAddAddress = () => {
+    setEditingIndex(null); // Reset editing index for new address
     setIsEditing(true);
   };
 
@@ -79,23 +86,22 @@ const YourProfile = () => {
             phoneNo: '',
             landmark: '',
           },
-          shippingAddresses: [{
-            name: '',
-            flatNo: '',
-            street: '',
-            area: '',
-            district: '',
-            state: '',
-            pincode: '',
-            phoneNo: '',
-            landmark: '',
-            isDefault: false,
-          }],
+          shippingAddresses: savedAddresses, // Use savedAddresses to pre-fill the form with existing addresses
         }}
         validationSchema={validationSchema}
         onSubmit={(values) => {
-          setSavedAddresses([...savedAddresses, values]);
-          alert('Successfully added address');
+          // Save the updated shipping addresses or billing address
+          if (editingIndex !== null) {
+            // Edit existing address
+            const updatedAddresses = [...savedAddresses];
+            updatedAddresses[editingIndex] = values.shippingAddresses[editingIndex];
+            setSavedAddresses(updatedAddresses);
+          } else {
+            // Add new address
+            setSavedAddresses([...savedAddresses, values.shippingAddresses[0]]);
+          }
+          alert('Address saved successfully!');
+          setIsEditing(false);
         }}
       >
         {({ values, setFieldValue }) => (
@@ -111,7 +117,6 @@ const YourProfile = () => {
 
             {/* Email, Password, PhoneNumber */}
             <div className="profile-info">
-              {/* Email Section */}
               <div className="email-section">
                 <div className="email-bar" onClick={toggleEmailSection}>
                   Gmail
@@ -123,7 +128,6 @@ const YourProfile = () => {
                 )}
               </div>
 
-              {/* Phone Section */}
               <div className="phoneNumber-section">
                 <div className="phoneNumber-bar" onClick={togglePhoneSection}>
                   Phone Number
@@ -135,50 +139,31 @@ const YourProfile = () => {
                 )}
               </div>
 
-              {/* Password Section */}
               <div className="password-section">
                 <div className="password-bar" onClick={togglePasswordSection}>
                   Change Password
                 </div>
                 {showPasswordSection && (
                   <div className="password-form">
-                    <div className='password-changebox'>
                     <Field type="password" name="oldPassword" placeholder="Old Password" className="profile-input" />
                     <Field type="password" name="newPassword" placeholder="New Password" className="profile-input" />
                     <Field type="password" name="confirmPassword" placeholder="Confirm Password" className="profile-input" />
                     <button type="button" onClick={handlePasswordChange} className="profile-button">Update</button>
                     <button type="button" onClick={togglePasswordSection} className="profile-button">Cancel</button>
                   </div>
-                  </div>
                 )}
                 {passwordChangeSuccess && <div className="success-message">Password changed successfully</div>}
               </div>
             </div>
 
-            {/* Billing Address Section */}
+            {/* Address Section */}
             <div className="address-box">
-              <h2>Billing Address</h2>
-              <div className="address-entry">
-                <Field name="billingAddress.name" placeholder="Name" />
-                <Field name="billingAddress.flatNo" placeholder="Flat No" />
-                <Field name="billingAddress.street" placeholder="Street" />
-                <Field name="billingAddress.area" placeholder="Area" />
-                <Field name="billingAddress.district" placeholder="District" />
-                <Field name="billingAddress.state" placeholder="State" />
-                <Field name="billingAddress.pincode" placeholder="Pincode" />
-                <Field name="billingAddress.phoneNo" placeholder="Phone No" />
-                <Field name="billingAddress.landmark" placeholder="Landmark (Optional)" />
-              </div>
-            </div>
-
-            {/* Shipping Addresses Section */}
-            <FieldArray name="shippingAddresses">
-              {({ push, remove }) => (
-                <div className="shipping-address-section">
-                  {values.shippingAddresses.map((address, index) => (
-                    <div key={index} className="address-box">
-                      <h2>Shipping Address {index + 1}</h2>
-                      <div className="address-entry">
+              <h2>Shipping Address</h2>
+              <FieldArray name="shippingAddresses">
+                {({ push, remove }) => (
+                  <div className="address-entry">
+                    {values.shippingAddresses.map((address, index) => (
+                      <div key={index} className="address-item">
                         <Field name={`shippingAddresses.${index}.name`} placeholder="Name" />
                         <Field name={`shippingAddresses.${index}.flatNo`} placeholder="Flat No" />
                         <Field name={`shippingAddresses.${index}.street`} placeholder="Street" />
@@ -187,70 +172,26 @@ const YourProfile = () => {
                         <Field name={`shippingAddresses.${index}.state`} placeholder="State" />
                         <Field name={`shippingAddresses.${index}.pincode`} placeholder="Pincode" />
                         <Field name={`shippingAddresses.${index}.phoneNo`} placeholder="Phone No" />
-                        <Field name={`shippingAddresses.${index}.landmark`} placeholder="Landmark (Optional)" />
-                        <label>
-                          <Field
-                            type="checkbox"
-                            name={`shippingAddresses.${index}.isDefault`}
-                            checked={address.isDefault}
-                            onChange={() => {
-                              const newAddresses = values.shippingAddresses.map((addr, i) => ({
-                                ...addr,
-                                isDefault: i === index,
-                              }));
-                              setFieldValue('shippingAddresses', newAddresses);
-                            }}
-                          />
-                          Default
-                        </label>
-                        <div className="profile-icons">
-                          <FaTrashAlt className="profile-delete-icon" onClick={() => remove(index)} />
+                        <Field name={`shippingAddresses.${index}.landmark`} placeholder="Landmark" />
+                        <div className="address-actions">
+                          <button type="button" onClick={() => handleEditClick(index)}>Edit</button>
+                          <button type="button" onClick={() => remove(index)}>Remove</button>
                         </div>
                       </div>
-                    </div>
-                  ))}
-                  <button
-                    className="profile-add-icon"
-                    type="button"
-                    onClick={() => push({
-                      name: '',
-                      flatNo: '',
-                      street: '',
-                      area: '',
-                      district: '',
-                      state: '',
-                      pincode: '',
-                      phoneNo: '',
-                      landmark: '',
-                      isDefault: false,
-                    })}
-                  >
-                    <FaPlus /> Add Address
-                  </button>
-                </div>
-              )}
-            </FieldArray>
+                    ))}
+                    <button type="button" onClick={handleAddAddress}>Add New Address</button>
+                  </div>
+                )}
+              </FieldArray>
+            </div>
 
-            <button type="submit" disabled={!isEditing}>
-              <FaSave /> {isEditing ? 'Save' : 'Inactive'}
+            {/* Save Button */}
+            <button type="submit" disabled={!isEditing} className="profile-button">
+              <FaSave /> Save
             </button>
           </Form>
         )}
       </Formik>
-
-      {/* Display Saved Addresses */}
-      {savedAddresses.length > 0 && (
-        <div className="saved-addresses">
-          <h2>Addresses</h2>
-          {savedAddresses.map((address, index) => (
-            <div key={index} className="address-box">
-              <p>
-                {address.billingAddress.name}, {address.billingAddress.flatNo}, {address.billingAddress.street}, {address.billingAddress.area}, {address.billingAddress.district}, {address.billingAddress.state}, {address.billingAddress.pincode}, {address.billingAddress.phoneNo}
-              </p>
-            </div>
-          ))}
-        </div>
-      )}
     </div>
   );
 };

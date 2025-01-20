@@ -23,6 +23,7 @@ import Wishlist from "./Components/Wishlist/Wishlist";
 import TermsConditions from "./Components/TermsConditions/TermsConditions";
 import OrderSummary from "./Components/OrderSummary/OrderSummary";
 import CartPage from "./Components/CartPage/CartPage";
+import WarrantyPolicy from "./Components/WarrantyPolicy/WarrantyPolicy";
 
 function App() {
   // eslint-disable-next-line
@@ -74,6 +75,7 @@ function App() {
             <Route path="/cart" element={<CartPage />} />
 
             <Route path="/termsconditions" element={<TermsConditions />} />
+            <Route path="/warranty" element={<WarrantyPolicy />} />
 
             {isLoggedIn ? (
               <>
