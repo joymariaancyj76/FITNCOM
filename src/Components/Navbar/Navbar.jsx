@@ -41,14 +41,14 @@ const Navbar = () => {
       <div className="right-bar">
         <div className="signin-icon">
           <Link to={isLoggedIn ? "/" : "/signin"}>
-            <img src={signinicon} alt="Sign In" />
+            <img src="https://i.ibb.co/JkptQRR/signin-icon.png" alt="Sign In" />
           </Link>
           {isLoggedIn && (
             <div className="profile-name">{User.getUserName()}</div>
           )}
         </div>
         <div className="addtocart-icon" onClick={handleAddToCartClick}>
-          <img src={addtocarticon} alt="Add to Cart" />
+          <img src="https://i.ibb.co/z2t0mKX/addtocart.png" alt="Add to Cart" />
         </div>
         <div className="menu-icon">
           <FiMenu onClick={handleMenuToggle} />

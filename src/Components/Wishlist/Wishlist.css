@@ -52,7 +52,18 @@
     font-size: 14px;
     color: #555;
   }
-  
+  .wishlist-cart-icon {
+    position: absolute;
+    top: -45px;
+    right: -40px;
+    width: 150px;
+    height: 150px;
+
+    .cart-icon-image {
+        width: 100%;
+        height: 100%;
+    }
+}
   /* Star Rating */
   .wishlist-star-rating {
     font-size: 20px;

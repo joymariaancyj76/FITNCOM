@@ -12,7 +12,7 @@ import productimage from "../../Assets/Images/bat png.png";
 const products = new Array(16).fill({
   name: "ProFlex Cricket Bat",
   price: "Rs. 1000/-",
-  image: productimage,
+  image: "https://i.ibb.co/kgQY3dT/bat-png.png",
   rating: 4.5, // Example rating, you can adjust for each product
 });
 

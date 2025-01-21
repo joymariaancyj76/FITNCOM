@@ -88,11 +88,12 @@ const TopSellingProduct = ({ products = [] }) => {
                     src={
                       cart.includes(product.id)
                         ? index % 2 === 0
-                          ? evensubicon
-                          : oddsubicon
+                          ? "https://i.ibb.co/sP3zZKF/cart-icon-4.png"
+                          : "https://i.ibb.co/nLj2jpY/cart-icon-3.png"
                         : index % 2 === 0
-                        ? evenaddicon
-                        : oddaddicon
+                        ? "https://i.ibb.co/5YpSzCP/cart-icon-1.png"
+                        : "https://i.ibb.co/5Wfff3K/cart-icon-2.png"
+                        
                     }
                     alt="Cart Icon"
                     className="cart-icon-image"

@@ -26,7 +26,7 @@ const productDescriptions = {
       material: "Willow",
     },
     price: "Rs. 2000",
-    image: product1,
+    image: "https://i.ibb.co/kgQY3dT/bat-png.png",
   },
   2: {
     name: "PROFLEX BAT",
@@ -39,7 +39,7 @@ const productDescriptions = {
       material: "Willow",
     },
     price: "Rs. 2200",
-    image: product2,
+    image: "https://i.ibb.co/kgQY3dT/bat-png.png",
   },
   3: {
     name: "PROFLEX BAT",
@@ -52,7 +52,7 @@ const productDescriptions = {
       material: "Kashmir Willow",
     },
     price: "Rs. 2500",
-    image: product3,
+    image: "https://i.ibb.co/kgQY3dT/bat-png.png",
   },
   4: {
     name: "PROFLEX BAT",
@@ -65,7 +65,7 @@ const productDescriptions = {
       material: "English Willow",
     },
     price: "Rs. 2800",
-    image: product4,
+    image: "https://i.ibb.co/kgQY3dT/bat-png.png",
   },
   5: {
     name: "PROFLEX BAT",
@@ -78,7 +78,7 @@ const productDescriptions = {
       material: "English Willow",
     },
     price: "Rs. 3000",
-    image: product5,
+    image: "https://i.ibb.co/kgQY3dT/bat-png.png",
   },
   6: {
     name: "PROFLEX BAT",
@@ -91,7 +91,7 @@ const productDescriptions = {
       material: "Grade A Willow",
     },
     price: "Rs. 3500",
-    image: product6,
+    image: "https://i.ibb.co/kgQY3dT/bat-png.png",
   },
   H: {
     name: "PROFLEX BAT",
@@ -104,7 +104,7 @@ const productDescriptions = {
       material: "Grade A Willow",
     },
     price: "Rs. 4000",
-    image: productH,
+    image: "https://i.ibb.co/kgQY3dT/bat-png.png",
   },
   SH: {
     name: "SHORT HAND BAT",
@@ -116,7 +116,7 @@ const productDescriptions = {
       material: "Premium Willow",
     },
     price: "Rs. 4500",
-    image: productSH,
+    image: "https://i.ibb.co/kgQY3dT/bat-png.png",
   },
   LH: {
     name: "PROFLEX BAT",
@@ -129,15 +129,15 @@ const productDescriptions = {
       material: "Premium Willow",
     },
     price: "Rs. 5000",
-    image: productLH,
+    image: "https://i.ibb.co/kgQY3dT/bat-png.png",
   },
 };
 
 const relatedProducts = [
-  { id: 1, name: "ProFlex Ball", price: "Rs. 500", image: product1 },
-  { id: 2, name: "ProFlex Gloves", price: "Rs. 1200", image: product2 },
-  { id: 3, name: "ProFlex Pads", price: "Rs. 1500", image: product3 },
-  { id: 4, name: "ProFlex Helmet", price: "Rs. 2500", image: product4 },
+  { id: 1, name: "ProFlex Ball", price: "Rs. 500", image: "https://i.ibb.co/kgQY3dT/bat-png.png" },
+  { id: 2, name: "ProFlex Gloves", price: "Rs. 1200", image: "https://i.ibb.co/kgQY3dT/bat-png.png" },
+  { id: 3, name: "ProFlex Pads", price: "Rs. 1500", image: "https://i.ibb.co/kgQY3dT/bat-png.png"},
+  { id: 4, name: "ProFlex Helmet", price: "Rs. 2500", image: "https://i.ibb.co/kgQY3dT/bat-png.png"},
 ];
 
 function CricketDetail() {

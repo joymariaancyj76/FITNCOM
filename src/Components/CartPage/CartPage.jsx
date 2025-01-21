@@ -86,15 +86,15 @@ const CartPage = () => {
   };
   // Sample products data
   const products = [
-    { id: 1, name: "Product 1", price: "Rs.50", rating: 4.5, image: product1 },
-    { id: 2, name: "Product 2", price: "Rs.75", rating: 4.6, image: product2 },
-    { id: 3, name: "Product 3", price: "Rs.60", rating: 4.3, image: product3 },
-    { id: 4, name: "Product 4", price: "Rs.50", rating: 4.5, image: product4 },
-    { id: 5, name: "Product 5", price: "Rs.75", rating: 4.6, image: product5 },
-    { id: 6, name: "Product 6", price: "Rs.60", rating: 4.3, image: product6 },
-    { id: 7, name: "Product 7", price: "Rs.50", rating: 4.5, image: product7 },
-    { id: 8, name: "Product 8", price: "Rs.75", rating: 4.6, image: product8 },
-    { id: 9, name: "Product 9", price: "Rs.60", rating: 4.3, image: product9 },
+    { id: 1, name: "Product 1", price: "Rs.50", rating: 4.5, image: "https://i.ibb.co/kgQY3dT/bat-png.png"},
+    { id: 2, name: "Product 2", price: "Rs.75", rating: 4.6, image: "https://i.ibb.co/kgQY3dT/bat-png.png" },
+    { id: 3, name: "Product 3", price: "Rs.60", rating: 4.3, image: "https://i.ibb.co/kgQY3dT/bat-png.png" },
+    { id: 4, name: "Product 4", price: "Rs.50", rating: 4.5, image: "https://i.ibb.co/kgQY3dT/bat-png.png" },
+    { id: 5, name: "Product 5", price: "Rs.75", rating: 4.6, image: "https://i.ibb.co/kgQY3dT/bat-png.png" },
+    { id: 6, name: "Product 6", price: "Rs.60", rating: 4.3, image: "https://i.ibb.co/kgQY3dT/bat-png.png" },
+    { id: 7, name: "Product 7", price: "Rs.50", rating: 4.5, image: "https://i.ibb.co/kgQY3dT/bat-png.png" },
+    { id: 8, name: "Product 8", price: "Rs.75", rating: 4.6, image: "https://i.ibb.co/kgQY3dT/bat-png.png" },
+    { id: 9, name: "Product 9", price: "Rs.60", rating: 4.3, image: "https://i.ibb.co/kgQY3dT/bat-png.png" },
   ];
 
   const handlePrevious = () => {

@@ -14,7 +14,7 @@ const Footer = () => {
       {/* Blogs Section */}
       <div className="footer-blogs">
         <h1>BLOGS</h1>
-        <img src={blogImage} alt="Blog" className="blog-image" />
+        <img src="https://i.ibb.co/CJkfBhY/blog1.jpg" alt="Blog" className="blog-image" />
         <p className="blog-subtext">Be Curious, Be Passionate</p>
       </div>
 

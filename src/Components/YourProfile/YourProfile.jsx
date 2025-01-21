@@ -38,11 +38,12 @@ const validationSchema = Yup.object().shape({
 const YourProfile = () => {
   const [savedAddresses, setSavedAddresses] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
+  const [useBillingAsShipping, setUseBillingAsShipping] = useState(false);
   const [sections, setSections] = useState({
     showEmailSection: false,
     showPhoneNumberSection: false,
-    showBillingAddressSection: false,
-    showShippingAddressSection: false,
+    showBillingAddressSection: true,
+    showShippingAddressSection: true,
     showAddAddressSection: false,
   });
 
@@ -55,6 +56,18 @@ const YourProfile = () => {
 
   const handleEditClick = () => {
     setIsEditing(true);
+  };
+
+  const handleSave = (values) => {
+    // Copy billing address to shipping address if checkbox is checked
+    if (useBillingAsShipping) {
+      values.shippingAddresses = [values.billingAddress];
+    }
+    
+    // Save the addresses to state
+    setSavedAddresses([...savedAddresses, values]);
+    alert('Successfully saved addresses');
+    setIsEditing(false);
   };
 
   return (
@@ -89,18 +102,15 @@ const YourProfile = () => {
           }],
         }}
         validationSchema={validationSchema}
-        onSubmit={(values) => {
-          setSavedAddresses([...savedAddresses, values]);
-          alert('Successfully added address');
-        }}
+        onSubmit={handleSave}
       >
         {({ values, setFieldValue }) => (
           <Form className="profile-form">
             {/* User Profile Section */}
             <div className="user-profile-section">
-              <img src={usericon} alt="User" className="signin-image" />
+              <img src="https://i.ibb.co/JkptQRR/signin-icon.png" alt="User" className="signin-image" />
               <div className='usericon'>
-                <Field name="username" placeholder="Username" className="profile-input" value={User.getUserName()}/>
+                <Field name="username" placeholder="Username" className="profile-input" value={User.getUserName()} />
                 <FaEdit className="edit-icon" onClick={handleEditClick} />
               </div>
             </div>
@@ -141,8 +151,29 @@ const YourProfile = () => {
                   <Field name="billingAddress.pincode" placeholder="Pincode" />
                   <Field name="billingAddress.phoneNo" placeholder="Phone No" />
                   <Field name="billingAddress.landmark" placeholder="Landmark (Optional)" />
+                  <button type="submit" className="save-button">
+                    <FaSave /> Save
+                  </button>
                 </div>
               )}
+            </div>
+
+            {/* Checkbox to use Billing Address as Shipping Address */}
+            <div className="checkbox-section">
+              <label>
+                <Field
+                  type="checkbox"
+                  name="useBillingAsShipping"
+                  checked={useBillingAsShipping}
+                  onChange={() => {
+                    setUseBillingAsShipping(!useBillingAsShipping);
+                    if (!useBillingAsShipping) {
+                      setFieldValue('shippingAddresses', [values.billingAddress]);
+                    }
+                  }}
+                />
+                Use the above address for shipping
+              </label>
             </div>
 
             {/* Shipping Addresses Section */}
@@ -167,6 +198,9 @@ const YourProfile = () => {
                             <Field name={`shippingAddresses.${index}.pincode`} placeholder="Pincode" />
                             <Field name={`shippingAddresses.${index}.phoneNo`} placeholder="Phone No" />
                             <Field name={`shippingAddresses.${index}.landmark`} placeholder="Landmark (Optional)" />
+                            <button type="submit" className="save-button">
+                              <FaSave /> Save
+                            </button>
                             <label>
                               <Field
                                 type="checkbox"
@@ -209,11 +243,6 @@ const YourProfile = () => {
                 </FieldArray>
               )}
             </div>
-
-            {/* Submit Button */}
-            <button type="submit" disabled={!isEditing}>
-              <FaSave /> {isEditing ? 'Save' : 'Inactive'}
-            </button>
           </Form>
         )}
       </Formik>
@@ -225,7 +254,11 @@ const YourProfile = () => {
           {savedAddresses.map((address, index) => (
             <div key={index} className="address-box">
               <p>
-                {address.billingAddress.name}, {address.billingAddress.flatNo}, {address.billingAddress.street}, {address.billingAddress.area}, {address.billingAddress.district}, {address.billingAddress.state}, {address.billingAddress.pincode}, {address.billingAddress.phoneNo}, {address.billingAddress.landmark}
+                {address.billingAddress.name},<br/>
+                {address.billingAddress.flatNo},<br/> {address.billingAddress.street},<br/> 
+                {address.billingAddress.area},<br/> {address.billingAddress.district},<br/>
+                {address.billingAddress.state},<br/>{address.billingAddress.pincode},<br/> 
+                {address.billingAddress.phoneNo}<br/> {address.billingAddress.landmark}<br/>
               </p>
             </div>
           ))}
