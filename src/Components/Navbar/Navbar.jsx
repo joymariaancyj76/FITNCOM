@@ -31,7 +31,10 @@ const Navbar = () => {
       <div className="left-bar">
         <div className="logo">
           <Link to="/">
-            <img src={logo} alt="Logo" />
+            <img
+              src={"https://i.ibb.co/2KgM1X7/LOGO-transparent1.png"}
+              alt="Logo"
+            />
           </Link>
         </div>
       </div>

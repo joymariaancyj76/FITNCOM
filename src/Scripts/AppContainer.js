@@ -36,7 +36,6 @@ const AppContainer = ({ children }) => {
     };
     // if accessToken present checkloginStatus for all pages otherwise only on required pages
     if (accessToken != null || pagesToCheckLogin.includes(location.pathname)) {
-      console.log("accessToken:", accessToken);
       checkLoginStatus();
     }
   }, []);
