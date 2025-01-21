@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import "./CartPage.css"; // Ensure this file contains necessary styles
 import productimg from "../../Assets/Images/bat png.png";
 import TopSellingProduct from "../TopSellingProducts/TopSellingProduct";
+import Wishlist from "../Wishlist/Wishlist";
 import product1 from "../../Assets/Images/bat png.png";
 import product2 from "../../Assets/Images/bat png.png";
 import product3 from "../../Assets/Images/bat png.png";
@@ -73,6 +74,15 @@ const CartPage = () => {
   const handlePayNow = () => {
     alert('Payment processing...');
     // Add your payment processing logic here
+  };
+  const handleProceedToPay = () => {
+    if (activeTab === "cart" && cart.length > 0) {
+      setActiveTab("address");
+    } else if (activeTab === "address" && addresses.length > 0) {
+      setActiveTab("payment");
+    } else {
+      alert("Please ensure you have at least one item in the cart or one address added.");
+    }
   };
   // Sample products data
   const products = [
@@ -320,11 +330,26 @@ return (
             <p>Discount: Rs. 100/-</p>
             <h4>Order Total: Rs. 900/-</h4>
           </div>
+          {activeTab === "cart" && (
+        <div>
+          <button className="proceed-to-pay-button" onClick={handleProceedToPay}>
+            PROCEED TO PAY
+          </button>
+          <Wishlist/>
+        </div>
+      )}
+      {activeTab === "address" && (
+        <div>
+          <button className="proceed-to-pay-button" onClick={handleProceedToPay}>
+          PROCEED TO PAY
+          </button>
+        </div>
+      )}
          {/* Place Order button only on the Payment tab */}
       {activeTab === "payment" && (
         <div>
           <button className="place-order-button" onClick={handlePlaceOrder}>
-            Place Order
+            PLACE ORDER
           </button>
         </div>
       )}

@@ -281,3 +281,20 @@ font-weight: bolder;
   .place-order-button:hover {
     background-color: var(--green-2);
   }
+  .proceed-to-pay-button {
+    display: block;
+    width: 20%;
+    padding: 10px;
+    background-color: var(--green-1);
+    color: var(--ash-1);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .proceed-to-pay-button:hover {
+    background-color: var(--green-2);
+  }
