@@ -7,6 +7,7 @@ export const UserStatusContext = createContext();
 
 const AppContainer = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const accessToken = localStorage.getItem("access-token");
   const location = useLocation();
   const pagesToCheckLogin = [
     "/myprofile",
@@ -33,7 +34,8 @@ const AppContainer = ({ children }) => {
         setIsLoggedIn(false);
       }
     };
-    if (pagesToCheckLogin.includes(location.pathname)) {
+    // if accessToken present checkloginStatus for all pages otherwise only on required pages
+    if (accessToken != null || pagesToCheckLogin.includes(location.pathname)) {
       checkLoginStatus();
     }
   }, []);
