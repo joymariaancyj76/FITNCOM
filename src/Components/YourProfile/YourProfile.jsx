@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import { FaEdit, FaTrashAlt, FaPlus, FaSave } from 'react-icons/fa';
 import './YourProfile.css';
 import usericon from "../../Assets/Images/signin-icon.png";
+import User from "../../Scripts/User";
 
 // Validation Schema
 const validationSchema = Yup.object().shape({
@@ -37,37 +38,23 @@ const validationSchema = Yup.object().shape({
 const YourProfile = () => {
   const [savedAddresses, setSavedAddresses] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
-  const [editingIndex, setEditingIndex] = useState(null); // Track index of the address being edited
-  const [showEmailSection, setShowEmailSection] = useState(false);
-  const [showPhoneSection, setShowPhoneSection] = useState(false);
-  const [showPasswordSection, setShowPasswordSection] = useState(false);
-  const [passwordChangeSuccess, setPasswordChangeSuccess] = useState(false);
+  const [sections, setSections] = useState({
+    showEmailSection: false,
+    showPhoneNumberSection: false,
+    showBillingAddressSection: false,
+    showShippingAddressSection: false,
+    showAddAddressSection: false,
+  });
 
-  const handleEditClick = (index) => {
-    setEditingIndex(index);
+  const toggleSection = (section) => {
+    setSections((prevSections) => ({
+      ...prevSections,
+      [section]: !prevSections[section],
+    }));
+  };
+
+  const handleEditClick = () => {
     setIsEditing(true);
-  };
-
-  const handleAddAddress = () => {
-    setEditingIndex(null); // Reset editing index for new address
-    setIsEditing(true);
-  };
-
-  const toggleEmailSection = () => {
-    setShowEmailSection(!showEmailSection);
-  };
-
-  const togglePhoneSection = () => {
-    setShowPhoneSection(!showPhoneSection);
-  };
-
-  const togglePasswordSection = () => {
-    setShowPasswordSection(!showPasswordSection);
-  };
-
-  const handlePasswordChange = () => {
-    setPasswordChangeSuccess(true);
-    setShowPasswordSection(false);
   };
 
   return (
@@ -75,6 +62,8 @@ const YourProfile = () => {
       <h1>Your Profile</h1>
       <Formik
         initialValues={{
+          email: '',
+          phoneNumber: '',
           billingAddress: {
             name: '',
             flatNo: '',
@@ -86,112 +75,162 @@ const YourProfile = () => {
             phoneNo: '',
             landmark: '',
           },
-          shippingAddresses: savedAddresses, // Use savedAddresses to pre-fill the form with existing addresses
+          shippingAddresses: [{
+            name: '',
+            flatNo: '',
+            street: '',
+            area: '',
+            district: '',
+            state: '',
+            pincode: '',
+            phoneNo: '',
+            landmark: '',
+            isDefault: false,
+          }],
         }}
         validationSchema={validationSchema}
         onSubmit={(values) => {
-          // Save the updated shipping addresses or billing address
-          if (editingIndex !== null) {
-            // Edit existing address
-            const updatedAddresses = [...savedAddresses];
-            updatedAddresses[editingIndex] = values.shippingAddresses[editingIndex];
-            setSavedAddresses(updatedAddresses);
-          } else {
-            // Add new address
-            setSavedAddresses([...savedAddresses, values.shippingAddresses[0]]);
-          }
-          alert('Address saved successfully!');
-          setIsEditing(false);
+          setSavedAddresses([...savedAddresses, values]);
+          alert('Successfully added address');
         }}
       >
         {({ values, setFieldValue }) => (
           <Form className="profile-form">
             {/* User Profile Section */}
             <div className="user-profile-section">
-              <img src={usericon} alt="User" className="profile-signin-image" />
-              <div>
-                <Field name="username" placeholder="Username" className="profile-input" />
-                <FaEdit className="profile-edit-icon" onClick={handleEditClick} />
+              <img src={usericon} alt="User" className="signin-image" />
+              <div className='usericon'>
+                <Field name="username" placeholder="Username" className="profile-input" value={User.getUserName()}/>
+                <FaEdit className="edit-icon" onClick={handleEditClick} />
               </div>
             </div>
 
-            {/* Email, Password, PhoneNumber */}
-            <div className="profile-info">
-              <div className="email-section">
-                <div className="email-bar" onClick={toggleEmailSection}>
-                  Gmail
-                </div>
-                {showEmailSection && (
-                  <div className="email-form">
-                    <Field name="email" placeholder="Gmail ID" className="profile-input" />
-                  </div>
-                )}
+            {/* Email Section */}
+            <div className="profile-section">
+              <div className="profile-bar" onClick={() => toggleSection('showEmailSection')}>
+                Gmail ID
               </div>
-
-              <div className="phoneNumber-section">
-                <div className="phoneNumber-bar" onClick={togglePhoneSection}>
-                  Phone Number
-                </div>
-                {showPhoneSection && (
-                  <div className="phoneNumber-form">
-                    <Field name="phoneNumber" placeholder="Phone Number" className="profile-input" />
-                  </div>
-                )}
-              </div>
-
-              <div className="password-section">
-                <div className="password-bar" onClick={togglePasswordSection}>
-                  Change Password
-                </div>
-                {showPasswordSection && (
-                  <div className="password-form">
-                    <Field type="password" name="oldPassword" placeholder="Old Password" className="profile-input" />
-                    <Field type="password" name="newPassword" placeholder="New Password" className="profile-input" />
-                    <Field type="password" name="confirmPassword" placeholder="Confirm Password" className="profile-input" />
-                    <button type="button" onClick={handlePasswordChange} className="profile-button">Update</button>
-                    <button type="button" onClick={togglePasswordSection} className="profile-button">Cancel</button>
-                  </div>
-                )}
-                {passwordChangeSuccess && <div className="success-message">Password changed successfully</div>}
-              </div>
+              {sections.showEmailSection && (
+                <Field name="email" placeholder="Gmail ID" className="profile-input" />
+              )}
             </div>
 
-            {/* Address Section */}
-            <div className="address-box">
-              <h2>Shipping Address</h2>
-              <FieldArray name="shippingAddresses">
-                {({ push, remove }) => (
-                  <div className="address-entry">
-                    {values.shippingAddresses.map((address, index) => (
-                      <div key={index} className="address-item">
-                        <Field name={`shippingAddresses.${index}.name`} placeholder="Name" />
-                        <Field name={`shippingAddresses.${index}.flatNo`} placeholder="Flat No" />
-                        <Field name={`shippingAddresses.${index}.street`} placeholder="Street" />
-                        <Field name={`shippingAddresses.${index}.area`} placeholder="Area" />
-                        <Field name={`shippingAddresses.${index}.district`} placeholder="District" />
-                        <Field name={`shippingAddresses.${index}.state`} placeholder="State" />
-                        <Field name={`shippingAddresses.${index}.pincode`} placeholder="Pincode" />
-                        <Field name={`shippingAddresses.${index}.phoneNo`} placeholder="Phone No" />
-                        <Field name={`shippingAddresses.${index}.landmark`} placeholder="Landmark" />
-                        <div className="address-actions">
-                          <button type="button" onClick={() => handleEditClick(index)}>Edit</button>
-                          <button type="button" onClick={() => remove(index)}>Remove</button>
+            {/* Phone Number Section */}
+            <div className="profile-section">
+              <div className="profile-bar" onClick={() => toggleSection('showPhoneNumberSection')}>
+                Phone Number
+              </div>
+              {sections.showPhoneNumberSection && (
+                <Field name="phoneNumber" placeholder="Phone Number" className="profile-input" />
+              )}
+            </div>
+
+            {/* Billing Address Section */}
+            <div className="profile-section">
+              <div className="profile-bar" onClick={() => toggleSection('showBillingAddressSection')}>
+                Billing Address
+              </div>
+              {sections.showBillingAddressSection && (
+                <div className="address-entry">
+                  <Field name="billingAddress.name" placeholder="Name" />
+                  <Field name="billingAddress.flatNo" placeholder="Flat No" />
+                  <Field name="billingAddress.street" placeholder="Street" />
+                  <Field name="billingAddress.area" placeholder="Area" />
+                  <Field name="billingAddress.district" placeholder="District" />
+                  <Field name="billingAddress.state" placeholder="State" />
+                  <Field name="billingAddress.pincode" placeholder="Pincode" />
+                  <Field name="billingAddress.phoneNo" placeholder="Phone No" />
+                  <Field name="billingAddress.landmark" placeholder="Landmark (Optional)" />
+                </div>
+              )}
+            </div>
+
+            {/* Shipping Addresses Section */}
+            <div className="profile-section">
+              <div className="profile-bar" onClick={() => toggleSection('showShippingAddressSection')}>
+                Shipping Address
+              </div>
+              {sections.showShippingAddressSection && (
+                <FieldArray name="shippingAddresses">
+                  {({ push, remove }) => (
+                    <div>
+                      {values.shippingAddresses.map((address, index) => (
+                        <div key={index} className="address-box">
+                          <h2>Shipping Address {index + 1}</h2>
+                          <div className="address-entry">
+                            <Field name={`shippingAddresses.${index}.name`} placeholder="Name" />
+                            <Field name={`shippingAddresses.${index}.flatNo`} placeholder="Flat No" />
+                            <Field name={`shippingAddresses.${index}.street`} placeholder="Street" />
+                            <Field name={`shippingAddresses.${index}.area`} placeholder="Area" />
+                            <Field name={`shippingAddresses.${index}.district`} placeholder="District" />
+                            <Field name={`shippingAddresses.${index}.state`} placeholder="State" />
+                            <Field name={`shippingAddresses.${index}.pincode`} placeholder="Pincode" />
+                            <Field name={`shippingAddresses.${index}.phoneNo`} placeholder="Phone No" />
+                            <Field name={`shippingAddresses.${index}.landmark`} placeholder="Landmark (Optional)" />
+                            <label>
+                              <Field
+                                type="checkbox"
+                                name={`shippingAddresses.${index}.isDefault`}
+                                checked={address.isDefault}
+                                onChange={() => {
+                                  const newAddresses = values.shippingAddresses.map((addr, i) => ({
+                                    ...addr,
+                                    isDefault: i === index,
+                                  }));
+                                  setFieldValue('shippingAddresses', newAddresses);
+                                }}
+                              />
+                              Default
+                            </label>
+                            <FaTrashAlt className="delete-icon" onClick={() => remove(index)} />
+                          </div>
                         </div>
-                      </div>
-                    ))}
-                    <button type="button" onClick={handleAddAddress}>Add New Address</button>
-                  </div>
-                )}
-              </FieldArray>
+                      ))}
+                      <button
+                        className="profile-add-icon"
+                        type="button"
+                        onClick={() => push({
+                          name: '',
+                          flatNo: '',
+                          street: '',
+                          area: '',
+                          district: '',
+                          state: '',
+                          pincode: '',
+                          phoneNo: '',
+                          landmark: '',
+                          isDefault: false,
+                        })}
+                      >
+                        <FaPlus /> Add Address
+                      </button>
+                    </div>
+                  )}
+                </FieldArray>
+              )}
             </div>
 
-            {/* Save Button */}
-            <button type="submit" disabled={!isEditing} className="profile-button">
-              <FaSave /> Save
+            {/* Submit Button */}
+            <button type="submit" disabled={!isEditing}>
+              <FaSave /> {isEditing ? 'Save' : 'Inactive'}
             </button>
           </Form>
         )}
       </Formik>
+
+      {/* Display Saved Addresses */}
+      {savedAddresses.length > 0 && (
+        <div className="saved-addresses">
+          <h2>Addresses</h2>
+          {savedAddresses.map((address, index) => (
+            <div key={index} className="address-box">
+              <p>
+                {address.billingAddress.name}, {address.billingAddress.flatNo}, {address.billingAddress.street}, {address.billingAddress.area}, {address.billingAddress.district}, {address.billingAddress.state}, {address.billingAddress.pincode}, {address.billingAddress.phoneNo}, {address.billingAddress.landmark}
+              </p>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

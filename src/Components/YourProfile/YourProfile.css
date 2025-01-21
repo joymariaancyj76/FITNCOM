@@ -1,271 +1,156 @@
-/* Base Styles */
 .YourProfile {
-    margin-top: 100px;
-    padding: 20px;
-    font-family: 'MyFont2','MyFont3';
-  }
-  
-  .YourProfile h1 {
-    text-align: center;
-    color: #333;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  top: 150px;
+}
 
-  }
-  
-  /* User Profile Section */
+.YourProfile h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.profile-form {
+  display: flex;
+  flex-direction: column;
+}
+.usericon{
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+}
+
+.user-profile-section {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.profile-form .signin-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+.profile-input {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.profile-section {
+  margin-bottom: 20px;
+}
+
+.profile-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--green-1);
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.profile-bar:hover {
+  background-color: #dcdcdc;
+}
+
+.address-box {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.address-entry {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.address-entry > * {
+  flex: 1 1 calc(50% - 10px);
+  min-width: 200px;
+}
+
+.profile-add-icon {
+  background-color: #007bff;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.profile-add-icon:hover {
+  background-color: #0056b3;
+}
+
+.delete-icon {
+  cursor: pointer;
+  color: red;
+}
+
+.saved-addresses {
+  margin-top: 20px;
+}
+
+button[type="submit"] {
+  background-color: #28a745;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  align-self: flex-start;
+}
+
+button[type="submit"]:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
   .user-profile-section {
-    display: flex;
+    flex-direction: column;
     align-items: center;
-    margin-top: 20px;
-    margin-bottom: 30px;
-    flex-wrap: wrap;
+    text-align: center;
   }
-  
-  .profile-signin-image {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin-right: 20px;
-    align-items: center;
+
+  .profile-form .signin-image {
+    margin: 0 auto 10px;
   }
-  
-  .profile-input {
-    width: 300px;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 2px solid #aded9e;
-    border-radius: 5px;
-    font-size: 14px;
-    color: #333;
-  }
-  
-  .profile-input:focus {
-    border-color: #8ee8c4;
-    outline: none;
-  }
-  
-  /* Profile Info Section */
-  .profile-info {
-    margin-bottom: 30px;
-  }
-  
-  .email-section, .phoneNumber-section, .password-section {
-    margin-bottom: 20px;
-  }
-  
-  .email-bar, .phoneNumber-bar, .password-bar {
-    background-color: #8ee8c4;
-    padding: 10px;
-    font-weight: bold;
-    cursor: pointer;
-    border-radius: 5px;
-    width: 100%;
-    margin-bottom: 10px;
-  }
-  
-  .email-form, .phoneNumber-form, .password-form {
-    margin-bottom: 20px;
-  }
-  
-  .password-form input {
-    display: flex;
-    margin-bottom: 10px;
-  }
-  .password-changebox {
-    border: 1px solid #ccc;
-    padding: 1em;
-    margin-top: 0.5em;
-  }
-  
-  /* Address Section */
-  .address-box {
-    margin-bottom: 30px;
-    border: 2px solid #aded9e;
-    padding: 20px;
-    border-radius: 5px;
-  }
-  
-  .address-box h2 {
-    color: #333;
-    margin-bottom: 20px;
-  }
-  
+
   .address-entry {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
+    flex-direction: column;
   }
-  
-  .address-entry input {
-    width: 45%;
+
+  .profile-add-icon,
+  .profile-input {
+    width: 100%;
   }
-  
-  button[type="submit"],
-  button.profile-add-icon,
-  button.profile-button {
-    background-color: #8ee8c4;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
+}
+
+@media (max-width: 480px) {
+  .YourProfile {
+    padding: 10px;
   }
-  
-  button[type="submit"]:hover,
-  button.profile-add-icon:hover,
-  button.profile-button:hover {
-    background-color: #aded9e;
+
+  .profile-add-icon {
+    font-size: 14px;
+    padding: 8px;
   }
-  
-  .profile-icons {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-  }
-  
-  .saved-addresses {
-    margin-top: 30px;
-    padding: 20px;
-    border: 2px solid #aded9e;
-    border-radius: 5px;
-  }
-  
-  .saved-addresses p {
-    color: #333;
-  }
-  
-  .saved-addresses h2 {
-    color: #333;
-    margin-bottom: 20px;
-  }
-  
-  .profile-edit-icon, .profile-delete-icon {
-    cursor: pointer;
-    font-size: 18px;
-  }
-  
-  .profile-edit-icon:hover, .profile-delete-icon:hover {
-    color: #8ee8c4;
-  }
-  
-  /* Column button and rectangle shape styling */
-  button.profile-add-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  button.profile-button {
-    width: 150px;
-    margin-right: 20px;
-  }
-  
-  button[type="button"] {
-    margin-top: 10px;
-    margin-bottom: 20px;
-    background-color: #8ee8c4;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  button[type="button"]:hover {
-    background-color: #aded9e;
-  }
-  
-  /* Adding space between sections */
-  .profile-info,
-  .address-box,
-  .saved-addresses {
-    margin-bottom: 30px;
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .user-profile-section {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-  
-    .profile-signin-image {
-      margin-bottom: 20px;
-    }
-  
-    .profile-input {
-      width: 100%;
-      margin-bottom: 15px;
-    }
-  
-    .email-bar, .phoneNumber-bar, .password-bar {
-      width: 100%;
-      text-align: center;
-      margin-bottom: 15px;
-    }
-  
-    .address-entry input {
-      width: 100%;
-      margin-bottom: 15px;
-    }
-  
-    button[type="submit"],
-    button.profile-add-icon,
-    button.profile-button {
-      width: 100%;
-      padding: 12px;
-    }
-  
-    .saved-addresses {
-      margin-top: 20px;
-      padding: 15px;
-    }
-  
-    .profile-icons {
-      justify-content: flex-start;
-      gap: 15px;
-    }
-  }
-  
-  /* Mobile View (max-width: 480px) */
-  @media (max-width: 480px) {
-    .user-profile-section {
-      align-items: center;
-    }
-  
-    .profile-signin-image {
-      width: 40px;
-      height: 40px;
-    }
-  
-    .profile-input {
-      width: 100%;
-      padding: 8px;
-    }
-  
-    .email-bar, .phoneNumber-bar, .password-bar {
-      width: 100%;
-      padding: 8px;
-    }
-  
-    .address-entry input {
-      width: 100%;
-      margin-bottom: 12px;
-    }
-  
-    button[type="submit"],
-    button.profile-add-icon,
-    button.profile-button {
-      width: 100%;
-      padding: 10px 20px;
-    }
-  
-    .saved-addresses {
-      padding: 10px;
-    }
-  
-    .profile-edit-icon, .profile-delete-icon {
-      font-size: 16px;
-    }
-  }
-  
+}

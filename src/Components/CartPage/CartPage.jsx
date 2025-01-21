@@ -56,11 +56,11 @@ const CartPage = () => {
   };
 
   const handleAddAddress = () => {
-    navigate('/profile');
+    navigate('/myprofile');
   };
 
   const handleEdit = (address) => {
-    navigate('/profile', { state: { address } });
+    navigate('/myprofile', { state: { address } });
   };
 
 
