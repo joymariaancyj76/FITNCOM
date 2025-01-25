@@ -87,7 +87,7 @@ const Navbar = () => {
           <div className="dropdown-section">
             HELP
             <div className="sub-dropdown-menu">
-              <Link to="/contact-us">Contact Us</Link>
+              <Link to="/contactus">Contact Us</Link>
               <Link to="/termsconditions">Terms & Conditions</Link>
               <Link to="/privacy-policy">Privacy Policy</Link>
               <Link to="/warranty">Warranty Policy</Link>

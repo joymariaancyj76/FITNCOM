@@ -29,11 +29,84 @@
 
 .cart-content {
   .product-box {
-    .product-image {
-      img {
-        width: 100px;
-      }
-    }
+    display: flex;
+    border: 1px solid #aded9e;
+    padding: 10px;
+    gap: 15px;
+    background-color: white;
+    transition: background-color 0.3s ease;
+  }
+  
+  .product-box:hover {
+    background-color: #f4fdfb;
+  }
+  
+  .product-selection {
+    display: flex;
+    align-items: center;
+  }
+  
+  .product-selection input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #aded9e;
+    background-color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border 0.3s ease;
+  }
+  
+  .product-selection input[type="checkbox"]:checked {
+    background-color: #aded9e;
+    border-color: #8ee8c4;
+  }
+  
+  .product-selection input[type="checkbox"]:hover {
+    background-color: #aded9e;
+  }
+  
+  .product-image img {
+    width: 100px;
+  }
+  
+  .product-details {
+    flex-grow: 1;
+  }
+  
+  .product-details label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .action-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .remove-button,
+  .wishlist-button {
+    padding: 5px 10px;
+    cursor: pointer;
+    border: none;
+    background-color: #aded9e;
+    color: white;
+    font-size: 14px;
+  }
+  
+  .remove-button:hover,
+  .wishlist-button:hover {
+    opacity: 0.8;
+  }
+  
+  /* Style for Wishlist and Cart Actions */
+  .remove-button,
+  .wishlist-button {
+    background-color: #aded9e;
+  }
+  
+  .remove-button:hover,
+  .wishlist-button:hover {
+    opacity: 0.8;
   }
 }
 

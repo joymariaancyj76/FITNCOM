@@ -13,6 +13,7 @@ import product6 from "../../Assets/Images/bat png.png";
 import product7 from "../../Assets/Images/bat png.png";
 import product8 from "../../Assets/Images/bat png.png";
 import product9 from "../../Assets/Images/bat png.png";
+import OrderConfirmationPage from "../OrderConfirmationPage/OrderConfirmationPage";
 
 const CartPage = () => {
   const [activeTab, setActiveTab] = useState("cart");
@@ -75,6 +76,7 @@ const CartPage = () => {
     alert('Payment processing...');
     // Add your payment processing logic here
   };
+  
   const handleProceedToPay = () => {
     if (activeTab === "cart" && cart.length > 0) {
       setActiveTab("address");
@@ -114,7 +116,7 @@ const CartPage = () => {
     {
       id: 1,
       name: "Cricket Bat",
-      image: productimg, 
+      image: "https://i.ibb.co/kgQY3dT/bat-png.png",
       price: "Rs. 5000/-",
       rating: 4.5,
       description:
@@ -123,34 +125,59 @@ const CartPage = () => {
     {
       id: 2,
       name: "Cricket Willow Bat",
-      image: productimg, 
+      image: "https://i.ibb.co/kgQY3dT/bat-png.png", 
       price: "Rs. 3000/-",
       rating: 4,
       description: "A high-quality football for professional play.",
     },
   ];
+  const [selectedItems, setSelectedItems] = useState([]);
+  const [wishlist, setWishlist] = useState([]);
+ 
+  const handleCheckboxChange = (id) => {
+    setSelectedItems((prevSelected) =>
+      prevSelected.includes(id)
+        ? prevSelected.filter((itemId) => itemId !== id)
+        : [...prevSelected, id]
+    );
+  };
+
+  const handleMoveToWishlist = (product) => {
+    // Add product to wishlist
+    setWishlist((prevWishlist) => [...prevWishlist, product]);
+
+    // Remove the product from cart
+    const updatedCart = cartItems.filter((item) => item.id !== product.id);
+    setCart(updatedCart); // Update the cart state
+  };
 
   const renderTabContent = () => {
     if (activeTab === "cart") {
       return (
         <div className="cart-content">
-          {cartItems.map((product) => (
-            <div key={product.id} className="product-box">
-              <div className="product-image">
-                <img src={product.image} alt={product.name} />
-              </div>
+        {cartItems.map((product) => (
+          <div key={product.id} className="product-box">
+            <div className="product-selection">
+              <input
+                type="checkbox"
+                checked={selectedItems.includes(product.id)}
+                onChange={() => handleCheckboxChange(product.id)}
+              />
+            </div>
+            <div className="product-image">
+              <img src="https://i.ibb.co/kgQY3dT/bat-png.png" alt={product.name} />
+            </div>
+            <div className="product-details">
               <p>{product.name}</p>
               <p>{product.description}</p>
               <label>
                 SIZE:
                 <select>
-                  {["1", "2", "3", "4", "5", "6", "H", "SH", "LH"].map(
-                    (size) => (
-                      <option key={size} value={size}>
-                        {size}
-                      </option>
-                    )
-                  )}
+                  {["1", "2", "3", "4", "5", "6", "H", "SH", "LH"].map((size) => (
+                    <option key={size} value={size}>
+                      {size}
+                    </option>
+                  ))}
                 </select>
               </label>
               <label>
@@ -165,11 +192,22 @@ const CartPage = () => {
               </label>
               <p>{product.price}</p>
               <div className="action-buttons">
-                <button className="remove-button">Remove</button>
-                <button className="wishlist-button">Move to Wishlist</button>
+                <button
+                  className="remove-button"
+                  onClick={() => setSelectedItems(selectedItems.filter((id) => id !== product.id))}
+                >
+                  Remove
+                </button>
+                <button
+                  className="wishlist-button"
+                  onClick={() => handleMoveToWishlist(product)}
+                >
+                  Move to Wishlist
+                </button>
               </div>
             </div>
-          ))}
+          </div>
+        ))}
         </div>
       );
     } else if (activeTab === "address") {
@@ -289,14 +327,10 @@ return (
     <div className="cart-page">
       <h2>Shopping Cart</h2>
 
-      {orderPlaced && (
-        <div className="order-confirmation">
-          <h2>Order Placed Successfully!</h2>
-          <button onClick={handleContinueShopping}>Continue Shopping</button>
-        </div>
-      )}
-
-      {!orderPlaced && (
+      {orderPlaced ? (
+  <OrderConfirmationPage />
+) : (
+  <>
         <header className="cart-header">
           <nav>
             <span
@@ -319,6 +353,7 @@ return (
             </span>
           </nav>
         </header>
+        </>
       )}
 
       <div className="tab-content">{renderTabContent()}</div>
