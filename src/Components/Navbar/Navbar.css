@@ -68,6 +68,23 @@
         width: 40px;
         cursor: pointer;
       }
+      .cart-count-badge {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        background-color: red;
+        color: white;
+        font-size: 12px;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        z-index: 1;
+      }
+      
     }
 
     .menu-icon {
