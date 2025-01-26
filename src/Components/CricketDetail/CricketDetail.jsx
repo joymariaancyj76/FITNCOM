@@ -3,17 +3,6 @@ import { FaStar, FaStarHalfAlt } from "react-icons/fa"; // Import star icons
 import { useParams } from "react-router-dom"; // Import useParams from react-router-dom
 import "./CricketDetail.css";
 
-// Import product images
-import product1 from "../../Assets/Images/bat png.png";
-import product2 from "../../Assets/Images/bat png.png";
-import product3 from "../../Assets/Images/bat png.png";
-import product4 from "../../Assets/Images/bat png.png";
-import product5 from "../../Assets/Images/bat png.png";
-import product6 from "../../Assets/Images/bat png.png";
-import productH from "../../Assets/Images/bat png.png";
-import productSH from "../../Assets/Images/bat png.png";
-import productLH from "../../Assets/Images/bat png.png";
-
 const productDescriptions = {
   1: {
     name: "PROFLEX BAT",
@@ -134,10 +123,30 @@ const productDescriptions = {
 };
 
 const relatedProducts = [
-  { id: 1, name: "ProFlex Ball", price: "Rs. 500", image: "https://i.ibb.co/kgQY3dT/bat-png.png" },
-  { id: 2, name: "ProFlex Gloves", price: "Rs. 1200", image: "https://i.ibb.co/kgQY3dT/bat-png.png" },
-  { id: 3, name: "ProFlex Pads", price: "Rs. 1500", image: "https://i.ibb.co/kgQY3dT/bat-png.png"},
-  { id: 4, name: "ProFlex Helmet", price: "Rs. 2500", image: "https://i.ibb.co/kgQY3dT/bat-png.png"},
+  {
+    id: 1,
+    name: "ProFlex Ball",
+    price: "Rs. 500",
+    image: "https://i.ibb.co/kgQY3dT/bat-png.png",
+  },
+  {
+    id: 2,
+    name: "ProFlex Gloves",
+    price: "Rs. 1200",
+    image: "https://i.ibb.co/kgQY3dT/bat-png.png",
+  },
+  {
+    id: 3,
+    name: "ProFlex Pads",
+    price: "Rs. 1500",
+    image: "https://i.ibb.co/kgQY3dT/bat-png.png",
+  },
+  {
+    id: 4,
+    name: "ProFlex Helmet",
+    price: "Rs. 2500",
+    image: "https://i.ibb.co/kgQY3dT/bat-png.png",
+  },
 ];
 
 function CricketDetail() {

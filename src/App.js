@@ -78,8 +78,8 @@ function App() {
 
             <Route path="/termsconditions" element={<TermsConditions />} />
             <Route path="/warranty" element={<WarrantyPolicy />} />
-            <Route path="/privacy-policy" element={<PrivacyPolicy/>} />
-            <Route path="/faq" element={<FAQ/>} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/faq" element={<FAQ />} />
 
             {isLoggedIn ? (
               <>

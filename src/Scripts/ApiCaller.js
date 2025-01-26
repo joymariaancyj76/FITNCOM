@@ -15,8 +15,11 @@ apiClient.interceptors.request.use(
     if (token) {
       config.headers["Access-Token"] = token;
     }
+    if (config.isMinorLoading) {
+    } else {
+      AppHelper.firEvent("loadmask:show");
+    }
 
-    AppHelper.firEvent("loadmask:show");
     return config;
   },
   (error) => Promise.reject(error)
@@ -32,7 +35,14 @@ apiClient.interceptors.response.use(
   }
 );
 
-const apiCaller = async (method, url, data = {}, params = {}, headers = {}) => {
+const apiCaller = async (
+  method,
+  url,
+  data = {},
+  params = {},
+  headers = {},
+  isMinorLoading = true
+) => {
   try {
     const response = await apiClient({
       method,
@@ -40,12 +50,16 @@ const apiCaller = async (method, url, data = {}, params = {}, headers = {}) => {
       data,
       params,
       headers,
+      isMinorLoading,
     });
     return response.data;
   } catch (error) {
     console.error(`Error in ${method.toUpperCase()} ${url}:`, error);
   } finally {
-    AppHelper.firEvent("loadmask:hide");
+    if (isMinorLoading) {
+    } else {
+      AppHelper.firEvent("loadmask:hide");
+    }
   }
 };
 
