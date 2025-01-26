@@ -3,6 +3,7 @@ import { FaStar, FaStarHalfAlt } from "react-icons/fa"; // Import star icons
 import { useParams } from "react-router-dom"; // Import useParams from react-router-dom
 import "./CricketDetail.css";
 import apiCaller from "../../Scripts/ApiCaller";
+import ProductsApiHelper from "../../Scripts/ProductsApiHelper";
 
 const CricketBatDetails = () => {
   const relatedProducts = [
@@ -82,9 +83,11 @@ const CricketBatDetails = () => {
     setTimeout(() => setWishlistMessage(""), 3000);
   };
 
-  const handleAddToCart = () => {
+  const handleAddToCart = async () => {
     setCartMessage("Added to Cart Successfully");
     setTimeout(() => setCartMessage(""), 3000);
+
+    ProductsApiHelper.handleAddToCart(product);
   };
 
   // if (loading) return <div className="loading">Loading...</div>;
@@ -115,7 +118,7 @@ const CricketBatDetails = () => {
         <div className="product-info">
           <h1>{productName}</h1>
           <p>{preciseDescription}</p>
-          <div className="product-price">Price: {price}</div>
+          <div className="product-price">Price: Rs. {price}</div>
           <div className="rating">
             {Array.from({ length: 5 }, (_, i) =>
               i < 4.5 ? (

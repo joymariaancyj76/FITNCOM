@@ -5,9 +5,11 @@ import productimg from "../../Assets/Images/bat1.png";
 import TopSellingProduct from "../TopSellingProducts/TopSellingProduct";
 import Wishlist from "../Wishlist/Wishlist";
 import OrderConfirmationPage from "../OrderConfirmationPage/OrderConfirmationPage";
+import ProductsApiHelper from "../../Scripts/ProductsApiHelper";
 
 const CartPage = () => {
   const [activeTab, setActiveTab] = useState("cart");
+  const [cartItems, setcartItems] = useState([]);
   const [currentProducts, setCurrentProducts] = useState([]); // Current products to display
   const [cart, setCart] = useState([]); // Cart items
   const [currentIndex, setCurrentIndex] = useState(0); // Index for the current product in the carousel
@@ -15,6 +17,14 @@ const CartPage = () => {
   const [selectedUPIOption, setSelectedUPIOption] = useState("");
   const [orderPlaced, setOrderPlaced] = useState(false); // To track order placement status
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const getCartProducts = async () => {
+      let products = await ProductsApiHelper.getCartProducts();
+      setcartItems(products);
+    };
+    getCartProducts();
+  }, []);
 
   const handlePlaceOrder = () => {
     // Simulate order placement
@@ -158,25 +168,7 @@ const CartPage = () => {
   const handleAddToCart = (productId) => {
     setCart((prevCart) => [...prevCart, productId]); // Add product to cart
   };
-  const cartItems = [
-    {
-      id: 1,
-      name: "Cricket Bat",
-      image: productimg,
-      price: "Rs. 5000/-",
-      rating: 4.5,
-      description:
-        "Willow is the only type of wood that can provide the strength and compression needed for a cricket bat.",
-    },
-    {
-      id: 2,
-      name: "Cricket Willow Bat",
-      image: productimg,
-      price: "Rs. 3000/-",
-      rating: 4,
-      description: "A high-quality football for professional play.",
-    },
-  ];
+
   const [selectedItems, setSelectedItems] = useState([]);
   const [wishlist, setWishlist] = useState([]);
 
@@ -197,6 +189,25 @@ const CartPage = () => {
     setCart(updatedCart); // Update the cart state
   };
 
+  // Function to update the quantity in state
+  const handleQuantityChange = (id, newQuantity) => {
+    setcartItems((prevProducts) =>
+      prevProducts.map((product) => {
+        if (product.id === id) {
+          let difference = newQuantity - product.quantity;
+          if (product.quantity < newQuantity) {
+            // ProductsApiHelper.handleAddToCart(product);
+          } else if (product.quantity > newQuantity) {
+            // ProductsApiHelper.handleRemoveFromCart(product.id);
+          }
+          return { ...product, quantity: newQuantity };
+        } else {
+          return product;
+        }
+      })
+    );
+  };
+
   const renderTabContent = () => {
     if (activeTab === "cart") {
       return (
@@ -213,11 +224,11 @@ const CartPage = () => {
               <div className="product-image">
                 <img
                   src="https://i.ibb.co/kgQY3dT/bat-png.png"
-                  alt={product.name}
+                  alt={product.productName}
                 />
               </div>
               <div className="product-details">
-                <p>{product.name}</p>
+                <p>{product.productName}</p>
                 <p>{product.description}</p>
                 <label>
                   SIZE:
@@ -233,7 +244,12 @@ const CartPage = () => {
                 </label>
                 <label>
                   QTY:
-                  <select>
+                  <select
+                    value={product.quantity}
+                    onChange={(e) => {
+                      handleQuantityChange(product.id, e.target.value);
+                    }}
+                  >
                     {Array.from({ length: 10 }, (_, i) => i + 1).map((qty) => (
                       <option key={qty} value={qty}>
                         {qty}
@@ -246,9 +262,7 @@ const CartPage = () => {
                   <button
                     className="remove-button"
                     onClick={() =>
-                      setSelectedItems(
-                        selectedItems.filter((id) => id !== product.id)
-                      )
+                      ProductsApiHelper.handleRemoveFromCart(product.id)
                     }
                   >
                     Remove

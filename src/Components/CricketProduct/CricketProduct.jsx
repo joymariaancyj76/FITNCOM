@@ -7,7 +7,7 @@ import {
 } from "react-icons/fa"; // Importing necessary icons
 import { Link } from "react-router-dom"; // Importing Link for routing
 import "./CricketProduct.css";
-import apiCaller from "../../Scripts/ApiCaller";
+import ProductsApiHelper from "../../Scripts/ProductsApiHelper";
 
 function CricketProduct() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -26,16 +26,8 @@ function CricketProduct() {
   useEffect(() => {
     setIsLoading(true);
     const getAllProducts = async () => {
-      try {
-        const response = await apiCaller("get", "/api/products/getAllProducts");
-        if (response && response.message === "success") {
-          setProducts(response.results);
-        } else {
-          console.log("response.message:", response);
-        }
-      } catch (error) {
-        console.log("error:", error);
-      }
+      let products = await ProductsApiHelper.getAllProducts();
+      setProducts(products);
     };
     getAllProducts();
     setIsLoading(false);
@@ -98,7 +90,7 @@ function CricketProduct() {
                   <Link to={`/products/${product.id}`}>
                     <img src={product.imageUrl} alt={product.productName} />
                     <h3>{product.productName}</h3>
-                    <p>{product.price}</p>
+                    <p>Rs. {product.price}</p>
                     <div className="rating">{renderRating(product.rating)}</div>
                   </Link>
                 </>
