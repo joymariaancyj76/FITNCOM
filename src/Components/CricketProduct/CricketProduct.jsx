@@ -95,12 +95,12 @@ function CricketProduct() {
                 </div>
               ) : (
                 <>
-                  <Link to={`/products/${index + 1}`}>
+                  <Link to={`/products/${product.id}`}>
                     <img src={product.imageUrl} alt={product.productName} />
+                    <h3>{product.productName}</h3>
+                    <p>{product.price}</p>
+                    <div className="rating">{renderRating(product.rating)}</div>
                   </Link>
-                  <h3>{product.productName}</h3>
-                  <p>{product.price}</p>
-                  <div className="rating">{renderRating(product.rating)}</div>
                 </>
               )}
             </div>
