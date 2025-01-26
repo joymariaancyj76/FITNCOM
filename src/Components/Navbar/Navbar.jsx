@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom"; // Import useNavigate hook
 import "./Navbar.css";
 import { FiMenu } from "react-icons/fi";
@@ -11,7 +11,22 @@ import User from "../../Scripts/User";
 const Navbar = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useContext(UserStatusContext);
-  const navigate = useNavigate(); // Initialize navigate function
+  const [cartCount, setCartCount] = useState(0); // State for cart count
+  const navigate = useNavigate();
+
+  // Initialize the cart count from localStorage or any backend service
+  useEffect(() => {
+    const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
+    setCartCount(storedCart.length);
+  }, []);
+
+  // Handle cart item updates (optional, if items are dynamically added)
+  const handleAddToCart = (item) => {
+    const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
+    const updatedCart = [...storedCart, item];
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+    setCartCount(updatedCart.length);
+  };
 
   const handleMenuToggle = () => {
     setShowDropdown(!showDropdown);
@@ -49,6 +64,9 @@ const Navbar = () => {
         </div>
         <div className="addtocart-icon" onClick={handleAddToCartClick}>
           <img src="https://i.ibb.co/z2t0mKX/addtocart.png" alt="Add to Cart" />
+          {cartCount > 0 && (
+            <span className="cart-count-badge">{cartCount}</span>
+          )}
         </div>
         <div className="menu-icon">
           <FiMenu onClick={handleMenuToggle} />
@@ -87,7 +105,7 @@ const Navbar = () => {
           <div className="dropdown-section">
             HELP
             <div className="sub-dropdown-menu">
-              <Link to="/contact-us">Contact Us</Link>
+              <Link to="/contactus">Contact Us</Link>
               <Link to="/termsconditions">Terms & Conditions</Link>
               <Link to="/privacy-policy">Privacy Policy</Link>
               <Link to="/warranty">Warranty Policy</Link>

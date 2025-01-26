@@ -4,6 +4,7 @@ import "./CartPage.css"; // Ensure this file contains necessary styles
 import productimg from "../../Assets/Images/bat1.png";
 import TopSellingProduct from "../TopSellingProducts/TopSellingProduct";
 import Wishlist from "../Wishlist/Wishlist";
+import OrderConfirmationPage from "../OrderConfirmationPage/OrderConfirmationPage";
 
 const CartPage = () => {
   const [activeTab, setActiveTab] = useState("cart");
@@ -65,6 +66,7 @@ const CartPage = () => {
     alert("Payment processing...");
     // Add your payment processing logic here
   };
+
   const handleProceedToPay = () => {
     if (activeTab === "cart" && cart.length > 0) {
       setActiveTab("address");
@@ -175,6 +177,25 @@ const CartPage = () => {
       description: "A high-quality football for professional play.",
     },
   ];
+  const [selectedItems, setSelectedItems] = useState([]);
+  const [wishlist, setWishlist] = useState([]);
+
+  const handleCheckboxChange = (id) => {
+    setSelectedItems((prevSelected) =>
+      prevSelected.includes(id)
+        ? prevSelected.filter((itemId) => itemId !== id)
+        : [...prevSelected, id]
+    );
+  };
+
+  const handleMoveToWishlist = (product) => {
+    // Add product to wishlist
+    setWishlist((prevWishlist) => [...prevWishlist, product]);
+
+    // Remove the product from cart
+    const updatedCart = cartItems.filter((item) => item.id !== product.id);
+    setCart(updatedCart); // Update the cart state
+  };
 
   const renderTabContent = () => {
     if (activeTab === "cart") {
@@ -182,37 +203,63 @@ const CartPage = () => {
         <div className="cart-content">
           {cartItems.map((product) => (
             <div key={product.id} className="product-box">
-              <div className="product-image">
-                <img src={product.image} alt={product.name} />
+              <div className="product-selection">
+                <input
+                  type="checkbox"
+                  checked={selectedItems.includes(product.id)}
+                  onChange={() => handleCheckboxChange(product.id)}
+                />
               </div>
-              <p>{product.name}</p>
-              <p>{product.description}</p>
-              <label>
-                SIZE:
-                <select>
-                  {["1", "2", "3", "4", "5", "6", "H", "SH", "LH"].map(
-                    (size) => (
-                      <option key={size} value={size}>
-                        {size}
+              <div className="product-image">
+                <img
+                  src="https://i.ibb.co/kgQY3dT/bat-png.png"
+                  alt={product.name}
+                />
+              </div>
+              <div className="product-details">
+                <p>{product.name}</p>
+                <p>{product.description}</p>
+                <label>
+                  SIZE:
+                  <select>
+                    {["1", "2", "3", "4", "5", "6", "H", "SH", "LH"].map(
+                      (size) => (
+                        <option key={size} value={size}>
+                          {size}
+                        </option>
+                      )
+                    )}
+                  </select>
+                </label>
+                <label>
+                  QTY:
+                  <select>
+                    {Array.from({ length: 10 }, (_, i) => i + 1).map((qty) => (
+                      <option key={qty} value={qty}>
+                        {qty}
                       </option>
-                    )
-                  )}
-                </select>
-              </label>
-              <label>
-                QTY:
-                <select>
-                  {Array.from({ length: 10 }, (_, i) => i + 1).map((qty) => (
-                    <option key={qty} value={qty}>
-                      {qty}
-                    </option>
-                  ))}
-                </select>
-              </label>
-              <p>{product.price}</p>
-              <div className="action-buttons">
-                <button className="remove-button">Remove</button>
-                <button className="wishlist-button">Move to Wishlist</button>
+                    ))}
+                  </select>
+                </label>
+                <p>{product.price}</p>
+                <div className="action-buttons">
+                  <button
+                    className="remove-button"
+                    onClick={() =>
+                      setSelectedItems(
+                        selectedItems.filter((id) => id !== product.id)
+                      )
+                    }
+                  >
+                    Remove
+                  </button>
+                  <button
+                    className="wishlist-button"
+                    onClick={() => handleMoveToWishlist(product)}
+                  >
+                    Move to Wishlist
+                  </button>
+                </div>
               </div>
             </div>
           ))}
@@ -369,36 +416,33 @@ const CartPage = () => {
     <div className="cart-page">
       <h2>Shopping Cart</h2>
 
-      {orderPlaced && (
-        <div className="order-confirmation">
-          <h2>Order Placed Successfully!</h2>
-          <button onClick={handleContinueShopping}>Continue Shopping</button>
-        </div>
-      )}
-
-      {!orderPlaced && (
-        <header className="cart-header">
-          <nav>
-            <span
-              className={activeTab === "cart" ? "active" : ""}
-              onClick={() => setActiveTab("cart")}
-            >
-              Cart
-            </span>
-            <span
-              className={activeTab === "address" ? "active" : ""}
-              onClick={() => setActiveTab("address")}
-            >
-              Address
-            </span>
-            <span
-              className={activeTab === "payment" ? "active" : ""}
-              onClick={() => setActiveTab("payment")}
-            >
-              Payment
-            </span>
-          </nav>
-        </header>
+      {orderPlaced ? (
+        <OrderConfirmationPage />
+      ) : (
+        <>
+          <header className="cart-header">
+            <nav>
+              <span
+                className={activeTab === "cart" ? "active" : ""}
+                onClick={() => setActiveTab("cart")}
+              >
+                Cart
+              </span>
+              <span
+                className={activeTab === "address" ? "active" : ""}
+                onClick={() => setActiveTab("address")}
+              >
+                Address
+              </span>
+              <span
+                className={activeTab === "payment" ? "active" : ""}
+                onClick={() => setActiveTab("payment")}
+              >
+                Payment
+              </span>
+            </nav>
+          </header>
+        </>
       )}
 
       <div className="tab-content">{renderTabContent()}</div>
