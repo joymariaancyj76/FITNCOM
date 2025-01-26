@@ -65,11 +65,46 @@ const ProductsApiHelper = (function () {
     }
   };
 
+  const _handleAddToWishList = async (product) => {
+    try {
+      const response = await apiCaller(
+        "post",
+        `/api/products/addToWishList`,
+        product
+      );
+      if (response && response.message === "success") {
+        console.log("response:", response);
+      } else {
+        console.log("response.message:", response);
+      }
+    } catch (error) {
+      console.log("error:", error);
+    }
+  };
+
+  const _getWishListProducts = async () => {
+    try {
+      const response = await apiCaller("get", "/api/products/getWishListItems");
+      if (response && response.message === "success") {
+        let products = response.results.items;
+        return products;
+      } else {
+        console.log("response.message:", response);
+      }
+    } catch (error) {
+      console.log("error:", error);
+    }
+
+    return [];
+  };
+
   return {
     handleRemoveFromCart: _handleRemoveFromCart,
     getCartProducts: _getCartProducts,
     getAllProducts: _getAllProducts,
     handleAddToCart: _handleAddToCart,
+    handleAddToWishList: _handleAddToWishList,
+    getWishListProducts: _getWishListProducts,
   };
 })();
 

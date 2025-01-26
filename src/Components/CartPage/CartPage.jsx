@@ -8,6 +8,7 @@ import OrderConfirmationPage from "../OrderConfirmationPage/OrderConfirmationPag
 import ProductsApiHelper from "../../Scripts/ProductsApiHelper";
 
 const CartPage = () => {
+  const [reload, setReload] = useState(false);
   const [activeTab, setActiveTab] = useState("cart");
   const [cartItems, setcartItems] = useState([]);
   const [currentProducts, setCurrentProducts] = useState([]); // Current products to display
@@ -24,7 +25,7 @@ const CartPage = () => {
       setcartItems(products);
     };
     getCartProducts();
-  }, []);
+  }, [reload]);
 
   const handlePlaceOrder = () => {
     // Simulate order placement
@@ -165,10 +166,6 @@ const CartPage = () => {
     ); // Prevent going beyond last product
   };
 
-  const handleAddToCart = (productId) => {
-    setCart((prevCart) => [...prevCart, productId]); // Add product to cart
-  };
-
   const [selectedItems, setSelectedItems] = useState([]);
   const [wishlist, setWishlist] = useState([]);
 
@@ -181,12 +178,9 @@ const CartPage = () => {
   };
 
   const handleMoveToWishlist = (product) => {
-    // Add product to wishlist
-    setWishlist((prevWishlist) => [...prevWishlist, product]);
-
-    // Remove the product from cart
-    const updatedCart = cartItems.filter((item) => item.id !== product.id);
-    setCart(updatedCart); // Update the cart state
+    ProductsApiHelper.handleAddToWishList(product);
+    ProductsApiHelper.handleRemoveFromCart(product.id);
+    setReload((prev) => !prev);
   };
 
   // Function to update the quantity in state
@@ -261,9 +255,10 @@ const CartPage = () => {
                 <div className="action-buttons">
                   <button
                     className="remove-button"
-                    onClick={() =>
-                      ProductsApiHelper.handleRemoveFromCart(product.id)
-                    }
+                    onClick={() => {
+                      ProductsApiHelper.handleRemoveFromCart(product.id);
+                      setReload((prevState) => !prevState); //to get the lates cart items after update
+                    }}
                   >
                     Remove
                   </button>
@@ -479,7 +474,7 @@ const CartPage = () => {
           >
             PROCEED TO PAY
           </button>
-          <Wishlist />
+          <Wishlist reload={reload} />
         </div>
       )}
       {activeTab === "address" && (

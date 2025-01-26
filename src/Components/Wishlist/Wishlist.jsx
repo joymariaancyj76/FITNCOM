@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaStar, FaStarHalfAlt } from "react-icons/fa";
 import { Link } from "react-router-dom"; // Import Link for navigation
 import "./Wishlist.css";
+import ProductsApiHelper from "../../Scripts/ProductsApiHelper";
 
 // Star Rating Component
 const StarRating = ({ rating }) => {
@@ -28,37 +29,24 @@ const StarRating = ({ rating }) => {
   );
 };
 
-const Wishlist = () => {
+const Wishlist = ({ reload }) => {
   const [wishlist, setWishlist] = useState([
     {
       id: 1,
-      name: "Proflex bat",
-      image: "https://i.ibb.co/kgQY3dT/bat-png.png",
+      productName: "Proflex bat",
+      imageUrl: "https://i.ibb.co/kgQY3dT/bat-png.png",
       price: "Rs.1000",
       rating: 4.5,
     },
-    {
-      id: 2,
-      name: "Junior Cricket Bat",
-      image: "https://i.ibb.co/kgQY3dT/bat-png.png",
-      price: "Rs.1000",
-      rating: 5,
-    },
-    {
-      id: 3,
-      name: "Product 3",
-      image: "https://i.ibb.co/kgQY3dT/bat-png.png",
-      price: "Rs.1000",
-      rating: 3.5,
-    },
-    {
-      id: 4,
-      name: "Product 4",
-      image: "https://i.ibb.co/kgQY3dT/bat-png.png",
-      price: "Rs.1000",
-      rating: 4,
-    },
   ]);
+
+  useEffect(() => {
+    const getWishListItems = async () => {
+      let products = await ProductsApiHelper.getWishListProducts();
+      setWishlist(products);
+    };
+    getWishListItems();
+  }, [reload]);
 
   const [cart, setCart] = useState([]);
   const [successMessage, setSuccessMessage] = useState("");
@@ -93,8 +81,8 @@ const Wishlist = () => {
             <div className="wishlist-image-container">
               <Link to={`/product/${product.id}`}>
                 <img
-                  src={product.image}
-                  alt={product.name}
+                  src={product.imageUrl}
+                  alt={product.productName}
                   className="wishlist-product-image"
                 />
               </Link>
@@ -114,7 +102,7 @@ const Wishlist = () => {
               </div>
             </div>
             <div className="wishlist-product-info">
-              <h3>{product.name}</h3>
+              <h3>{product.productName}</h3>
               <p>{product.price}</p>
               <StarRating rating={product.rating} />
             </div>
