@@ -22,8 +22,8 @@ const Wishlist = () => {
   const [wishlist, setWishlist] = useState([
     { id: 1, name: 'Proflex bat', image: "https://i.ibb.co/kgQY3dT/bat-png.png", price: 'Rs.1000', rating: 4.5 },
     { id: 2, name: 'Junior Cricket Bat', image: "https://i.ibb.co/kgQY3dT/bat-png.png", price: 'Rs.1000', rating: 5 },
-    { id: 3, name: 'Product 3', image: "https://i.ibb.co/kgQY3dT/bat-png.png", price: 'Rs.1000', rating: 3.5 },
-    { id: 4, name: 'Product 4', image: "https://i.ibb.co/kgQY3dT/bat-png.png", price: 'Rs.1000', rating: 4 },
+    { id: 3, name: 'Proflex bat', image: "https://i.ibb.co/kgQY3dT/bat-png.png", price: 'Rs.1000', rating: 3.5 },
+    { id: 4, name: 'Proflex bat', image: "https://i.ibb.co/kgQY3dT/bat-png.png", price: 'Rs.1000', rating: 4 },
   ]);
 
   const [cart, setCart] = useState([]);
