@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./OrderPage.css";
-import product1 from "../../Assets/Images/bat png.png"; // Replace with actual image path
+import product1 from "../../Assets/Images/bat1.png"; // Replace with actual image path
 
 // OrderTabs Component
 const OrderTabs = ({ activeTab, setActiveTab }) => {
@@ -129,7 +129,11 @@ const OrderPage = () => {
   // Filter orders based on active tab
   const filteredOrders = orders.filter((order) => {
     if (activeTab === "all") return true;
-    if (activeTab === "orders") return order.deliveryStatus === "In Transit" || order.deliveryStatus === "Delivered";
+    if (activeTab === "orders")
+      return (
+        order.deliveryStatus === "In Transit" ||
+        order.deliveryStatus === "Delivered"
+      );
     if (activeTab === "notShipped") return order.deliveryStatus === "Shipped";
     if (activeTab === "cancelled") return order.deliveryStatus === "Cancelled";
     return false;

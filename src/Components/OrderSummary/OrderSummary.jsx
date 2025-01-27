@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./OrderSummary.css";
-import ordersummaryproduct from "../../Assets/Images/bat png.png";
+import ordersummaryproduct from "../../Assets/Images/bat1.png";
 
 const OrderSummary = () => {
   const [showTrackingDetails, setShowTrackingDetails] = useState(false);

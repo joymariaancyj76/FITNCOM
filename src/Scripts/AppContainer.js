@@ -21,7 +21,11 @@ const AppContainer = ({ children }) => {
       try {
         const response = await apiCaller(
           "post",
-          "/account/checkWhetherUserLoggedIn"
+          "/account/checkWhetherUserLoggedIn",
+          {},
+          {},
+          {},
+          false
         );
         if (response.message === "success") {
           setIsLoggedIn(true);

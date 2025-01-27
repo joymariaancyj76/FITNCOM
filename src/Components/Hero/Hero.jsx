@@ -1,29 +1,73 @@
 import React, { useState, useEffect } from "react";
 import { useSpring, animated } from "@react-spring/web";
 import "./Hero.css";
-import product1 from "../../Assets/Images/bat png.png";
-import product2 from "../../Assets/Images/bat png.png";
-import product3 from "../../Assets/Images/bat png.png";
-import product4 from "../../Assets/Images/bat png.png";
-import product5 from "../../Assets/Images/bat png.png";
-import product6 from "../../Assets/Images/bat png.png";
-import product7 from "../../Assets/Images/bat png.png";
-import product8 from "../../Assets/Images/bat png.png";
-import product9 from "../../Assets/Images/bat png.png";
-
 import TopSellingProduct from "../TopSellingProducts/TopSellingProduct";
 
 // Sample products data
 const products = [
-  { id: 1, name: "Product 1", price: "Rs.50", rating: 4.5, image: "https://i.ibb.co/kgQY3dT/bat-png.png" },
-  { id: 2, name: "Product 2", price: "Rs.75", rating: 4.6, image: "https://i.ibb.co/kgQY3dT/bat-png.png" },
-  { id: 3, name: "Product 3", price: "Rs.60", rating: 4.3, image: "https://i.ibb.co/kgQY3dT/bat-png.png" },
-  { id: 4, name: "Product 4", price: "Rs.50", rating: 4.5, image: "https://i.ibb.co/kgQY3dT/bat-png.png" },
-  { id: 5, name: "Product 5", price: "Rs.75", rating: 4.6, image: "https://i.ibb.co/kgQY3dT/bat-png.png"},
-  { id: 6, name: "Product 6", price: "Rs.60", rating: 4.3, image: "https://i.ibb.co/kgQY3dT/bat-png.png"},
-  { id: 7, name: "Product 7", price: "Rs.50", rating: 4.5, image: "https://i.ibb.co/kgQY3dT/bat-png.png" },
-  { id: 8, name: "Product 8", price: "Rs.75", rating: 4.6, image: "https://i.ibb.co/kgQY3dT/bat-png.png" },
-  { id: 9, name: "Product 9", price: "Rs.60", rating: 4.3, image: "https://i.ibb.co/kgQY3dT/bat-png.png" },
+  {
+    id: 1,
+    name: "Product 1",
+    price: "Rs.50",
+    rating: 4.5,
+    image: "https://i.ibb.co/kgQY3dT/bat-png.png",
+  },
+  {
+    id: 2,
+    name: "Product 2",
+    price: "Rs.75",
+    rating: 4.6,
+    image: "https://i.ibb.co/kgQY3dT/bat-png.png",
+  },
+  {
+    id: 3,
+    name: "Product 3",
+    price: "Rs.60",
+    rating: 4.3,
+    image: "https://i.ibb.co/kgQY3dT/bat-png.png",
+  },
+  {
+    id: 4,
+    name: "Product 4",
+    price: "Rs.50",
+    rating: 4.5,
+    image: "https://i.ibb.co/kgQY3dT/bat-png.png",
+  },
+  {
+    id: 5,
+    name: "Product 5",
+    price: "Rs.75",
+    rating: 4.6,
+    image: "https://i.ibb.co/kgQY3dT/bat-png.png",
+  },
+  {
+    id: 6,
+    name: "Product 6",
+    price: "Rs.60",
+    rating: 4.3,
+    image: "https://i.ibb.co/kgQY3dT/bat-png.png",
+  },
+  {
+    id: 7,
+    name: "Product 7",
+    price: "Rs.50",
+    rating: 4.5,
+    image: "https://i.ibb.co/kgQY3dT/bat-png.png",
+  },
+  {
+    id: 8,
+    name: "Product 8",
+    price: "Rs.75",
+    rating: 4.6,
+    image: "https://i.ibb.co/kgQY3dT/bat-png.png",
+  },
+  {
+    id: 9,
+    name: "Product 9",
+    price: "Rs.60",
+    rating: 4.3,
+    image: "https://i.ibb.co/kgQY3dT/bat-png.png",
+  },
 ];
 
 function Hero() {

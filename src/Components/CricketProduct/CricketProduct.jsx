@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   FaArrowLeft,
   FaArrowRight,
@@ -7,18 +7,31 @@ import {
 } from "react-icons/fa"; // Importing necessary icons
 import { Link } from "react-router-dom"; // Importing Link for routing
 import "./CricketProduct.css";
-import productimage from "../../Assets/Images/bat png.png";
-
-const products = new Array(16).fill({
-  name: "ProFlex Cricket Bat",
-  price: "Rs. 1000/-",
-  image: "https://i.ibb.co/kgQY3dT/bat-png.png",
-  rating: 4.5, // Example rating, you can adjust for each product
-});
+import ProductsApiHelper from "../../Scripts/ProductsApiHelper";
 
 function CricketProduct() {
   const [currentPage, setCurrentPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
+  const [products, setProducts] = useState(
+    // []
+    new Array(16).fill({
+      name: "ProFlex Cricket Bat",
+      price: "Rs. 1000/-",
+      image: "https://i.ibb.co/kgQY3dT/bat-png.png",
+      rating: 4.5, // Example rating, you can adjust for each product
+    })
+  );
   const productsPerPage = 8;
+
+  useEffect(() => {
+    setIsLoading(true);
+    const getAllProducts = async () => {
+      let products = await ProductsApiHelper.getAllProducts();
+      setProducts(products);
+    };
+    getAllProducts();
+    setIsLoading(false);
+  }, []);
 
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
@@ -68,12 +81,20 @@ function CricketProduct() {
         {currentProducts.map((product, index) => (
           <div key={index} className="grid-item">
             <div className="product-card">
-              <Link to={`/products/${index + 1}`}>
-                <img src={product.image} alt={product.name} />
-              </Link>
-              <h3>{product.name}</h3>
-              <p>{product.price}</p>
-              <div className="rating">{renderRating(product.rating)}</div>
+              {isLoading ? (
+                <div className="loading-mask">
+                  <div className="loading-bar"></div>
+                </div>
+              ) : (
+                <>
+                  <Link to={`/products/${product.id}`}>
+                    <img src={product.imageUrl} alt={product.productName} />
+                    <h3>{product.productName}</h3>
+                    <p>Rs. {product.price}</p>
+                    <div className="rating">{renderRating(product.rating)}</div>
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         ))}
