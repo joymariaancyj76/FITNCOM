@@ -33,8 +33,120 @@ const CricketBatDetails = () => {
     },
   ];
 
+  const allProducts = [
+    {
+      id: 1,
+      productName: "Proflex Cricket Bat",
+      price: "Rs.500/-",
+      rating: 4.5,
+      imageUrl: "https://i.ibb.co/kgQY3dT/bat-png.png",
+      specifications: [],
+      preciseDescription:
+        "Lightweight Kashmir willow cricket bat designed for kids aged 4-5 years. Perfect for beginners to start their cricket journey with confidence and comfort.",
+      enhancedDescription:
+        "Ideal for young cricket enthusiasts aged 4-5 years and 4 ft - 4 ft 3 in tall, this Size 1 cricket bat is crafted from premium Kashmir willow for durability and precision. The lightweight design ensures effortless handling and control, making it the perfect choice for beginners. It features a comfortable grip, making it suitable for friendly games, practice sessions, or fun backyard cricket. Its compact size and sturdy build help budding players develop their batting skills while having fun. Buy now to give your little one the ultimate cricket experience!",
+    },
+    {
+      id: 2,
+      productName: "Lightweight Cricket Bat",
+      price: "Rs.750/-",
+      rating: 4.6,
+      imageUrl: "https://i.ibb.co/kgQY3dT/bat-png.png",
+      specifications: [],
+      preciseDescription:
+        "Lightweight Kashmir willow cricket bat designed for kids aged 4-5 years. Perfect for beginners to start their cricket journey with confidence and comfort.",
+      enhancedDescription:
+        "Ideal for young cricket enthusiasts aged 4-5 years and 4 ft - 4 ft 3 in tall, this Size 1 cricket bat is crafted from premium Kashmir willow for durability and precision. The lightweight design ensures effortless handling and control, making it the perfect choice for beginners. It features a comfortable grip, making it suitable for friendly games, practice sessions, or fun backyard cricket. Its compact size and sturdy build help budding players develop their batting skills while having fun. Buy now to give your little one the ultimate cricket experience!",
+    },
+    {
+      id: 3,
+      productName: "Stiched Ball Bat",
+      price: "Rs.1000",
+      rating: 4.3,
+      imageUrl: "https://i.ibb.co/kgQY3dT/bat-png.png",
+      specifications: [],
+      preciseDescription:
+        "Lightweight Kashmir willow cricket bat designed for kids aged 4-5 years. Perfect for beginners to start their cricket journey with confidence and comfort.",
+      enhancedDescription:
+        "Ideal for young cricket enthusiasts aged 4-5 years and 4 ft - 4 ft 3 in tall, this Size 1 cricket bat is crafted from premium Kashmir willow for durability and precision. The lightweight design ensures effortless handling and control, making it the perfect choice for beginners. It features a comfortable grip, making it suitable for friendly games, practice sessions, or fun backyard cricket. Its compact size and sturdy build help budding players develop their batting skills while having fun. Buy now to give your little one the ultimate cricket experience!",
+    },
+    {
+      id: 4,
+      productName: "Gully Kashmir Willow Scoop Bat",
+      price: "Rs.1500",
+      rating: 4.5,
+      imageUrl: "https://i.ibb.co/kgQY3dT/bat-png.png",
+      specifications: [],
+      preciseDescription:
+        "Lightweight Kashmir willow cricket bat designed for kids aged 4-5 years. Perfect for beginners to start their cricket journey with confidence and comfort.",
+      enhancedDescription:
+        "Ideal for young cricket enthusiasts aged 4-5 years and 4 ft - 4 ft 3 in tall, this Size 1 cricket bat is crafted from premium Kashmir willow for durability and precision. The lightweight design ensures effortless handling and control, making it the perfect choice for beginners. It features a comfortable grip, making it suitable for friendly games, practice sessions, or fun backyard cricket. Its compact size and sturdy build help budding players develop their batting skills while having fun. Buy now to give your little one the ultimate cricket experience!",
+    },
+    {
+      id: 5,
+      productName: "Proflex Teen Bat",
+      price: "Rs.1750/-",
+      rating: 4.6,
+      imageUrl: "https://i.ibb.co/kgQY3dT/bat-png.png",
+      specifications: [],
+      preciseDescription:
+        "Lightweight Kashmir willow cricket bat designed for kids aged 4-5 years. Perfect for beginners to start their cricket journey with confidence and comfort.",
+      enhancedDescription:
+        "Ideal for young cricket enthusiasts aged 4-5 years and 4 ft - 4 ft 3 in tall, this Size 1 cricket bat is crafted from premium Kashmir willow for durability and precision. The lightweight design ensures effortless handling and control, making it the perfect choice for beginners. It features a comfortable grip, making it suitable for friendly games, practice sessions, or fun backyard cricket. Its compact size and sturdy build help budding players develop their batting skills while having fun. Buy now to give your little one the ultimate cricket experience!",
+    },
+    {
+      id: 6,
+      productName: "Premium Kashmir Willow Bat",
+      price: "Rs.2000/-",
+      rating: 4.3,
+      imageUrl: "https://i.ibb.co/kgQY3dT/bat-png.png",
+      specifications: [],
+      preciseDescription:
+        "Lightweight Kashmir willow cricket bat designed for kids aged 4-5 years. Perfect for beginners to start their cricket journey with confidence and comfort.",
+      enhancedDescription:
+        "Ideal for young cricket enthusiasts aged 4-5 years and 4 ft - 4 ft 3 in tall, this Size 1 cricket bat is crafted from premium Kashmir willow for durability and precision. The lightweight design ensures effortless handling and control, making it the perfect choice for beginners. It features a comfortable grip, making it suitable for friendly games, practice sessions, or fun backyard cricket. Its compact size and sturdy build help budding players develop their batting skills while having fun. Buy now to give your little one the ultimate cricket experience!",
+    },
+    {
+      id: 7,
+      productName: "Teen Stiched Ball Bat",
+      price: "Rs.2500/-",
+      rating: 4.5,
+      imageUrl: "https://i.ibb.co/kgQY3dT/bat-png.png",
+      specifications: [],
+      preciseDescription:
+        "Lightweight Kashmir willow cricket bat designed for kids aged 4-5 years. Perfect for beginners to start their cricket journey with confidence and comfort.",
+      enhancedDescription:
+        "Ideal for young cricket enthusiasts aged 4-5 years and 4 ft - 4 ft 3 in tall, this Size 1 cricket bat is crafted from premium Kashmir willow for durability and precision. The lightweight design ensures effortless handling and control, making it the perfect choice for beginners. It features a comfortable grip, making it suitable for friendly games, practice sessions, or fun backyard cricket. Its compact size and sturdy build help budding players develop their batting skills while having fun. Buy now to give your little one the ultimate cricket experience!",
+    },
+    {
+      id: 8,
+      productName: "Premium Kashmiri Willow Short Handle Bat",
+      price: "Rs.3000/-",
+      rating: 4.6,
+      imageUrl: "https://i.ibb.co/kgQY3dT/bat-png.png",
+      specifications: [],
+      preciseDescription:
+        "Lightweight Kashmir willow cricket bat designed for kids aged 4-5 years. Perfect for beginners to start their cricket journey with confidence and comfort.",
+      enhancedDescription:
+        "Ideal for young cricket enthusiasts aged 4-5 years and 4 ft - 4 ft 3 in tall, this Size 1 cricket bat is crafted from premium Kashmir willow for durability and precision. The lightweight design ensures effortless handling and control, making it the perfect choice for beginners. It features a comfortable grip, making it suitable for friendly games, practice sessions, or fun backyard cricket. Its compact size and sturdy build help budding players develop their batting skills while having fun. Buy now to give your little one the ultimate cricket experience!",
+    },
+    {
+      id: 9,
+      productName: "Gully Kashmir Willow Long Handle Bat",
+      price: "Rs.4000/-",
+      rating: 4.3,
+      imageUrl: "https://i.ibb.co/kgQY3dT/bat-png.png",
+      specifications: [],
+      preciseDescription:
+        "Lightweight Kashmir willow cricket bat designed for kids aged 4-5 years. Perfect for beginners to start their cricket journey with confidence and comfort.",
+      enhancedDescription:
+        "Ideal for young cricket enthusiasts aged 4-5 years and 4 ft - 4 ft 3 in tall, this Size 1 cricket bat is crafted from premium Kashmir willow for durability and precision. The lightweight design ensures effortless handling and control, making it the perfect choice for beginners. It features a comfortable grip, making it suitable for friendly games, practice sessions, or fun backyard cricket. Its compact size and sturdy build help budding players develop their batting skills while having fun. Buy now to give your little one the ultimate cricket experience!",
+    },
+  ];
+
   const { productId } = useParams();
-  const [product, setProduct] = useState({});
+  // const [product, setProduct] = useState(allProducts[allProducts - 1]);
+  const product = allProducts[productId - 1];
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [quantity, setQuantity] = useState(1);
@@ -42,31 +154,32 @@ const CricketBatDetails = () => {
   const [cartMessage, setCartMessage] = useState("");
   const productSizes = [1, 2, 3, 4, 5, 6, "H", "SH", "LH"];
 
-  useEffect(() => {
-    const getProductDetails = async () => {
-      try {
-        const response = await apiCaller(
-          "get",
-          `/api/products/getProductDetails/${productId}`
-        );
-        if (response && response.message === "success") {
-          let product = response.results;
-          setProduct(product);
-        } else {
-          console.log("response.message:", response);
-        }
-      } catch (error) {
-        console.log("error:", error);
-      }
-    };
-    getProductDetails();
-  }, []);
+  // useEffect(() => {
+  // const getProductDetails = async () => {
+  //   try {
+  //     const response = await apiCaller(
+  //       "get",
+  //       `/api/products/getProductDetails/${productId}`
+  //     );
+  //     if (response && response.message === "success") {
+  //       let product = response.results;
+  //       setProduct(product);
+  //     } else {
+  //       console.log("response.message:", response);
+  //     }
+  //   } catch (error) {
+  //     console.log("error:", error);
+  //   }
+  // };
+  // getProductDetails();
+  //   setProduct(allProducts[allProducts - 1]);
+  // }, []);
 
   const handleAddToWishlist = () => {
     const wishlistItem = {
-      productName,
-      price,
-      imageUrl,
+      productName: product.productName,
+      price: product.price,
+      imageUrl: product.imageUrl,
       size: productId, // You can use productId or other details as needed
     };
 
@@ -93,15 +206,15 @@ const CricketBatDetails = () => {
   // if (loading) return <div className="loading">Loading...</div>;
   // if (error) return <div className="error">Error: {error}</div>;
 
-  const {
-    productName,
-    preciseDescription,
-    enhancedDescription,
-    price,
-    imageUrl,
-    specifications = [],
-  } = product;
+  // const {
+  //   preciseDescription,
+  //   enhancedDescription,
+  //   price,
+  //   imageUrl,
+  //   specifications = [],
+  // } = product;
 
+  console.log("product:", product);
   return (
     <div className="product-detail-page">
       {wishlistMessage && (
@@ -112,13 +225,13 @@ const CricketBatDetails = () => {
       <header className="product-header">
         <img
           src={product.imageUrl}
-          alt={productName}
+          alt={product.productName}
           className="product-image"
         />
         <div className="product-info">
-          <h1>{productName}</h1>
-          <p>{preciseDescription}</p>
-          <div className="product-price">Price: Rs. {price}</div>
+          <h1>{product.productName}</h1>
+          <p>{product.preciseDescription}</p>
+          <div className="product-price">Price: Rs. {product.price}</div>
           <div className="rating">
             {Array.from({ length: 5 }, (_, i) =>
               i < 4.5 ? (
@@ -162,18 +275,19 @@ const CricketBatDetails = () => {
 
       <section className="product-description">
         <h3>Description</h3>
-        <p>{enhancedDescription}</p>
+        <p>{product.enhancedDescription}</p>
 
-        {specifications.map((spec, index) => (
-          <div key={index}>
-            <h3>{spec.heading}</h3>
-            <ul>
-              {spec.details.map((detail, idx) => (
-                <li key={idx}>{detail}</li>
-              ))}
-            </ul>
-          </div>
-        ))}
+        {product.specifications ??
+          [].map((spec, index) => (
+            <div key={index}>
+              <h3>{spec.heading}</h3>
+              <ul>
+                {spec.details.map((detail, idx) => (
+                  <li key={idx}>{detail}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
       </section>
 
       <section className="related-products">
