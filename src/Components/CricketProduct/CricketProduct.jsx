@@ -12,7 +12,7 @@ import ProductsApiHelper from "../../Scripts/ProductsApiHelper";
 function CricketProduct() {
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
-  const [products] = useState([
+  const [products, setProducts] = useState([
     {
       id: 1,
       name: "Proflex Cricket Bat",
@@ -76,8 +76,18 @@ function CricketProduct() {
       rating: 4.3,
       image: "https://i.ibb.co/kgQY3dT/bat-png.png",
     },
-  ]
-  );
+  ]);
+
+  useEffect(() => {
+    setIsLoading(true);
+    const getAllProducts = async () => {
+      let products = await ProductsApiHelper.getAllProducts();
+      setProducts(products);
+    };
+    getAllProducts();
+    setIsLoading(false);
+  }, []);
+
   const productsPerPage = 8;
 
   // Calculate the total number of pages
@@ -131,8 +141,8 @@ function CricketProduct() {
           <div key={product.id} className="grid-item">
             <div className="product-card">
               <Link to={`/products/${product.id}`}>
-                <img src={product.image} alt={product.name} />
-                <h3>{product.name}</h3>
+                <img src={product.imageUrl} alt={product.productName} />
+                <h3>{product.productName}</h3>
                 <p>{product.price}</p>
                 <div className="rating">{renderRating(product.rating)}</div>
               </Link>
@@ -149,9 +159,7 @@ function CricketProduct() {
             disabled={currentPage === 1}
           />
           <FaArrowRight
-            className={`arrow ${
-              currentPage === totalPages ? "disabled" : ""
-            }`}
+            className={`arrow ${currentPage === totalPages ? "disabled" : ""}`}
             onClick={handleNext}
             disabled={currentPage === totalPages}
           />

@@ -145,8 +145,37 @@ const CricketBatDetails = () => {
   ];
 
   const { productId } = useParams();
-  // const [product, setProduct] = useState(allProducts[allProducts - 1]);
-  const product = allProducts[productId - 1];
+  console.log("productId:", productId);
+  const [product, setProduct] = useState({
+    size: "SH",
+    title: "Premium Kashmiri Willow Short Handle Bat",
+    preciseDescription:
+      "Professional-grade bat for players aged 15+ years, suitable for heights 5ft 6in - 6ft 1in. Crafted for explosive power and precision.",
+    enhancedDescription:
+      "Engineered with premium willow for optimal performance in competitive matches and intense practice. Lightweight and durable, ensuring unmatched control.",
+    specifications: [
+      {
+        heading: "Specifications",
+        details: [
+          "Height: 33 1/2 inches",
+          "Width: 4 1/4 inches",
+          "Weight: Heavy",
+          "Material: Premium Willow",
+        ],
+      },
+      {
+        heading: "Additional Features",
+        details: [
+          "Grip: Ergonomic Grip for Comfortable Handling",
+          "Balance: Optimally Balanced for Swift Movements",
+          "Power: Designed for Maximum Boundary Shots",
+        ],
+      },
+    ],
+    price: "Rs. 3000",
+    imageUrl: "https://i.ibb.co/kgQY3dT/bat-png.png",
+  });
+  // const product = allProducts[productId - 1];
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [quantity, setQuantity] = useState(1);
@@ -154,26 +183,27 @@ const CricketBatDetails = () => {
   const [cartMessage, setCartMessage] = useState("");
   const productSizes = [1, 2, 3, 4, 5, 6, "H", "SH", "LH"];
 
-  // useEffect(() => {
-  // const getProductDetails = async () => {
-  //   try {
-  //     const response = await apiCaller(
-  //       "get",
-  //       `/api/products/getProductDetails/${productId}`
-  //     );
-  //     if (response && response.message === "success") {
-  //       let product = response.results;
-  //       setProduct(product);
-  //     } else {
-  //       console.log("response.message:", response);
-  //     }
-  //   } catch (error) {
-  //     console.log("error:", error);
-  //   }
-  // };
-  // getProductDetails();
-  //   setProduct(allProducts[allProducts - 1]);
-  // }, []);
+  useEffect(() => {
+    const getProductDetails = async () => {
+      try {
+        const response = await apiCaller(
+          "get",
+          `/api/products/getProductDetails/${productId}`
+        );
+        if (response && response.message === "success") {
+          let product = response.results;
+          setProduct(product);
+          console.log("product:", product);
+        } else {
+          console.log("response.message:", response);
+        }
+      } catch (error) {
+        console.log("error:", error);
+      }
+    };
+    getProductDetails();
+    // setProduct(allProducts[allProducts - 1]);
+  }, []);
 
   const handleAddToWishlist = () => {
     const wishlistItem = {
@@ -277,17 +307,16 @@ const CricketBatDetails = () => {
         <h3>Description</h3>
         <p>{product.enhancedDescription}</p>
 
-        {product.specifications ??
-          [].map((spec, index) => (
-            <div key={index}>
-              <h3>{spec.heading}</h3>
-              <ul>
-                {spec.details.map((detail, idx) => (
-                  <li key={idx}>{detail}</li>
-                ))}
-              </ul>
-            </div>
-          ))}
+        {product.specifications.map((spec, index) => (
+          <div key={index}>
+            <h3>{spec.heading}</h3>
+            <ul>
+              {spec.details.map((detail, idx) => (
+                <li key={idx}>{detail}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
       </section>
 
       <section className="related-products">
