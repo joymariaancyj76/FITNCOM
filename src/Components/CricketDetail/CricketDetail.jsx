@@ -244,7 +244,6 @@ const CricketBatDetails = () => {
   //   specifications = [],
   // } = product;
 
-  console.log("product:", product);
   return (
     <div className="product-detail-page">
       {wishlistMessage && (
