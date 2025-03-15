@@ -57,7 +57,14 @@ const Signin = () => {
         password: values.password,
       };
 
-      const response = await apiCaller("post", "/account/login", body);
+      const response = await apiCaller(
+        "post",
+        "/account/login",
+        body,
+        {},
+        {},
+        false
+      );
       if (response.message === "success") {
         setIsLoggedIn(true);
         localStorage.setItem("access-token", response.results.accessToken);
